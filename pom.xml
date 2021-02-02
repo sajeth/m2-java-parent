@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.saji.stocks.parent</groupId>
+    <artifactId>stocks-parent</artifactId>
+    <version>0.0.1</version>
+    <packaging>pom</packaging>
+    <name>stocks-parent</name>
+
+    <properties>
+        <buildDirectory>${project.basedir}/target.nosync</buildDirectory>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>15</maven.compiler.source>
+        <maven.compiler.target>15</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>15</java.version>
+        <hibernate.version>5.4.22.Final</hibernate.version>
+        <ehcache.version>3.9.0</ehcache.version>
+        <maven.compiler.version>3.8.1</maven.compiler.version>
+        <maven.jar.version>3.2.0</maven.jar.version>
+        <json.version>2.10.2</json.version>
+        <jedis.version>3.3.0</jedis.version>
+        <persistence.version>2.2</persistence.version>
+        <spring.boot.version>2.3.4.RELEASE</spring.boot.version>
+        <spring.version>5.2.9.RELEASE</spring.version>
+        <junit.version>4.13.1</junit.version>
+        <jta.version>1.1</jta.version>
+        <maven.dependency.version>3.1.2</maven.dependency.version>
+        <mysql.version>8.0.22</mysql.version>
+        <stocks.entities.version>1.0.0</stocks.entities.version>
+        <stocks.candlesticks.version>2.0.0</stocks.candlesticks.version>
+        <stocks.analysis.version>3.0.0</stocks.analysis.version>
+        <stocks.finance.version>4.0.0</stocks.finance.version>
+        <stocks.redis.version>5.0.0</stocks.redis.version>
+        <stocks.core.version>6.0.0</stocks.core.version>
+        <stocks.mongo.version>7.0.0</stocks.mongo.version>
+        <stocks.services.version>8.0.0</stocks.services.version>
+        <stocks.batch.version>9.0.0</stocks.batch.version>
+        <jackson.version>2.12.0</jackson.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <directory>${buildDirectory}</directory>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven.jar.version}</version>
+                <configuration>
+                    <outputDirectory>${buildDirectory}</outputDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.version}</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
