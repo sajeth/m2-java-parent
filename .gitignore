@@ -1,6 +1,13 @@
+# Log file
+*.log
 
+# Package Files #
+*.zip
+*.tar.gz
+*.rar
+*.txt
 .idea/
+target.nosync/
 
 *.iml
-compiler.xml
-workspace.xml
+
