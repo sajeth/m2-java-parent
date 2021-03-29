@@ -32,15 +32,16 @@
         <maven.dependency.version>3.1.2</maven.dependency.version>
         <mysql.version>8.0.22</mysql.version>
         <stocks.entities.version>1.0.0</stocks.entities.version>
-        <stocks.candlesticks.version>2.0.0</stocks.candlesticks.version>
+        <stocks.finance.version>2.0.0</stocks.finance.version>
         <stocks.analysis.version>3.0.0</stocks.analysis.version>
-        <stocks.finance.version>4.0.0</stocks.finance.version>
+        <stocks.candlesticks.version>4.0.0</stocks.candlesticks.version>
         <stocks.redis.version>5.0.0</stocks.redis.version>
         <stocks.core.version>6.0.0</stocks.core.version>
         <stocks.mongo.version>7.0.0</stocks.mongo.version>
         <stocks.services.version>8.0.0</stocks.services.version>
         <stocks.batch.version>9.0.0</stocks.batch.version>
         <jackson.version>2.12.0</jackson.version>
+        <jsoup.version>1.13.1</jsoup.version>
     </properties>
 
     <dependencies>
