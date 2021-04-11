@@ -27,7 +27,7 @@
         <persistence.version>2.2</persistence.version>
         <spring.boot.version>2.3.4.RELEASE</spring.boot.version>
         <spring.version>5.2.9.RELEASE</spring.version>
-        <junit.version>4.13.1</junit.version>
+        <junit.version>4.13.2</junit.version>
         <jta.version>1.1</jta.version>
         <maven.dependency.version>3.1.2</maven.dependency.version>
         <mysql.version>8.0.22</mysql.version>
@@ -37,11 +37,11 @@
         <stocks.candlesticks.version>4.0.0</stocks.candlesticks.version>
         <stocks.redis.version>5.0.0</stocks.redis.version>
         <stocks.core.version>6.0.0</stocks.core.version>
+        <stocks.business.version>8.0.0</stocks.business.version>
         <stocks.mongo.version>7.0.0</stocks.mongo.version>
-        <stocks.services.version>8.0.0</stocks.services.version>
-        <stocks.batch.version>9.0.0</stocks.batch.version>
-        <jackson.version>2.12.0</jackson.version>
-        <jsoup.version>1.13.1</jsoup.version>
+        <stocks.services.version>9.0.0</stocks.services.version>
+        <stocks.batch.version>10.0.0</stocks.batch.version>
+        <json.version>2.12.2</json.version>
     </properties>
 
     <dependencies>
