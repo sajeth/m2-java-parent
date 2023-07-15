@@ -12,8 +12,6 @@
 
     <properties>
         <buildDirectory>${project.basedir}/target.nosync</buildDirectory>
-        <maven.compiler.source>20</maven.compiler.source>
-        <maven.compiler.target>20</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>20</java.version>
@@ -25,15 +23,18 @@
         <maven.javadoc.plugin>3.5.0</maven.javadoc.plugin>
 <!--        <json.version>2.10.2</json.version>-->
 <!--        <jedis.version>3.3.0</jedis.version>-->
+        <aspectj.version>1.9.19</aspectj.version>
         <spring.web>6.0.9</spring.web>
+        <selenium.version>4.10.0</selenium.version>
 
 <!--        <persistence.version>2.2</persistence.version>-->
 <!--        <spring.boot.version>2.3.4.RELEASE</spring.boot.version>-->
-<!--        <spring.version>5.2.9.RELEASE</spring.version>-->
+        <spring.version>6.0.11</spring.version>
         <junit.version>4.13.2</junit.version>
 <!--        <jta.version>1.1</jta.version>-->
         <maven.dependency.version>3.1.2</maven.dependency.version>
 <!--        <mysql.version>8.0.22</mysql.version>-->
+        <stocks.commons.version>1.0.0</stocks.commons.version>
 <!--        <stocks.entities.version>1.0.0</stocks.entities.version>-->
 <!--        <stocks.finance.version>2.0.0</stocks.finance.version>-->
 <!--        <stocks.analysis.version>3.0.0</stocks.analysis.version>-->
@@ -71,23 +72,23 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.version}</version>
                 <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>${maven.jar.version}</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-source-plugin</artifactId>-->
+<!--                <version>${maven.jar.version}</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>attach-sources</id>-->
+<!--                        <goals>-->
+<!--                            <goal>jar-no-fork</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
 <!--            <plugin>-->
 <!--                <groupId>org.apache.maven.plugins</groupId>-->
 <!--                <artifactId>maven-gpg-plugin</artifactId>-->
