@@ -15,37 +15,21 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>20</java.version>
-<!--        <hibernate.version>5.4.22.Final</hibernate.version>-->
-<!--        <ehcache.version>3.9.0</ehcache.version>-->
         <maven.compiler.version>3.11.0</maven.compiler.version>
         <maven.source.version>3.3.0</maven.source.version>
         <maven.jar.version>3.3.0</maven.jar.version>
         <maven.javadoc.plugin>3.5.0</maven.javadoc.plugin>
-<!--        <json.version>2.10.2</json.version>-->
-<!--        <jedis.version>3.3.0</jedis.version>-->
         <aspectj.version>1.9.19</aspectj.version>
         <spring.web>6.0.9</spring.web>
         <selenium.version>4.6.0</selenium.version>
-
-<!--        <persistence.version>2.2</persistence.version>-->
-<!--        <spring.boot.version>2.3.4.RELEASE</spring.boot.version>-->
+        <guava.version>32.1.1-jre</guava.version>
         <spring.version>6.0.11</spring.version>
         <junit.version>4.13.2</junit.version>
-<!--        <jta.version>1.1</jta.version>-->
+        <netty.codec.version>4.1.96.Final</netty.codec.version>
         <maven.dependency.version>3.1.2</maven.dependency.version>
-<!--        <mysql.version>8.0.22</mysql.version>-->
         <stocks.commons.version>1.0.0</stocks.commons.version>
-<!--        <stocks.entities.version>1.0.0</stocks.entities.version>-->
-<!--        <stocks.finance.version>2.0.0</stocks.finance.version>-->
-<!--        <stocks.analysis.version>3.0.0</stocks.analysis.version>-->
-<!--        <stocks.candlesticks.version>4.0.0</stocks.candlesticks.version>-->
-<!--        <stocks.redis.version>5.0.0</stocks.redis.version>-->
-<!--        <stocks.core.version>6.0.0</stocks.core.version>-->
-<!--        <stocks.business.version>8.0.0</stocks.business.version>-->
-<!--        <stocks.mongo.version>7.0.0</stocks.mongo.version>-->
-<!--        <stocks.services.version>9.0.0</stocks.services.version>-->
-<!--        <stocks.batch.version>10.0.0</stocks.batch.version>-->
-<!--        <json.version>2.12.2</json.version>-->
+        <slf4j.version>2.0.7</slf4j.version>
+        <async.http.client.version>2.12.3</async.http.client.version>
     </properties>
 
     <dependencies>
