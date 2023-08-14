@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -11,26 +10,22 @@
     <name>stocks-parent</name>
 
     <properties>
+
         <buildDirectory>${project.basedir}/target.nosync</buildDirectory>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>20</java.version>
-        <maven.compiler.version>3.11.0</maven.compiler.version>
-        <maven.source.version>3.3.0</maven.source.version>
-        <maven.jar.version>3.3.0</maven.jar.version>
-        <maven.javadoc.plugin>3.5.0</maven.javadoc.plugin>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <aspectj.version>1.9.19</aspectj.version>
         <spring.web>6.0.9</spring.web>
-      <lombok.version>1.18.28</lombok.version>
-        <selenium.version>4.6.0</selenium.version>
-        <guava.version>32.1.1-jre</guava.version>
-        <spring.version>6.0.11</spring.version>
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
         <junit.version>4.13.2</junit.version>
-        <netty.codec.version>4.1.96.Final</netty.codec.version>
-        <maven.dependency.version>3.1.2</maven.dependency.version>
-        <stocks.commons.version>1.0.0</stocks.commons.version>
-        <slf4j.version>2.0.7</slf4j.version>
-        <async.http.client.version>2.12.3</async.http.client.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+        <maven.compiler.version>3.11.0</maven.compiler.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-resources-plugin -->
+        <maven.resource.version>3.3.1</maven.resource.version>
+        <stocks.commons.version>[1.0.0,)</stocks.commons.version>
     </properties>
 
     <dependencies>
@@ -45,63 +40,22 @@
         <directory>${buildDirectory}</directory>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>${maven.jar.version}</version>
-                <configuration>
-                    <outputDirectory>${buildDirectory}</outputDirectory>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.version}</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
                     <compilerArgument>-proc:none</compilerArgument>
                 </configuration>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-source-plugin</artifactId>-->
-<!--                <version>${maven.jar.version}</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>attach-sources</id>-->
-<!--                        <goals>-->
-<!--                            <goal>jar-no-fork</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-gpg-plugin</artifactId>-->
-<!--                <version>1.5</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>sign-artifacts</id>-->
-<!--                        <phase>verify</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>sign</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven.javadoc.plugin}</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven.resource.version}</version>
             </plugin>
         </plugins>
     </build>
+    <modules>
+        <module>stocks-core-parent</module>
+        <module>stocks-webapp-parent</module>
+    </modules>
 </project>
