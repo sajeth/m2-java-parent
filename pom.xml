@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -11,37 +10,22 @@
     <name>stocks-parent</name>
 
     <properties>
+
         <buildDirectory>${project.basedir}/target.nosync</buildDirectory>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>15</maven.compiler.source>
-        <maven.compiler.target>15</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>15</java.version>
-        <hibernate.version>5.4.22.Final</hibernate.version>
-        <ehcache.version>3.9.0</ehcache.version>
-        <maven.compiler.version>3.8.1</maven.compiler.version>
-        <maven.jar.version>3.2.0</maven.jar.version>
-        <json.version>2.10.2</json.version>
-        <jedis.version>3.3.0</jedis.version>
-        <persistence.version>2.2</persistence.version>
-        <spring.boot.version>2.3.4.RELEASE</spring.boot.version>
-        <spring.version>5.2.9.RELEASE</spring.version>
+        <java.version>20</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <aspectj.version>1.9.19</aspectj.version>
+        <spring.web>6.0.9</spring.web>
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
         <junit.version>4.13.2</junit.version>
-        <jta.version>1.1</jta.version>
-        <maven.dependency.version>3.1.2</maven.dependency.version>
-        <mysql.version>8.0.22</mysql.version>
-        <stocks.entities.version>1.0.0</stocks.entities.version>
-        <stocks.finance.version>2.0.0</stocks.finance.version>
-        <stocks.analysis.version>3.0.0</stocks.analysis.version>
-        <stocks.candlesticks.version>4.0.0</stocks.candlesticks.version>
-        <stocks.redis.version>5.0.0</stocks.redis.version>
-        <stocks.core.version>6.0.0</stocks.core.version>
-        <stocks.business.version>8.0.0</stocks.business.version>
-        <stocks.mongo.version>7.0.0</stocks.mongo.version>
-        <stocks.services.version>9.0.0</stocks.services.version>
-        <stocks.batch.version>10.0.0</stocks.batch.version>
-        <json.version>2.12.2</json.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+        <maven.compiler.version>3.11.0</maven.compiler.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-resources-plugin -->
+        <maven.resource.version>3.3.1</maven.resource.version>
+        <stocks.commons.version>[1.0.0,)</stocks.commons.version>
     </properties>
 
     <dependencies>
@@ -56,22 +40,22 @@
         <directory>${buildDirectory}</directory>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>${maven.jar.version}</version>
-                <configuration>
-                    <outputDirectory>${buildDirectory}</outputDirectory>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.version}</version>
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
+                    <compilerArgument>-proc:none</compilerArgument>
                 </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven.resource.version}</version>
             </plugin>
         </plugins>
     </build>
+    <modules>
+        <module>stocks-core-parent</module>
+        <module>stocks-webapp-parent</module>
+    </modules>
 </project>

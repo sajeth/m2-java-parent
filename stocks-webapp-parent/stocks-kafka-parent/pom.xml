@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>stocks-webapp-parent</artifactId>
+        <groupId>com.saji.stocks.parent</groupId>
+        <version>0.0.1</version>
+    </parent>
+
+    <artifactId>stocks-kafka-parent</artifactId>
+    <version>0.0.1</version>
+    <packaging>pom</packaging>
+    <name>stocks-kafka-parent</name>
+    <!--    <url>http://www.example.com</url>-->
+
+    <properties>
+        <!-- https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-spring-boot2 -->
+        <resilience4j.spring-boot2.version>2.1.0</resilience4j.spring-boot2.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-spring-boot2</artifactId>
+            <version>${resilience4j.spring-boot2.version}</version>
+        </dependency>
+    </dependencies>
+</project>
