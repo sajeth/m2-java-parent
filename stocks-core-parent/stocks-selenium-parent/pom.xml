@@ -55,10 +55,8 @@
         <guava.version>32.1.1-jre</guava.version>
         <!-- https://mvnrepository.com/artifact/io.netty/netty-transport-classes-epoll -->
         <netty.codec.version>4.1.96.Final</netty.codec.version>
-        <!--        https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-exporter-logging-->
-        <opentelemetry.exporter.logging.version>1.2.0</opentelemetry.exporter.logging.version>
         <!--        https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-context-->
-        <opentelemetry.context.version>1.2.0</opentelemetry.context.version>
+        <opentelemetry.context.version>1.24.0</opentelemetry.context.version>
     </properties>
 
     <dependencies>
@@ -468,7 +466,7 @@
         <dependency>
             <groupId>io.opentelemetry</groupId>
             <artifactId>opentelemetry-exporter-logging</artifactId>
-            <version>${opentelemetry.exporter.logging.version}</version>
+            <version>${opentelemetry.context.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>io.opentelemetry</groupId>
