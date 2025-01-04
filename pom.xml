@@ -3,11 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.saji.stocks.parent</groupId>
-    <artifactId>stocks-parent</artifactId>
+    <groupId>com.saji.m2.parent</groupId>
+    <artifactId>m2-java-parent</artifactId>
     <version>0.0.1</version>
     <packaging>pom</packaging>
-    <name>stocks-parent</name>
+    <name>m2-java-parent</name>
 
     <properties>
 
@@ -18,14 +18,15 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <aspectj.version>1.9.19</aspectj.version>
-        <spring.web>6.0.9</spring.web>
         <!-- https://mvnrepository.com/artifact/junit/junit -->
         <junit.version>4.13.2</junit.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
-        <maven.compiler.version>3.11.0</maven.compiler.version>
+        <maven.compiler.version>3.13.0</maven.compiler.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-resources-plugin -->
         <maven.resource.version>3.3.1</maven.resource.version>
-        <stocks.commons.version>[1.0.0,)</stocks.commons.version>
+        <base.commons.version>[1.0.0,)</base.commons.version>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <jackson.version>2.18.2</jackson.version>
     </properties>
 
     <dependencies>
@@ -55,7 +56,7 @@
         </plugins>
     </build>
     <modules>
-        <module>stocks-core-parent</module>
-        <module>stocks-webapp-parent</module>
+        <module>m2-core-parent</module>
+        <module>m2-webapp-parent</module>
     </modules>
 </project>

@@ -1,1 +1,1 @@
-# stocks-parent
+# m2-java-parent
