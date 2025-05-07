@@ -15,8 +15,6 @@
     <!--  <url>http://www.example.com</url>-->
 
     <properties>
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-        <lombok.version>1.18.28</lombok.version>
 
     </properties>
 
@@ -32,11 +30,5 @@
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>org.projectlombok</groupId>-->
-        <!--            <artifactId>lombok</artifactId>-->
-        <!--            <version>${lombok.version}</version>-->
-        <!--            <scope>provided</scope>-->
-        <!--        </dependency>-->
     </dependencies>
 </project>

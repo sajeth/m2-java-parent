@@ -15,26 +15,26 @@
     <!--  <url>http://www.example.com</url>-->
 
     <properties>
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
-        <spring.version>6.1.14</spring.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-install-plugin -->
-        <maven.install.plugin>3.1.1</maven.install.plugin>
+        <maven.install.plugin>3.1.4</maven.install.plugin>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-deploy-plugin -->
-        <maven.deploy.version>3.1.1</maven.deploy.version>
+        <maven.deploy.version>3.1.4</maven.deploy.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-site-plugin -->
-        <maven.site.version>3.12.1</maven.site.version>
+        <maven.site.version>3.21.0</maven.site.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-project-info-reports-plugin -->
         <maven.project.info.reports.version>3.4.5</maven.project.info.reports.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-clean-plugin -->
-        <maven.clean.version>3.3.1</maven.clean.version>
+        <maven.clean.version>3.4.1</maven.clean.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
-        <maven.surfire.version>3.1.2</maven.surfire.version>
+        <maven.surfire.version>3.5.3</maven.surfire.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
-        <maven.source.version>3.3.0</maven.source.version>
+        <maven.source.version>3.3.1</maven.source.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
-        <maven.jar.version>3.3.0</maven.jar.version>
+        <maven.jar.version>3.4.2</maven.jar.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
-        <maven.javadoc.plugin>3.5.0</maven.javadoc.plugin>
+        <maven.javadoc.plugin>3.11.2</maven.javadoc.plugin>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+        <spring.version>6.2.6</spring.version>
     </properties>
 
     <dependencies/>
@@ -82,6 +82,7 @@
                         </execution>
                     </executions>
                 </plugin>
+
             </plugins>
         </pluginManagement>
     </build>

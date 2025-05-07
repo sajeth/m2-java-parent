@@ -16,23 +16,23 @@
 
     <properties>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-http -->
-        <selenium.http.version>4.11.0</selenium.http.version>
+        <selenium.http.version>4.32.0</selenium.http.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-failsafe-plugin -->
-        <maven.failsafe.version>3.1.2</maven.failsafe.version>
-        <!--        https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-semconv-->
-
-        <!--        https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-extension-incubator-->
-        <opentelemetry.extension.version>1.29.0-alpha</opentelemetry.extension.version>
+        <maven.failsafe.version>3.5.3</maven.failsafe.version>
+        <!-- https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-extension-incubator -->
+        <opentelemetry.extension.incubator.version>1.36.0-alpha</opentelemetry.extension.incubator.version>
+        <!-- https://mvnrepository.com/artifact/io.opentelemetry.semconv/opentelemetry-semconv -->
+        <opentelemetry.extension.version>1.32.0</opentelemetry.extension.version>
         <!-- https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-sdk-common -->
-        <opentelemetry.sdk.version>1.45.0</opentelemetry.sdk.version>
+        <opentelemetry.sdk.version>1.49.0</opentelemetry.sdk.version>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-api -->
-        <selenium.api.version>4.11.0</selenium.api.version>
+        <selenium.api.version>4.32.0</selenium.api.version>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-json -->
-        <selenium.json.version>4.11.0</selenium.json.version>
+        <selenium.json.version>4.32.0</selenium.json.version>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-devtools-v115 -->
-        <selenium.devtools.v115.version>4.11.0</selenium.devtools.v115.version>
+        <selenium.devtools.v115.version>4.13.0</selenium.devtools.v115.version>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-devtools-v114 -->
-        <selenium.devtools.v114.version>4.11.0</selenium.devtools.v114.version>
+        <selenium.devtools.v114.version>4.12.1</selenium.devtools.v114.version>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-devtools-v113 -->
         <selenium.devtools.v113.version>4.11.0</selenium.devtools.v113.version>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-devtools-v110 -->
@@ -40,7 +40,7 @@
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-devtools-v111 -->
         <selenium.devtools.v111.version>4.9.1</selenium.devtools.v111.version>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-devtools-v85 -->
-        <selenium.devtools.v85.version>4.11.0</selenium.devtools.v85.version>
+        <selenium.devtools.v85.version>4.29.0</selenium.devtools.v85.version>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-devtools-v107 -->
         <selenium.devtools.v107.version>4.8.0</selenium.devtools.v107.version>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-devtools-v106 -->
@@ -50,18 +50,18 @@
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-devtools-v105 -->
         <selenium.devtools.v105.version>4.6.0</selenium.devtools.v105.version>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-support -->
-        <selenium.version>4.11.0</selenium.version>
+        <selenium.version>4.32.0</selenium.version>
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-        <slf4j.version>2.0.7</slf4j.version>
-        <!-- https://mvnrepository.com/artifact/org.asynchttpclient/async-http-client -->
+        <slf4j.version>2.0.17</slf4j.version>
+        <!-- https://mvnrepository.com/artifact/org.asynchttpclient/async-http-client-netty-utils -->
         <async.http.client.version>2.12.4</async.http.client.version>
-        <async.http.client.version1>3.0.1</async.http.client.version1>
+        <async.http.client.version1>3.0.2</async.http.client.version1>
         <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
-        <guava.version>32.1.1-jre</guava.version>
+        <guava.version>33.4.8-jre</guava.version>
         <!-- https://mvnrepository.com/artifact/io.netty/netty-transport-classes-epoll -->
-        <netty.codec.version>4.1.116.Final</netty.codec.version>
-        <!--        https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-context-->
-        <opentelemetry.context.version>1.24.0</opentelemetry.context.version>
+        <netty.codec.version>4.2.0.Final</netty.codec.version>
+        <!-- https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-context -->
+        <opentelemetry.context.version>1.49.0</opentelemetry.context.version>
 
         <!-- https://mvnrepository.com/artifact/dev.failsafe/failsafe -->
         <failsafe.version>3.3.2</failsafe.version>
@@ -80,7 +80,7 @@
             <version>${failsafe.version}</version>
         </dependency>
         <dependency>
-            <groupId>io.opentelemetry</groupId>
+            <groupId>io.opentelemetry.semconv</groupId>
             <artifactId>opentelemetry-semconv</artifactId>
             <version>${opentelemetry.extension.version}</version>
         </dependency>
@@ -508,7 +508,7 @@
         <dependency>
             <groupId>io.opentelemetry</groupId>
             <artifactId>opentelemetry-extension-incubator</artifactId>
-            <version>${opentelemetry.extension.version}</version>
+            <version>${opentelemetry.extension.incubator.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>io.opentelemetry</groupId>
