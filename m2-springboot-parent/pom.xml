@@ -8,10 +8,10 @@
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>m2-webapp-parent</artifactId>
+    <artifactId>m2-springboot-parent</artifactId>
     <version>0.0.1</version>
     <packaging>pom</packaging>
-    <name>m2-webapp-parent</name>
+    <name>m2-springboot-parent</name>
     <!--    <url>http://www.example.com</url>-->
 
     <properties>
@@ -75,6 +75,11 @@
             <version>${springdoc.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${org.mapstruct.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
             <version>${jackson.version}</version>
@@ -88,6 +93,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -110,5 +119,6 @@
 
     <modules>
         <module>m2-kafka-parent</module>
+        <module>m2-webapp-parent</module>
     </modules>
 </project>
