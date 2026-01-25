@@ -14,23 +14,23 @@
         <buildDirectory>${project.basedir}/target.nosync</buildDirectory>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>21</java.version>
+        <java.version>25</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <aspectj.version>1.9.19</aspectj.version>
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
-        <junit.version>5.13.0-M3</junit.version>
+        <junit.version>6.0.1</junit.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
-        <maven.compiler.version>3.14.0</maven.compiler.version>
+        <maven.compiler.version>3.14.1</maven.compiler.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-resources-plugin -->
-        <maven.resource.version>3.3.1</maven.resource.version>
+        <maven.resource.version>3.4.0</maven.resource.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
-        <maven.surfire.plugin>3.5.3</maven.surfire.plugin>
+        <maven.surfire.plugin>3.5.4</maven.surfire.plugin>
         <!--        <base.commons.version>[1.0.0,)</base.commons.version>-->
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-        <jackson.version>2.19.0</jackson.version>
+        <jackson.version>3.0.3</jackson.version>
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-        <lombok.version>1.18.38</lombok.version>
+        <lombok.version>1.18.42</lombok.version>
     </properties>
 
     <dependencies>

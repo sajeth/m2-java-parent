@@ -3,13 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>m2-java-parent</artifactId>
+        <artifactId>m2-parent</artifactId>
         <groupId>com.saji.m2.parent</groupId>
         <version>0.0.1</version>
     </parent>
 
     <artifactId>m2-core-parent</artifactId>
-    <version>0.0.1</version>
     <packaging>pom</packaging>
     <name>m2-core-parent</name>
     <!--  <url>http://www.example.com</url>-->
@@ -22,19 +21,19 @@
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-site-plugin -->
         <maven.site.version>3.21.0</maven.site.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-project-info-reports-plugin -->
-        <maven.project.info.reports.version>3.4.5</maven.project.info.reports.version>
+        <maven.project.info.reports.version>3.9.0</maven.project.info.reports.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-clean-plugin -->
-        <maven.clean.version>3.4.1</maven.clean.version>
+        <maven.clean.version>3.5.0</maven.clean.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
-        <maven.surfire.version>3.5.3</maven.surfire.version>
+        <maven.surfire.version>3.5.4</maven.surfire.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
-        <maven.source.version>3.3.1</maven.source.version>
+        <maven.source.version>3.4.0</maven.source.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
-        <maven.jar.version>3.4.2</maven.jar.version>
+        <maven.jar.version>3.5.0</maven.jar.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
-        <maven.javadoc.plugin>3.11.2</maven.javadoc.plugin>
+        <maven.javadoc.plugin>3.12.0</maven.javadoc.plugin>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
-        <spring.version>6.2.6</spring.version>
+        <spring.version>7.0.2</spring.version>
     </properties>
 
     <dependencies/>
@@ -88,6 +87,5 @@
     </build>
     <modules>
         <module>m2-commons-parent</module>
-        <module>m2-selenium-parent</module>
     </modules>
 </project>

@@ -1,1 +1,1 @@
-# m2-java-parent
+# m2-parent
