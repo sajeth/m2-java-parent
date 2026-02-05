@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>m2-parent</artifactId>
+        <artifactId>m2-java-parent</artifactId>
         <groupId>com.saji.m2.parent</groupId>
         <version>0.0.1</version>
     </parent>
@@ -14,24 +14,35 @@
     <!--    <url>http://www.example.com</url>-->
 
     <properties>
-
+        <!--		https://mvnrepository.com/artifact/io.cucumber/cucumber-spring-->
+        <cucumber.version>7.18.1</cucumber.version>
+        <!--		https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite-->
+        <junit-platform.version>1.10.1</junit-platform.version>
+        <clean.commons.version>[1.0.0,)</clean.commons.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
         <spring.boot.version>3.5.9</spring.boot.version>
         <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
         <swagger.version>3.0.1</swagger.version>
         <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
         <snakeyaml.version>2.5</snakeyaml.version>
-        <!-- https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-core-jakarta -->
-        <swagger.core.jakarta>2.2.41</swagger.core.jakarta>
-        <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
-        <springdoc.version>3.0.1</springdoc.version>
+
         <!-- https://mvnrepository.com/artifact/org.openapitools/openapi-generator-maven-plugin -->
         <openapi-generator.version>7.18.0</openapi-generator.version>
         <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
+        <spring-cloud.version>2025.0.0</spring-cloud.version>
     </properties>
     <dependencyManagement>
+
         <dependencies>
+            <!-- Spring Cloud BOM for managing Spring Cloud dependencies -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -42,6 +53,41 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
+        <dependency>
+            <groupId>com.saji.m2.commons</groupId>
+            <artifactId>clean-architecture-commons</artifactId>
+            <version>${clean.commons.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>jakarta.persistence</groupId>
+                    <artifactId>jakarta.persistence-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.projectlombok</groupId>
+                    <artifactId>lombok</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-web</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.projectreactor</groupId>
+                    <artifactId>reactor-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.data</groupId>
+                    <artifactId>spring-data-jpa</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>tools.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.maven.surefire</groupId>
+                    <artifactId>surefire-junit-platform</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-docker-compose</artifactId>
@@ -56,42 +102,20 @@
                     <groupId>org.yaml</groupId>
                     <artifactId>snakeyaml</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.assertj</groupId>
+                    <artifactId>assertj-core</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>${snakeyaml.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>${springdoc.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
-            <version>${springdoc.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
-            <version>${org.mapstruct.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>tools.jackson.dataformat</groupId>
-            <artifactId>jackson-dataformat-yaml</artifactId>
-            <version>${jackson.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.yaml</groupId>
-                    <artifactId>snakeyaml</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -113,11 +137,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.assertj</groupId>
+                    <artifactId>assertj-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
     <modules>
         <module>m2-kafka-parent</module>
         <module>m2-webapp-parent</module>
+        <module>m2-batch-parent</module>
     </modules>
 </project>
