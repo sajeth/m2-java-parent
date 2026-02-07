@@ -40,4 +40,7 @@
         <artifactId>grpc-services</artifactId>
     </dependency>
 </dependencies>
+    <modules>
+        <module>m2-batch-parent</module>
+    </modules>
 </project>

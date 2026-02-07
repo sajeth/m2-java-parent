@@ -169,6 +169,5 @@
     <modules>
         <module>m2-kafka-parent</module>
         <module>m2-webapp-parent</module>
-        <module>m2-batch-parent</module>
     </modules>
 </project>
