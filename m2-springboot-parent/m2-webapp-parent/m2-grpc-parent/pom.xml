@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>m2-webapp-parent</artifactId>
+        <groupId>com.saji.m2.parent</groupId>
+        <version>0.0.1</version>
+    </parent>
+
+    <artifactId>m2-grpc-parent</artifactId>
+    <packaging>pom</packaging>
+    <name>m2-grpc-parent</name>
+    <properties>
+        <grpc.version>1.77.1</grpc.version>
+        <protobuf.version>4.33.4</protobuf.version>
+        <spring-grpc.version>1.0.2</spring-grpc.version>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.grpc</groupId>
+                <artifactId>spring-grpc-dependencies</artifactId>
+                <version>${spring-grpc.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+<dependencies>
+    <!-- Spring gRPC Server Starter (version managed by spring-grpc-dependencies BOM) -->
+    <dependency>
+        <groupId>org.springframework.grpc</groupId>
+        <artifactId>spring-grpc-spring-boot-starter</artifactId>
+<!--        <version>${spring-grpc.version}</version>-->
+    </dependency>
+    <!-- gRPC services (reflection + health check support) -->
+    <dependency>
+        <groupId>io.grpc</groupId>
+        <artifactId>grpc-services</artifactId>
+    </dependency>
+</dependencies>
+</project>
