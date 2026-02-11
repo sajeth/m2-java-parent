@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>m2-webapp-parent</artifactId>
+        <groupId>com.saji.m2.parent</groupId>
+        <version>0.0.1</version>
+    </parent>
+
+    <artifactId>m2-quic-parent</artifactId>
+    <packaging>pom</packaging>
+    <name>m2-quic-parent</name>
+    <properties>
+        <quic.version>0.0.68.Final</quic.version>
+
+    </properties>
+    <dependencyManagement/>
+<dependencies>
+    <!-- Netty QUIC codec for HTTP/3 support -->
+    <dependency>
+        <groupId>io.netty.incubator</groupId>
+        <artifactId>netty-incubator-codec-native-quic</artifactId>
+        <version>0.0.68.Final</version>
+        <classifier>osx-aarch_64</classifier>
+    </dependency>
+    <dependency>
+        <groupId>io.netty.incubator</groupId>
+        <artifactId>netty-incubator-codec-native-quic</artifactId>
+        <version>0.0.68.Final</version>
+        <classifier>linux-aarch_64</classifier>
+    </dependency>
+
+</dependencies>
+
+</project>

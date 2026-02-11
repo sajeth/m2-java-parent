@@ -54,6 +54,12 @@
     </dependencyManagement>
     <dependencies>
         <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite</artifactId>
+            <scope>test</scope>
+            <version>${junit-platform.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.saji.m2.commons</groupId>
             <artifactId>clean-architecture-commons</artifactId>
             <version>${clean.commons.version}</version>

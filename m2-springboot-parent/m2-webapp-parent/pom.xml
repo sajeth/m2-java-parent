@@ -72,5 +72,7 @@
 
     <modules>
         <module>m2-grpc-parent</module>
+        <module>m2-batch-parent</module>
+        <module>m2-quic-parent</module>
     </modules>
 </project>
