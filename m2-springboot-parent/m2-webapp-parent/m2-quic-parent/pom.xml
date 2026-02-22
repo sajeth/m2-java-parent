@@ -16,50 +16,51 @@
 
     </properties>
     <dependencyManagement/>
-<dependencies>
-    <!-- Netty QUIC codec for HTTP/3 support -->
-    <dependency>
-        <groupId>io.netty.incubator</groupId>
-        <artifactId>netty-incubator-codec-native-quic</artifactId>
-        <version>0.0.75.Final</version>
-        <classifier>osx-aarch_64</classifier>
-    </dependency>
-    <dependency>
-        <groupId>io.netty.incubator</groupId>
-        <artifactId>netty-incubator-codec-native-quic</artifactId>
-        <version>0.0.75.Final</version>
-        <classifier>linux-aarch_64</classifier>
-    </dependency>
-    <!-- BoringSSL native TLS — required by Netty QUIC/HTTP3 -->
-    <dependency>
-        <groupId>io.netty</groupId>
-        <artifactId>netty-tcnative-boringssl-static</artifactId>
-    </dependency>
-</dependencies>
-<build>
-    <plugins>
-        <!-- Build Helper Maven Plugin to add generated sources -->
-        <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>build-helper-maven-plugin</artifactId>
-            <version>3.4.0</version>
-            <executions>
-                <execution>
-                    <id>add-generated-sources</id>
-                    <phase>generate-sources</phase>
-                    <goals>
-                        <goal>add-source</goal>
-                    </goals>
-                    <configuration>
-                        <sources>
-                            <source>${project.basedir}/target.nosync/generated-sources/openapi/src/main/java</source>
-                            <source>${project.basedir}/target.nosync/generated-sources/protobuf/java</source>
-                            <source>${project.basedir}/target.nosync/generated-sources/protobuf/grpc-java</source>
-                        </sources>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-    </plugins>
-</build>
+    <dependencies>
+        <!-- Netty QUIC codec for HTTP/3 support -->
+        <dependency>
+            <groupId>io.netty.incubator</groupId>
+            <artifactId>netty-incubator-codec-native-quic</artifactId>
+            <version>0.0.75.Final</version>
+            <classifier>osx-aarch_64</classifier>
+        </dependency>
+        <dependency>
+            <groupId>io.netty.incubator</groupId>
+            <artifactId>netty-incubator-codec-native-quic</artifactId>
+            <version>0.0.75.Final</version>
+            <classifier>linux-aarch_64</classifier>
+        </dependency>
+        <!-- BoringSSL native TLS — required by Netty QUIC/HTTP3 -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-tcnative-boringssl-static</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <!-- Build Helper Maven Plugin to add generated sources -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.4.0</version>
+                <executions>
+                    <execution>
+                        <id>add-generated-sources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.basedir}/target.nosync/generated-sources/openapi/src/main/java
+                                </source>
+                                <source>${project.basedir}/target.nosync/generated-sources/protobuf/java</source>
+                                <source>${project.basedir}/target.nosync/generated-sources/protobuf/grpc-java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -20,21 +20,26 @@
         <springdoc.version>3.0.1</springdoc.version>
         <!-- Source: https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
         <commons.lang3.version>3.20.0</commons.lang3.version>
+        <!-- BDD -->
+        <cucumber.version>7.18.1</cucumber.version>
+        <serenity.version>4.2.34</serenity.version>
+        <!-- Performance -->
+        <gatling.version>3.13.5</gatling.version>
+        <gatling.plugin.version>4.16.3</gatling.plugin.version>
     </properties>
 
     <dependencies>
-
-    <dependency>
-        <groupId>org.springdoc</groupId>
-        <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-        <version>${springdoc.version}</version>
-        <exclusions>
-            <exclusion>
-                <groupId>*</groupId>
-                <artifactId>*</artifactId>
-            </exclusion>
-        </exclusions>
-    </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
@@ -69,14 +74,61 @@
             </exclusions>
         </dependency>
         <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-web</artifactId>
-        <exclusions>
-            <exclusion>
-                <groupId>*</groupId>
-                <artifactId>*</artifactId>
-            </exclusion>
-        </exclusions>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- ===== BDD (Cucumber + Serenity) ===== -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-core</artifactId>
+            <version>${serenity.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-cucumber</artifactId>
+            <version>${serenity.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- ===== Performance (Gatling) ===== -->
+        <dependency>
+            <groupId>io.gatling.highcharts</groupId>
+            <artifactId>gatling-charts-highcharts</artifactId>
+            <version>${gatling.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- ===== TDD ===== -->
+        <!-- EvoSuite runtime (generated tests depend on this) -->
+        <dependency>
+            <groupId>org.evosuite</groupId>
+            <artifactId>evosuite-standalone-runtime</artifactId>
+            <version>${evosuite.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -85,4 +137,78 @@
         <module>m2-batch-parent</module>
         <module>m2-quic-parent</module>
     </modules>
+    <build>
+        <plugins>
+            <!-- ===== TDD: EvoSuite - Auto Unit Test Generation ===== -->
+            <plugin>
+                <groupId>org.evosuite.plugins</groupId>
+                <artifactId>evosuite-maven-plugin</artifactId>
+                <version>${evosuite.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- ===== TDD: PIT - Mutation Testing ===== -->
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>${pitest.version}</version>
+                <configuration>
+                    <outputFormats>
+                        <outputFormat>HTML</outputFormat>
+                        <outputFormat>XML</outputFormat>
+                    </outputFormats>
+                    <mutationThreshold>80</mutationThreshold>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>mutation-testing</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>mutationCoverage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- ===== BDD: Serenity - Living Documentation & Reports ===== -->
+<!--            <plugin>-->
+<!--                <groupId>net.serenity-bdd.maven.plugins</groupId>-->
+<!--                <artifactId>serenity-maven-plugin</artifactId>-->
+<!--                <version>${serenity.version}</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>serenity-reports</id>-->
+<!--                        <phase>post-integration-test</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>aggregate</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+
+            <!-- ===== Performance: Gatling ===== -->
+<!--            <plugin>-->
+<!--                <groupId>io.gatling</groupId>-->
+<!--                <artifactId>gatling-maven-plugin</artifactId>-->
+<!--                <version>${gatling.plugin.version}</version>-->
+<!--                <configuration>-->
+<!--                    <simulationClass>simulations.BasicSimulation</simulationClass>-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>performance-tests</id>-->
+<!--                        <phase>integration-test</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>test</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+        </plugins>
+    </build>
 </project>

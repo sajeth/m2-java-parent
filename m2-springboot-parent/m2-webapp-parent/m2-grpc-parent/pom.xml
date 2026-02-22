@@ -27,22 +27,22 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-<dependencies>
-    <!-- Spring gRPC Server Starter (version managed by spring-grpc-dependencies BOM) -->
-    <dependency>
-        <groupId>org.springframework.grpc</groupId>
-        <artifactId>spring-grpc-spring-boot-starter</artifactId>
-<!--        <version>${spring-grpc.version}</version>-->
-    </dependency>
-    <!-- gRPC services (reflection + health check support) -->
-    <dependency>
-        <groupId>io.grpc</groupId>
-        <artifactId>grpc-services</artifactId>
-    </dependency>
-</dependencies>
-<build>
-    <plugins>
+    <dependencies>
+        <!-- Spring gRPC Server Starter (version managed by spring-grpc-dependencies BOM) -->
+        <dependency>
+            <groupId>org.springframework.grpc</groupId>
+            <artifactId>spring-grpc-spring-boot-starter</artifactId>
+            <!--        <version>${spring-grpc.version}</version>-->
+        </dependency>
+        <!-- gRPC services (reflection + health check support) -->
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-services</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
 
-    </plugins>
-</build>
+        </plugins>
+    </build>
 </project>
