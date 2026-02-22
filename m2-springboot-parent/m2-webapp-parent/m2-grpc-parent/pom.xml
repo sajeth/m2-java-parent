@@ -39,7 +39,10 @@
         <groupId>io.grpc</groupId>
         <artifactId>grpc-services</artifactId>
     </dependency>
-
 </dependencies>
+<build>
+    <plugins>
 
+    </plugins>
+</build>
 </project>

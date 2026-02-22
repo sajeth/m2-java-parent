@@ -61,7 +61,7 @@
         </dependency>
         <dependency>
             <groupId>com.saji.m2.commons</groupId>
-            <artifactId>clean-architecture-commons</artifactId>
+            <artifactId>clean-architecture-common</artifactId>
             <version>${clean.commons.version}</version>
             <exclusions>
                 <exclusion>
