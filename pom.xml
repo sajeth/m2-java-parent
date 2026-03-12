@@ -31,7 +31,8 @@
         <maven.surfire.plugin>3.5.4</maven.surfire.plugin>
         <!--        <base.commons.version>[1.0.0,)</base.commons.version>-->
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-        <jackson.version>3.0.4</jackson.version>
+        <!-- https://github.com/FasterXML/jackson-core/security/advisories/GHSA-72hv-8253-57qq -->
+        <jackson.version>3.1.0</jackson.version>
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <lombok.version>1.18.42</lombok.version>
     </properties>

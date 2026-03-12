@@ -11,7 +11,6 @@
     <artifactId>m2-webapp-parent</artifactId>
     <packaging>pom</packaging>
     <name>m2-webapp-parent</name>
-    <!--    <url>http://www.example.com</url>-->
 
     <properties>
         <!-- https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-core-jakarta -->
@@ -29,6 +28,23 @@
     </properties>
 
     <dependencies>
+        <!-- SpringDoc OpenAPI for WebFlux -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
+            <version>2.8.14</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-lang3</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Micrometer Tracing (replacement for Spring Cloud Sleuth) -->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-tracing-bridge-brave</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
@@ -132,6 +148,29 @@
         </dependency>
     </dependencies>
 
+    <dependencyManagement>
+        <dependencies>
+            <!-- Override transitive jackson-core (2.x) from springdoc/serenity: GHSA-72hv-8253-57qq (DoS, CVSS 7.5) -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.21.1</version>
+            </dependency>
+            <!-- Override transitive jackson-core (3.x) from mapstruct: GHSA-72hv-8253-57qq / CVE-2026-29062 -->
+            <dependency>
+                <groupId>tools.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <!-- Override transitive pebble from gatling: CVE-2025-1686 (LFI, CVSS 4.9), fixed in 3.2.4 -->
+            <dependency>
+                <groupId>io.pebbletemplates</groupId>
+                <artifactId>pebble</artifactId>
+                <version>3.2.4</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <modules>
         <module>m2-grpc-parent</module>
         <module>m2-batch-parent</module>
@@ -175,40 +214,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- ===== BDD: Serenity - Living Documentation & Reports ===== -->
-<!--            <plugin>-->
-<!--                <groupId>net.serenity-bdd.maven.plugins</groupId>-->
-<!--                <artifactId>serenity-maven-plugin</artifactId>-->
-<!--                <version>${serenity.version}</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>serenity-reports</id>-->
-<!--                        <phase>post-integration-test</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>aggregate</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
-
-            <!-- ===== Performance: Gatling ===== -->
-<!--            <plugin>-->
-<!--                <groupId>io.gatling</groupId>-->
-<!--                <artifactId>gatling-maven-plugin</artifactId>-->
-<!--                <version>${gatling.plugin.version}</version>-->
-<!--                <configuration>-->
-<!--                    <simulationClass>simulations.BasicSimulation</simulationClass>-->
-<!--                </configuration>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>performance-tests</id>-->
-<!--                        <phase>integration-test</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>test</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
         </plugins>
     </build>
 </project>
