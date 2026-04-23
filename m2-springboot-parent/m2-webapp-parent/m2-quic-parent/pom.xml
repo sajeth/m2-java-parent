@@ -13,36 +13,58 @@
     <name>m2-quic-parent</name>
     <properties>
         <quic.version>0.0.68.Final</quic.version>
-
+        <spring-grpc.version>1.0.2</spring-grpc.version>
     </properties>
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.springframework.grpc</groupId>
+                <artifactId>spring-grpc-dependencies</artifactId>
+                <version>${spring-grpc.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
                 <groupId>io.netty</groupId>
                 <artifactId>netty-codec-classes-quic</artifactId>
-                <version>4.2.9.Final</version>
+                <version>4.2.12.Final</version>
+            </dependency>
+            <!-- Override Spring to patch CVE-2026-22735 (spring-web) and CVE-2026-22737 (spring-webflux) -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>7.0.7</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webflux</artifactId>
+                <version>7.0.7</version>
+            </dependency>
+            <!-- Override transitive Netty to patch CVE-2026-33870 (HTTP smuggling) and CVE-2026-33871 (HTTP/2 DoS) -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-codec-http</artifactId>
+                <version>5.0.0.Alpha2</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-codec-http2</artifactId>
+                <version>5.0.0.Alpha2</version>
             </dependency>
             <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
-                <version>3.0.1</version>
+                <version>3.0.3</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
     <dependencies>
 
-        <!-- Source: https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
-        <dependency>
-            <groupId>org.modelmapper</groupId>
-            <artifactId>modelmapper</artifactId>
-            <version>3.2.6</version>
-            <scope>compile</scope>
-        </dependency>
         <!-- Source: https://mvnrepository.com/artifact/io.netty/netty-codec-classes-quic -->
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-codec-classes-quic</artifactId>
-            <version>4.2.10.Final</version>
+            <version>4.2.12.Final</version>
             <scope>compile</scope>
         </dependency>
         <!-- gRPC Spring Boot Starter (client + server) -->
@@ -50,11 +72,6 @@
             <groupId>net.devh</groupId>
             <artifactId>grpc-spring-boot-starter</artifactId>
             <version>3.1.0.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
-            <version>2.8.5</version>
         </dependency>
         <!-- Spring WebFlux — provides HttpHandler bean, reactive web stack -->
         <dependency>

@@ -11,7 +11,6 @@
     <artifactId>m2-springboot-parent</artifactId>
     <packaging>pom</packaging>
     <name>m2-springboot-parent</name>
-    <!--    <url>http://www.example.com</url>-->
 
     <properties>
         <!--		https://mvnrepository.com/artifact/io.cucumber/cucumber-spring-->
@@ -20,17 +19,22 @@
         <junit-platform.version>6.0.2</junit-platform.version>
         <clean.commons.version>[1.0.0,)</clean.commons.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
-        <spring.boot.version>4.0.2</spring.boot.version>
+        <spring.boot.version>4.0.5</spring.boot.version>
         <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
-        <swagger.version>3.0.1</swagger.version>
+        <swagger.version>3.0.3</swagger.version>
         <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
-        <snakeyaml.version>2.5</snakeyaml.version>
+        <snakeyaml.version>2.6</snakeyaml.version>
 
         <!-- https://mvnrepository.com/artifact/org.openapitools/openapi-generator-maven-plugin -->
-        <openapi-generator.version>7.19.0</openapi-generator.version>
+        <openapi-generator.version>7.21.0</openapi-generator.version>
         <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
         <spring-cloud.version>2025.1.1</spring-cloud.version>
+        <!-- Override Spring Framework to patch CVE-2026-22735 (spring-web) and CVE-2026-22737 (spring-webflux) -->
+        <spring-framework.version>7.0.7</spring-framework.version>
+        <spring-security.version>7.0.4</spring-security.version>
+        <spring-web.version>7.0.7</spring-web.version>
+        <kafka.version>4.1.2</kafka.version>
     </properties>
     <dependencyManagement>
 
@@ -49,6 +53,18 @@
                 <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!-- Override transitive bcprov-jdk18on 1.81 (CVE-2025-55242 / GHSA, CVSS high), fixed in 1.82 -->
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk18on</artifactId>
+                <version>1.84</version>
+            </dependency>
+            <!-- Override Spring Boot BOM's tools.jackson.core:3.1.0: GHSA-2m67-wjpj-xhg9 (DoS, CVSS 7.5) -->
+            <dependency>
+                <groupId>tools.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -108,15 +124,17 @@
                     <groupId>org.yaml</groupId>
                     <artifactId>snakeyaml</artifactId>
                 </exclusion>
-                <!--                <exclusion>-->
-                <!--                    <groupId>ch.qos.logback</groupId>-->
-                <!--                    <artifactId>logback-classic</artifactId>-->
-                <!--                </exclusion>-->
                 <exclusion>
                     <groupId>org.assertj</groupId>
                     <artifactId>assertj-core</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <!-- Fix CVE-2026-24400 (CVSS 7.3): assertj XXE in isXmlEqualTo assertion (test scope) -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>4.0.0-M1</version>
         </dependency>
         <dependency>
             <groupId>org.yaml</groupId>
@@ -134,16 +152,6 @@
             <version>4.0.0-M2</version>
             <scope>compile</scope>
         </dependency>
-        <!-- Logback (excluded by parent POM, re-added explicitly) -->
-        <!--        <dependency>-->
-        <!--            <groupId>ch.qos.logback</groupId>-->
-        <!--            <artifactId>logback-classic</artifactId>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>ch.qos.logback</groupId>-->
-        <!--            <artifactId>logback-core</artifactId>-->
-        <!--        </dependency>-->
-        <!-- Source: https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
         <dependency>
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
