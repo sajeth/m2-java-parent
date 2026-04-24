@@ -40,17 +40,6 @@
                 <artifactId>spring-webflux</artifactId>
                 <version>7.0.7</version>
             </dependency>
-            <!-- Override transitive Netty to patch CVE-2026-33870 (HTTP smuggling) and CVE-2026-33871 (HTTP/2 DoS) -->
-            <dependency>
-                <groupId>io.netty</groupId>
-                <artifactId>netty-codec-http</artifactId>
-                <version>5.0.0.Alpha2</version>
-            </dependency>
-            <dependency>
-                <groupId>io.netty</groupId>
-                <artifactId>netty-codec-http2</artifactId>
-                <version>5.0.0.Alpha2</version>
-            </dependency>
             <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
