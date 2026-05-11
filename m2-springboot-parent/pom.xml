@@ -75,41 +75,41 @@
             <scope>test</scope>
             <version>${junit-platform.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.saji.m2.commons</groupId>-->
-<!--            <artifactId>clean-architecture-common</artifactId>-->
-<!--            <version>${clean.commons.version}</version>-->
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>jakarta.persistence</groupId>-->
-<!--                    <artifactId>jakarta.persistence-api</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.projectlombok</groupId>-->
-<!--                    <artifactId>lombok</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.springframework</groupId>-->
-<!--                    <artifactId>spring-web</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>io.projectreactor</groupId>-->
-<!--                    <artifactId>reactor-core</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.springframework.data</groupId>-->
-<!--                    <artifactId>spring-data-jpa</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>tools.jackson.core</groupId>-->
-<!--                    <artifactId>jackson-databind</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.apache.maven.surefire</groupId>-->
-<!--                    <artifactId>surefire-junit-platform</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.saji.m2.commons</groupId>
+            <artifactId>clean-architecture-common</artifactId>
+            <version>${clean.commons.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>jakarta.persistence</groupId>
+                    <artifactId>jakarta.persistence-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.projectlombok</groupId>
+                    <artifactId>lombok</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-web</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.projectreactor</groupId>
+                    <artifactId>reactor-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.data</groupId>
+                    <artifactId>spring-data-jpa</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>tools.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.maven.surefire</groupId>
+                    <artifactId>surefire-junit-platform</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-docker-compose</artifactId>
@@ -179,6 +179,7 @@
             </exclusions>
         </dependency>
     </dependencies>
+
 
     <modules>
         <module>m2-kafka-parent</module>

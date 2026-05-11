@@ -53,12 +53,11 @@
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
         <slf4j.version>2.0.17</slf4j.version>
         <!-- https://mvnrepository.com/artifact/org.asynchttpclient/async-http-client-netty-utils -->
-        <async.http.client.version>3.0.6</async.http.client.version>
-        <async.http.client.version1>3.0.6</async.http.client.version1>
+        <async.http.client.version1>[3.0.9,)</async.http.client.version1>
         <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
         <guava.version>33.5.0-jre</guava.version>
         <!-- https://mvnrepository.com/artifact/io.netty/netty-transport-classes-epoll -->
-        <netty.codec.version>4.2.10.Final</netty.codec.version>
+        <netty.codec.version>[4.2.13.Final,)</netty.codec.version>
         <!-- https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-context -->
         <opentelemetry.context.version>1.58.0</opentelemetry.context.version>
 
