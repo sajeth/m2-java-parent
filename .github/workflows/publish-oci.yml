@@ -1,4 +1,4 @@
-name: Publish to OCI Artifact Registry
+name: Publish to GitHub Packages
 
 on:
   push:
@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      packages: write
 
     steps:
       - name: Checkout
@@ -21,13 +22,12 @@ jobs:
           java-version: '25'
           distribution: 'temurin'
           cache: 'maven'
-          # Matches the <id> in distributionManagement; setup-java injects these into ~/.m2/settings.xml
-          server-id: oci-artifact-registry
-          server-username: OCI_USERNAME
-          server-password: OCI_AUTH_TOKEN
+          server-id: github
+          server-username: GITHUB_ACTOR
+          server-password: GITHUB_TOKEN
 
-      - name: Deploy to OCI Artifact Registry
+      - name: Deploy to GitHub Packages
         run: mvn --no-transfer-progress deploy -DskipTests
         env:
-          OCI_USERNAME: ${{ secrets.OCI_REGISTRY_USERNAME }}
-          OCI_AUTH_TOKEN: ${{ secrets.OCI_AUTH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
