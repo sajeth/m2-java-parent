@@ -26,6 +26,12 @@ jobs:
           server-username: GITHUB_ACTOR
           server-password: GITHUB_TOKEN
 
+      - name: Set version
+        run: |
+          mvn --no-transfer-progress org.codehaus.mojo:versions-maven-plugin:2.17.1:set \
+            -DnewVersion=0.0.${{ github.run_number }} \
+            -DgenerateBackupPoms=false
+
       - name: Deploy to GitHub Packages
         run: mvn --no-transfer-progress deploy -DskipTests
         env:
