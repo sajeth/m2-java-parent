@@ -1,0 +1,33 @@
+name: Publish to OCI Artifact Registry
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 25
+        uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'temurin'
+          cache: 'maven'
+          # Matches the <id> in distributionManagement; setup-java injects these into ~/.m2/settings.xml
+          server-id: oci-artifact-registry
+          server-username: OCI_USERNAME
+          server-password: OCI_AUTH_TOKEN
+
+      - name: Deploy to OCI Artifact Registry
+        run: mvn --no-transfer-progress deploy -DskipTests
+        env:
+          OCI_USERNAME: ${{ secrets.OCI_REGISTRY_USERNAME }}
+          OCI_AUTH_TOKEN: ${{ secrets.OCI_AUTH_TOKEN }}

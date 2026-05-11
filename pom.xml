@@ -37,7 +37,19 @@
         <lombok.version>1.18.42</lombok.version>
         <jacoco.version>0.8.14</jacoco.version>
         <junit.jupiter.version>5.10.2</junit.jupiter.version>
+        <oci.maven.repo.url>https://artifact.ca-toronto-1.oci.oraclecloud.com/20200630/generic/ocid1.artifactrepository.oc1.ca-toronto-1.0.amaaaaaanfns6lqa2vamadp2s2zefzqowkjghkhjsfk5livuj4a6ovrhhdla/</oci.maven.repo.url>
     </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>oci-artifact-registry</id>
+            <url>${oci.maven.repo.url}</url>
+        </repository>
+        <snapshotRepository>
+            <id>oci-artifact-registry</id>
+            <url>${oci.maven.repo.url}</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <dependencies>
         <dependency>
