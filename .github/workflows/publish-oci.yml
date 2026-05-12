@@ -35,5 +35,7 @@ jobs:
       - name: Deploy to GitHub Packages
         run: mvn --no-transfer-progress deploy -DskipTests
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # GH_PACKAGES_TOKEN needs read:packages + write:packages scope
+          # GITHUB_TOKEN alone cannot read packages from other repos (clean-architecture-common)
+          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
