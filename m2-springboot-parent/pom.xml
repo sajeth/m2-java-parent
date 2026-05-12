@@ -17,7 +17,7 @@
         <cucumber.version>7.34.2</cucumber.version>
         <!--		https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite-->
         <junit-platform.version>6.0.2</junit-platform.version>
-        <clean.commons.version>[0.0.8,)</clean.commons.version>
+        <clean.commons.version>0.0.8</clean.commons.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
         <spring.boot.version>4.0.5</spring.boot.version>
         <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
