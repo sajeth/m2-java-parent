@@ -12,8 +12,8 @@
     <packaging>pom</packaging>
     <name>m2-quic-parent</name>
     <properties>
-        <quic.version>0.0.68.Final</quic.version>
-        <spring-grpc.version>1.0.2</spring-grpc.version>
+        <quic.version>0.0.75.Final</quic.version>
+        <spring-grpc.version>1.0.3</spring-grpc.version>
     </properties>
     <dependencyManagement>
         <dependencies>

@@ -12,9 +12,9 @@
     <packaging>pom</packaging>
     <name>m2-grpc-parent</name>
     <properties>
-        <grpc.version>1.77.1</grpc.version>
+        <grpc.version>1.81.0</grpc.version>
         <protobuf.version>4.33.4</protobuf.version>
-        <spring-grpc.version>1.0.2</spring-grpc.version>
+        <spring-grpc.version>1.0.3</spring-grpc.version>
     </properties>
     <dependencyManagement>
         <dependencies>

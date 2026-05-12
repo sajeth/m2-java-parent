@@ -14,10 +14,10 @@
 
     <properties>
         <!--		https://mvnrepository.com/artifact/io.cucumber/cucumber-spring-->
-        <cucumber.version>7.34.2</cucumber.version>
+        <cucumber.version>7.34.3</cucumber.version>
         <!--		https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite-->
         <junit-platform.version>6.0.2</junit-platform.version>
-        <clean.commons.version>0.0.8</clean.commons.version>
+        <clean.commons.version>1.0.1</clean.commons.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
         <spring.boot.version>4.0.5</spring.boot.version>
         <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
@@ -34,7 +34,7 @@
         <spring-framework.version>7.0.7</spring-framework.version>
         <spring-security.version>7.0.4</spring-security.version>
         <spring-web.version>7.0.7</spring-web.version>
-        <kafka.version>4.1.2</kafka.version>
+        <kafka.version>4.2.0</kafka.version>
     </properties>
     <dependencyManagement>
 
@@ -155,7 +155,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
-            <version>4.0.0-M2</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
