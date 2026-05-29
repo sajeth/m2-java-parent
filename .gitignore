@@ -12,7 +12,6 @@ target.nosync/
 *.iml
 
 */.idea
-*.md
 */.bmad-core
 */.claude
 */.bmad-infrastructure-devops
