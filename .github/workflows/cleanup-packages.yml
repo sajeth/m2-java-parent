@@ -1,0 +1,64 @@
+name: Cleanup Old Package Versions
+
+on:
+  workflow_run:
+    workflows: [ "Publish to GitHub Packages" ]
+    types: [ completed ]
+  schedule:
+    - cron: '0 9 1,15 * *'  # 3 h after publish windows
+  workflow_dispatch:
+    inputs:
+      keep:
+        description: 'Versions to keep per package (oldest are deleted)'
+        required: false
+        default: '2'
+        type: string
+
+permissions: { }
+
+jobs:
+  cleanup:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+
+    steps:
+      - name: Prune old versions
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          KEEP: ${{ inputs.keep || '2' }}
+        run: |
+          echo "Listing maven packages for m2-java-parent..."
+          packages=$(gh api "/user/packages?package_type=maven" --paginate \
+            --jq '.[] | select(.repository.name == "m2-java-parent") | .name')
+
+          if [ -z "$packages" ]; then
+            echo "No packages found."
+            exit 0
+          fi
+
+          while IFS= read -r pkg; do
+            echo ""
+            echo "=== $pkg ==="
+            encoded=$(printf '%s' "$pkg" | jq -Rr @uri)
+
+            mapfile -t to_delete < <(
+              gh api "/user/packages/maven/$encoded/versions" --paginate \
+                --jq "sort_by(.created_at) | reverse | .[$KEEP:] | .[].id"
+            )
+
+            if [ "${#to_delete[@]}" -eq 0 ]; then
+              echo "  Nothing to prune (≤$KEEP versions present)"
+              continue
+            fi
+
+            echo "  Deleting ${#to_delete[@]} version(s)..."
+            for vid in "${to_delete[@]}"; do
+              echo "  → Deleting version id $vid"
+              gh api --method DELETE "/user/packages/maven/$encoded/versions/$vid"
+            done
+          done <<< "$packages"
+
+          echo ""
+          echo "Done."

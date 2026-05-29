@@ -7,7 +7,15 @@ on:
 permissions: {}
 
 jobs:
+  gate:
+    uses: ./.github/workflows/dependabot-gate.yml
+    permissions:
+      pull-requests: read
+    with:
+      pr-number: ${{ github.event.pull_request.number }}
+
   submit:
+    needs: gate
     runs-on: ubuntu-latest
     permissions:
       contents: write
