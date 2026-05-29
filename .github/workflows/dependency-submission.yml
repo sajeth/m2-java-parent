@@ -25,6 +25,7 @@ jobs:
           server-password: GITHUB_TOKEN
 
       - uses: advanced-security/maven-dependency-submission-action@v5.0.0
+        if: github.actor != 'dependabot[bot]'
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
         env:
