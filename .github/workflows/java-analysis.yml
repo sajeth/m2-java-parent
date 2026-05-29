@@ -128,19 +128,12 @@ jobs:
           server-username: GITHUB_ACTOR
           server-password: GITHUB_TOKEN
 
-      - name: Cache NVD database
-        uses: actions/cache@v5
-        with:
-          path: ~/.dependency-check
-          key: owasp-nvd-${{ hashFiles('**/pom.xml') }}
-          restore-keys: owasp-nvd-
-
       - name: Run OWASP Dependency Check
         run: |
           mvn --no-transfer-progress org.owasp:dependency-check-maven:check \
             -DfailBuildOnCVSS=7 \
             -DsuppressionFile=.github/owasp-suppressions.xml \
-            -DnvdApiKey=${{ secrets.NVD_API_KEY }} \
+            -DanalyzerNvdApiEnabled=false \
             --batch-mode
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
