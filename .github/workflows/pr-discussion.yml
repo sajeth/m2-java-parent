@@ -1,0 +1,125 @@
+name: Create Discussion on PR
+
+on:
+  pull_request:
+    types: [opened]
+    branches: [master]
+
+permissions: {}
+
+jobs:
+  create-discussion:
+    runs-on: ubuntu-latest
+    # Skip Dependabot, other bots, and draft PRs
+    if: |
+      !github.event.pull_request.draft &&
+      github.actor != 'dependabot[bot]' &&
+      github.actor != 'app/dependabot' &&
+      github.actor != 'github-actions[bot]'
+    permissions:
+      pull-requests: read
+      discussions: write
+
+    steps:
+      - name: Determine category and create discussion
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          PR_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.event.repository.name }}
+        run: |
+          set -euo pipefail
+
+          # ── Determine discussion category based on labels ──────────────────
+          # Labels map (checked in priority order):
+          #   security                   → Announcements
+          #   feature, enhancement       → Ideas
+          #   bug, fix                   → Q&A
+          #   ci                         → Show and tell
+          #   polls                      → Polls
+          #   dependency, chore          → skip (handled by Dependabot; no discussion)
+          #   (anything else / no label) → General
+
+          LABELS=",${PR_LABELS},"
+          CATEGORY="General"
+
+          if [[ "$LABELS" =~ ,(dependency|chore), ]]; then
+            echo "Skipping dependency/maintenance PR — no discussion created."
+            exit 0
+          elif [[ "$LABELS" =~ ,security, ]]; then
+            CATEGORY="Announcements"
+          elif [[ "$LABELS" =~ ,(feature|enhancement), ]]; then
+            CATEGORY="Ideas"
+          elif [[ "$LABELS" =~ ,(bug|fix), ]]; then
+            CATEGORY="Q&A"
+          elif [[ "$LABELS" =~ ,ci, ]]; then
+            CATEGORY="Show and tell"
+          elif [[ "$LABELS" =~ ,polls?, ]]; then
+            CATEGORY="Polls"
+          fi
+
+          echo "PR labels : '${PR_LABELS}'"
+          echo "Category  : ${CATEGORY}"
+
+          # ── Resolve repository and category IDs via GraphQL ───────────────
+          IDS=$(gh api graphql \
+            -f query='query($owner:String!, $name:String!) {
+              repository(owner:$owner, name:$name) {
+                id
+                discussionCategories(first:20) { nodes { id name } }
+              }
+            }' \
+            -f owner="$REPO_OWNER" \
+            -f name="$REPO_NAME")
+
+          REPO_ID=$(echo "$IDS" | jq -r '.data.repository.id')
+
+          CATEGORY_ID=$(echo "$IDS" | \
+            jq -r --arg cat "$CATEGORY" \
+            '.data.repository.discussionCategories.nodes[] | select(.name == $cat) | .id')
+
+          # Fall back to General if the requested category doesn't exist
+          if [[ -z "$CATEGORY_ID" ]]; then
+            echo "::warning::Category '${CATEGORY}' not found — falling back to General."
+            CATEGORY_ID=$(echo "$IDS" | \
+              jq -r '.data.repository.discussionCategories.nodes[] | select(.name == "General") | .id')
+          fi
+
+          if [[ -z "$CATEGORY_ID" ]]; then
+            echo "::error::No usable discussion category found. Enable Discussions in Settings and create the required categories."
+            exit 1
+          fi
+
+          # ── Build discussion body ─────────────────────────────────────────
+          BODY="**Pull Request:** [#${PR_NUMBER} — ${PR_TITLE}](${PR_URL})
+          **Author:** @${PR_AUTHOR}
+
+          ---
+
+          ${PR_BODY:-*(No description provided.)*}
+
+          ---
+          *This discussion was created automatically when the PR was opened. Use it to ask questions, share feedback, or discuss the proposed change before it merges.*"
+
+          # ── Create the discussion ─────────────────────────────────────────
+          DISCUSSION_URL=$(gh api graphql \
+            -f query='mutation($repoId:ID!, $catId:ID!, $title:String!, $body:String!) {
+              createDiscussion(input:{
+                repositoryId: $repoId
+                categoryId:   $catId
+                title:        $title
+                body:         $body
+              }) { discussion { url } }
+            }' \
+            -f repoId="$REPO_ID" \
+            -f catId="$CATEGORY_ID" \
+            -f title="PR #${PR_NUMBER}: ${PR_TITLE}" \
+            -f body="$BODY" \
+            --jq '.data.createDiscussion.discussion.url')
+
+          echo "Discussion created: ${DISCUSSION_URL}"
