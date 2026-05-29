@@ -88,13 +88,6 @@
         </repository>
     </distributionManagement>
 
-    <repositories>
-        <repository>
-            <id>github</id>
-            <url>https://maven.pkg.github.com/sajeth/clean-architecture-common</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
