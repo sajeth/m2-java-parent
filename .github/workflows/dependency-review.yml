@@ -5,7 +5,13 @@ on:
     types: [opened, synchronize, reopened, ready_for_review]
 
 jobs:
+  gate:
+    uses: ./.github/workflows/dependabot-gate.yml
+    with:
+      pr-number: ${{ github.event.pull_request.number }}
+
   review:
+    needs: gate
     runs-on: ubuntu-latest
     permissions:
       contents: read
