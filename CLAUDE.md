@@ -89,10 +89,52 @@ Both need to be patched independently when a Jackson CVE lands.
 | `publish.yml` | Schedule (1st/15th) or manual | CalVer release to Maven Central + SBOM + SLSA |
 | `java-analysis.yml` | PRs | SpotBugs, PMD, Checkstyle, JaCoCo, Semgrep SAST |
 | `dependency-upgrade.yml` | Weekly Monday | Minor/patch bumps → PR with OWASP pre-check |
-| `dependabot-auto-merge.yml` | Dependabot PRs | Auto-approve + squash-merge after checks pass |
+| `auto-merge.yml` | All PRs opened/updated | Auto-approve (Dependabot only) + enable squash auto-merge for all PRs |
 | `dependabot-gate.yml` | Called by other workflows | Serializes Dependabot PRs — only the oldest open one runs checks |
+| `pr-discussion.yml` | PR opened against master | Creates a GitHub Discussion linked to the PR |
+| `cleanup-packages.yml` | After publish.yml | Prunes old GitHub Packages versions |
+| `scorecard.yml` | Push to master + weekly | OpenSSF Scorecard supply-chain analysis |
+| `qodana_code_quality.yml` | PRs + push to master | JetBrains Qodana static analysis |
 
 The `release` Maven profile (activated by `-Prelease`) adds GPG signing, attaches sources, and routes deployment to Maven Central via the Sonatype Central Portal plugin instead of the GitHub Packages default.
+
+## GitHub Discussions
+
+Discussions are created automatically by `pr-discussion.yml` whenever a non-draft PR is opened against `master`. The label on the PR determines which Discussion category is used:
+
+| PR Label | Discussion Category |
+|---|---|
+| `security` | Announcements |
+| `feature`, `enhancement` | Ideas |
+| `bug`, `fix` | Q&A |
+| `ci` | Show and tell |
+| `polls` | Polls |
+| `dependency`, `chore` | *(skipped — no discussion created)* |
+| *(anything else / no label)* | General |
+
+**One-time repository setup:** Enable GitHub Discussions in repository Settings → General → Features, then create the following categories exactly as spelled: `Announcements`, `General`, `Ideas`, `Polls`, `Q&A`, `Show and tell`. The workflow falls back to `General` if a mapped category is missing.
+
+## Wiki Maintenance
+
+The repository wiki (`sajeth/m2-java-parent.wiki`) documents the POM hierarchy, version history, dependency rationale, and workflow design.
+
+**When a PR is merged, update the wiki if the PR:**
+- Adds, removes, or renames a parent POM module → update the POM Hierarchy page
+- Changes the release schedule or versioning scheme → update the Versioning page
+- Adds, removes, or significantly changes a workflow → update the Workflows page
+- Adds a CVE override or suppression → update the Security / Dependency Overrides page
+- Changes static-analysis rules or thresholds → update the Static Analysis page
+
+To edit the wiki locally:
+```bash
+git clone https://github.com/sajeth/m2-java-parent.wiki.git /tmp/m2-wiki
+cd /tmp/m2-wiki
+# edit or create *.md files, then:
+git add . && git commit -m "docs: update wiki — <summary>"
+git push origin master
+```
+
+Wiki pages use GitHub-Flavored Markdown. The home page is `Home.md`; each top-level topic is a separate `*.md` file (e.g. `POM-Hierarchy.md`, `Versioning.md`, `Workflows.md`, `Security.md`, `Static-Analysis.md`).
 
 ## Static Analysis Configuration
 

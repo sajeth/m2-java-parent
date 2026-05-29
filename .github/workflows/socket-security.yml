@@ -15,7 +15,17 @@ concurrency:
 permissions: {}
 
 jobs:
+  gate:
+    if: github.event_name == 'pull_request'
+    uses: ./.github/workflows/dependabot-gate.yml
+    permissions:
+      pull-requests: read
+    with:
+      pr-number: ${{ github.event.pull_request.number }}
+
   socket-security:
+    needs: gate
+    if: always() && (needs.gate.result == 'success' || needs.gate.result == 'skipped')
     runs-on: ubuntu-latest
     permissions:
       contents: read
