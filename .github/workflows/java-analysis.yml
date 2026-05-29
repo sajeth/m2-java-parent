@@ -147,7 +147,7 @@ jobs:
         continue-on-error: true  # report findings; don't hard-block until suppressions are tuned
 
       - name: Upload OWASP report as SARIF
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: always()
         with:
           sarif_file: '**/target.nosync/dependency-check-report.sarif'
@@ -178,6 +178,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload SARIF to GitHub Security
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: semgrep.sarif
+        continue-on-error: true  # requires GitHub Advanced Security; skips gracefully if not enabled
