@@ -4,9 +4,13 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
 
+permissions: {}
+
 jobs:
   gate:
     uses: ./.github/workflows/dependabot-gate.yml
+    permissions:
+      pull-requests: read
     with:
       pr-number: ${{ github.event.pull_request.number }}
 

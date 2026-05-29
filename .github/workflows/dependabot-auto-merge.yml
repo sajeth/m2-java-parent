@@ -1,20 +1,21 @@
-name: Dependabot Auto-merge
+name: Auto-merge
 
 on:
   pull_request:
     types: [opened, reopened, synchronize, closed]
     branches: [master]
 
-permissions:
-  contents: write
-  pull-requests: write
+permissions: {}
 
 jobs:
   auto-merge:
     runs-on: ubuntu-latest
-    if: github.event.action != 'closed' && (github.actor == 'dependabot[bot]' || github.actor == 'app/dependabot')
+    if: github.event.action != 'closed'
+    permissions:
+      pull-requests: write
     steps:
-      - name: Approve PR
+      - name: Approve PR (Dependabot only)
+        if: github.actor == 'dependabot[bot]' || github.actor == 'app/dependabot'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
@@ -24,11 +25,16 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
-        run: gh pr merge --auto --squash "$PR_URL"
+        run: |
+          gh pr merge --auto --squash "$PR_URL" \
+            && echo "Auto-merge enabled." \
+            || echo "Auto-merge not available (repo setting disabled or already set); merge manually when checks pass."
 
   rebase-on-merge:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
+    permissions:
+      pull-requests: write
     steps:
       - name: Rebase open Dependabot PRs
         env:

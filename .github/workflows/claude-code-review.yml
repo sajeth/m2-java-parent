@@ -8,6 +8,8 @@ on:
         required: true
         type: number
 
+permissions: {}
+
 jobs:
   claude-review:
     # Optional: Filter by PR author
