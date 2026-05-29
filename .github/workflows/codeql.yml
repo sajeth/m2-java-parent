@@ -37,7 +37,7 @@ jobs:
           queries: security-and-quality
 
       - name: Build
-        if: github.actor != 'dependabot[bot]'
+        if: github.actor != 'dependabot[bot]' && github.actor != 'app/dependabot'
         run: mvn --no-transfer-progress compile -DskipTests --batch-mode
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}

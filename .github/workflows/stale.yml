@@ -28,5 +28,4 @@ jobs:
             Closing due to inactivity. Re-open if still relevant.
 
           stale-pr-label: 'stale'
-          exempt-pr-labels: 'pinned,security,do-not-close'
-          exempt-pr-authors: 'dependabot[bot]'
+          exempt-pr-labels: 'pinned,security,do-not-close,dependencies'
