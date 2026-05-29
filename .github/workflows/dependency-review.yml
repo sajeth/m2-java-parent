@@ -20,5 +20,4 @@ jobs:
         with:
           fail-on-severity: high
           comment-summary-in-pr: always
-          # Align with OWASP suppression file
-          allow-dependencies-licenses: ''
+          retry-on-snapshot-warnings: true
