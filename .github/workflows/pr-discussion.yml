@@ -67,6 +67,7 @@ jobs:
           echo "Category  : ${CATEGORY}"
 
           # ── Resolve repository and category IDs via GraphQL ───────────────
+          # shellcheck disable=SC2016
           IDS=$(gh api graphql \
             -f query='query($owner:String!, $name:String!) {
               repository(owner:$owner, name:$name) {
@@ -107,6 +108,7 @@ jobs:
           *This discussion was created automatically when the PR was opened. Use it to ask questions, share feedback, or discuss the proposed change before it merges.*"
 
           # ── Create the discussion ─────────────────────────────────────────
+          # shellcheck disable=SC2016
           DISCUSSION_URL=$(gh api graphql \
             -f query='mutation($repoId:ID!, $catId:ID!, $title:String!, $body:String!) {
               createDiscussion(input:{
