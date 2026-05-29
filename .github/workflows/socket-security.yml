@@ -65,6 +65,6 @@ jobs:
             PR_NUMBER=${{ github.event.issue.number }}
           fi
           socketcli \
-            --target-path $GITHUB_WORKSPACE \
+            --target-path "$GITHUB_WORKSPACE" \
             --scm github \
-            --pr-number $PR_NUMBER
+            --pr-number "$PR_NUMBER"
