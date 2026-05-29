@@ -17,9 +17,9 @@
         <cucumber.version>7.34.3</cucumber.version>
         <!--		https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite-->
         <junit-platform.version>6.0.2</junit-platform.version>
-        <clean.commons.version>1.0.1</clean.commons.version>
+        <clean.commons.version>0.0.1</clean.commons.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
-        <spring.boot.version>4.0.5</spring.boot.version>
+        <spring.boot.version>4.0.6</spring.boot.version>
         <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
         <swagger.version>3.0.3</swagger.version>
         <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
@@ -66,7 +66,7 @@
                 <artifactId>jackson-core</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
-            <!-- Override spring-boot-autoconfigure CVE-2026-40971 (CVSS 5.0) — update version when Spring Boot patch releases -->
+            <!-- Override spring-boot-autoconfigure — patched in 4.0.6 (CVE-2026-40970/71/74/75/76/77, CVE-2026-40972/73) -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-autoconfigure</artifactId>
@@ -80,41 +80,6 @@
             <artifactId>junit-platform-suite</artifactId>
             <scope>test</scope>
             <version>${junit-platform.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.saji.m2.commons</groupId>
-            <artifactId>clean-architecture-common</artifactId>
-            <version>${clean.commons.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>jakarta.persistence</groupId>
-                    <artifactId>jakarta.persistence-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.projectlombok</groupId>
-                    <artifactId>lombok</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-web</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.projectreactor</groupId>
-                    <artifactId>reactor-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework.data</groupId>
-                    <artifactId>spring-data-jpa</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>tools.jackson.core</groupId>
-                    <artifactId>jackson-databind</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.maven.surefire</groupId>
-                    <artifactId>surefire-junit-platform</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -156,6 +121,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
             <scope>compile</scope>
+            <version>4.0.0-M2</version>
         </dependency>
         <dependency>
             <groupId>org.modelmapper</groupId>

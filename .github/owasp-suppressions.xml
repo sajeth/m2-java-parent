@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="dependency-suppression.1.3.xsd">
+    <!--
+        Add false-positive suppressions here.
+
+        Example — suppress a specific CVE for one artifact:
+        <suppress>
+            <notes>False positive: CVE affects the C library, not the Java binding</notes>
+            <packageUrl regex="true">^pkg:maven/com\.example/artifact@.*$</packageUrl>
+            <cve>CVE-2024-12345</cve>
+        </suppress>
+
+        Example — suppress by file name pattern:
+        <suppress>
+            <notes>Test-scope only, not in production classpath</notes>
+            <filePath regex="true">.*test.*\.jar</filePath>
+            <cvssBelow>8</cvssBelow>
+        </suppress>
+    -->
+
+    <!-- CVE-2025-14813 (CVSS 9.3) — Bouncy Castle 1.83 GOST CTR cipher overflow.
+         Gatling 3.15.0 ships this as `gatling-recorder-bc-shaded` (a relocated internal artifact).
+         It cannot be overridden via Maven dependencyManagement.
+         Risk accepted: only exploitable if the Gatling Recorder is used with GOST-encrypted TLS traffic.
+         Revisit when Gatling releases a version that bumps to BC 1.84+. -->
+    <suppress>
+        <notes>Gatling-shaded internal BC copy; not overridable via Maven. Low exposure — GOST cipher only used by Gatling Recorder.</notes>
+        <filePath regex="true">.*gatling-recorder-bc-shaded.*\.jar</filePath>
+        <cve>CVE-2025-14813</cve>
+    </suppress>
+</suppressions>

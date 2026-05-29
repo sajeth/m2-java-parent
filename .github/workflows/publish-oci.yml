@@ -40,6 +40,30 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
 
+      - name: Generate CycloneDX SBOM
+        run: |
+          mvn --no-transfer-progress org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom \
+            -DskipTests --batch-mode
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
+
+      - name: Publish GitHub Release with SBOM
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="0.${{ github.run_number }}.${{ github.run_attempt }}"
+          gh release create "v${VERSION}" \
+            --title "v${VERSION}" \
+            --notes "Published to GitHub Packages as \`com.saji.m2.parent:*:${VERSION}\`" \
+            --target "${{ github.sha }}" \
+            target.nosync/bom.json \
+            target.nosync/bom.xml \
+          || gh release upload "v${VERSION}" \
+            target.nosync/bom.json \
+            target.nosync/bom.xml \
+            --clobber
+
       - name: Commit version bump
         run: |
           git config user.name "github-actions[bot]"
