@@ -37,6 +37,16 @@
         <lombok.version>1.18.46</lombok.version>
         <jacoco.version>0.8.14</jacoco.version>
         <junit.jupiter.version>5.10.2</junit.jupiter.version>
+        <!-- https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs-maven-plugin -->
+        <spotbugs.plugin.version>4.9.3.0</spotbugs.plugin.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-pmd-plugin -->
+        <pmd.plugin.version>3.26.0</pmd.plugin.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-checkstyle-plugin -->
+        <checkstyle.plugin.version>3.6.0</checkstyle.plugin.version>
+        <!-- https://mvnrepository.com/artifact/org.owasp/dependency-check-maven -->
+        <owasp.dependency.check.version>9.2.0</owasp.dependency.check.version>
+        <!-- https://mvnrepository.com/artifact/org.cyclonedx/cyclonedx-maven-plugin -->
+        <cyclonedx.plugin.version>2.7.9</cyclonedx.plugin.version>
     </properties>
 
     <distributionManagement>
@@ -69,6 +79,70 @@
     </dependencies>
     <build>
         <directory>${buildDirectory}</directory>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.github.spotbugs</groupId>
+                    <artifactId>spotbugs-maven-plugin</artifactId>
+                    <version>${spotbugs.plugin.version}</version>
+                    <configuration>
+                        <effort>Max</effort>
+                        <threshold>Low</threshold>
+                        <xmlOutput>true</xmlOutput>
+                        <failOnError>false</failOnError>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-pmd-plugin</artifactId>
+                    <version>${pmd.plugin.version}</version>
+                    <configuration>
+                        <printFailingErrors>true</printFailingErrors>
+                        <format>xml</format>
+                        <failOnViolation>false</failOnViolation>
+                        <linkXRef>false</linkXRef>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${checkstyle.plugin.version}</version>
+                    <configuration>
+                        <configLocation>google_checks.xml</configLocation>
+                        <consoleOutput>true</consoleOutput>
+                        <failsOnError>false</failsOnError>
+                        <violationSeverity>warning</violationSeverity>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.owasp</groupId>
+                    <artifactId>dependency-check-maven</artifactId>
+                    <version>${owasp.dependency.check.version}</version>
+                    <configuration>
+                        <failBuildOnCVSS>7</failBuildOnCVSS>
+                        <format>ALL</format>
+                        <suppressionFile>.github/owasp-suppressions.xml</suppressionFile>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.cyclonedx</groupId>
+                    <artifactId>cyclonedx-maven-plugin</artifactId>
+                    <version>${cyclonedx.plugin.version}</version>
+                    <configuration>
+                        <projectType>library</projectType>
+                        <schemaVersion>1.6</schemaVersion>
+                        <outputFormat>all</outputFormat>
+                        <includeBomSerialNumber>true</includeBomSerialNumber>
+                        <includeTestScope>false</includeTestScope>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -94,7 +168,22 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>${maven.resource.version}</version>
             </plugin>
-
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals><goal>prepare-agent</goal></goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals><goal>report</goal></goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <modules>

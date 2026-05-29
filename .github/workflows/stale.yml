@@ -1,0 +1,35 @@
+name: Stale
+
+on:
+  schedule:
+    - cron: '0 8 * * 1'  # every Monday 08:00 UTC (after dependency-upgrade at 06:00)
+  workflow_dispatch:
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+
+    steps:
+      - uses: actions/stale@v9
+        with:
+          # PRs only — don't touch issues
+          days-before-issue-stale: -1
+          days-before-issue-close: -1
+
+          days-before-pr-stale: 14
+          days-before-pr-close: 7
+
+          stale-pr-message: >
+            This PR has had no activity for 14 days and is marked stale.
+            It will be closed in 7 days unless updated.
+          close-pr-message: >
+            Closing due to inactivity. Re-open if still relevant.
+
+          stale-pr-label: 'stale'
+          exempt-pr-labels: 'pinned,security,do-not-close'
+
+          # Treat dependency-upgrade PRs more aggressively — they are superseded weekly
+          close-pr-message-with-staleness: >
+            Closing stale dependency-upgrade PR — a newer upgrade PR will be created next cycle.

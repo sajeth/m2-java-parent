@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="suppressions">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="suppress" type="SuppressType" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="SuppressType">
+        <xs:sequence>
+            <xs:element name="notes" type="xs:string" minOccurs="0"/>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="filePath"          type="RegexStringType"/>
+                <xs:element name="sha1"              type="xs:string"/>
+                <xs:element name="cpe"               type="RegexStringType"/>
+                <xs:element name="cve"               type="xs:string"/>
+                <xs:element name="cweId"             type="xs:integer"/>
+                <xs:element name="vulnerabilityName" type="RegexStringType"/>
+                <xs:element name="gav"               type="RegexStringType"/>
+                <xs:element name="packageUrl"        type="RegexStringType"/>
+                <xs:element name="cvssBelow"         type="xs:decimal"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="base" type="xs:boolean" default="false"/>
+    </xs:complexType>
+
+    <xs:complexType name="RegexStringType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="regex" type="xs:boolean" default="false"/>
+                <xs:attribute name="caseSensitive" type="xs:boolean" default="true"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+</xs:schema>
