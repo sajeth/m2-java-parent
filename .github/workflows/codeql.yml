@@ -39,7 +39,7 @@ jobs:
       - name: Build
         run: mvn --no-transfer-progress compile -DskipTests --batch-mode
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
 
       - name: Perform CodeQL Analysis
