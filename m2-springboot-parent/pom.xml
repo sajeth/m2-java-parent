@@ -116,10 +116,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
-        <!-- Source: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop -->
+        <!-- spring-boot-starter-aop was renamed to spring-boot-starter-aspectj in Spring Boot 4.0 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
+            <artifactId>spring-boot-starter-aspectj</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
