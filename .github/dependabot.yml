@@ -11,3 +11,18 @@ updates:
       prefix: "ci"
     labels:
       - "ci"
+
+  # Maven security updates only — version bumps are handled by dependency-upgrade.yml.
+  # open-pull-requests-limit: 0 disables scheduled version PRs; security update PRs
+  # are exempt from this limit and will still be raised automatically.
+  - package-ecosystem: maven
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+    open-pull-requests-limit: 0
+    commit-message:
+      prefix: "fix"
+    labels:
+      - "security"

@@ -1,0 +1,21 @@
+# Maps changed file paths to PR labels.
+# Labels must match the categories defined in .github/release-drafter.yml
+
+ci:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.github/workflows/**'
+      - '.github/dependabot.yml'
+      - '.github/release-drafter.yml'
+
+dependency:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/pom.xml'
+
+security:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.github/owasp-suppressions.xml'
+      - 'SECURITY.md'
+      - '.github/dependency-suppression.1.3.xsd'

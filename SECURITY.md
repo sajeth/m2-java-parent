@@ -7,9 +7,9 @@ Older versions are not patched — consumers should always pin to the latest rel
 
 | Artifact | Supported |
 |----------|-----------|
-| `com.saji.m2.parent:m2-java-parent` (latest) | ✅ |
-| `com.saji.m2.parent:m2-springboot-parent` (latest) | ✅ |
-| `com.saji.m2.parent:m2-core-parent` (latest) | ✅ |
+| `io.github.sajeth:m2-java-parent` (latest) | ✅ |
+| `io.github.sajeth:m2-springboot-parent` (latest) | ✅ |
+| `io.github.sajeth:m2-core-parent` (latest) | ✅ |
 | Any version that is not the latest | ❌ |
 
 ## Reporting a Vulnerability
