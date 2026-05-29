@@ -12,7 +12,7 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: actions/stale@v10
+      - uses: actions/stale@eb5cf3af3ac0a1aa4c9c45633dd1ae542a27a899  # v10
         with:
           # PRs only — don't touch issues
           days-before-issue-stale: -1
@@ -28,5 +28,4 @@ jobs:
             Closing due to inactivity. Re-open if still relevant.
 
           stale-pr-label: 'stale'
-          exempt-pr-labels: 'pinned,security,do-not-close'
-          exempt-pr-authors: 'dependabot[bot]'
+          exempt-pr-labels: 'pinned,security,do-not-close,dependencies'

@@ -21,12 +21,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6
         with:
           fetch-depth: 0
 
       - name: Set up Java
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654  # v5
         with:
           java-version: ${{ vars.JAVA_VERSION }}
           distribution: 'temurin'
@@ -36,41 +36,47 @@ jobs:
           server-password: GITHUB_TOKEN
 
       - name: Run SpotBugs
+        if: github.actor != 'dependabot[bot]' && github.actor != 'app/dependabot'
         run: |
           mvn --no-transfer-progress com.github.spotbugs:spotbugs-maven-plugin:spotbugs \
             -DskipTests --batch-mode
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
 
       - name: Post SpotBugs annotations
-        uses: jwgmeligmeyling/spotbugs-github-action@v1.2
+        if: github.actor != 'dependabot[bot]' && github.actor != 'app/dependabot'
+        uses: jwgmeligmeyling/spotbugs-github-action@b8e2c3523acb34c87f14e18cbcd2d87db8c8584e  # v1.2
         with:
           path: '**/target.nosync/spotbugsXml.xml'
 
       - name: Run PMD
+        if: github.actor != 'dependabot[bot]' && github.actor != 'app/dependabot'
         run: |
           mvn --no-transfer-progress org.apache.maven.plugins:maven-pmd-plugin:pmd \
             -DskipTests --batch-mode
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
 
       - name: Post PMD annotations
-        uses: jwgmeligmeyling/pmd-github-action@v1.2
+        if: github.actor != 'dependabot[bot]' && github.actor != 'app/dependabot'
+        uses: jwgmeligmeyling/pmd-github-action@322e346bd76a0757c4d54ff9209e245965aa066d  # v1.2
         with:
           path: '**/target.nosync/pmd.xml'
 
       - name: Run Checkstyle
+        if: github.actor != 'dependabot[bot]' && github.actor != 'app/dependabot'
         run: |
           mvn --no-transfer-progress org.apache.maven.plugins:maven-checkstyle-plugin:checkstyle \
             -DskipTests --batch-mode
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
 
       - name: Post Checkstyle annotations
-        uses: jwgmeligmeyling/checkstyle-github-action@v1.2
+        if: github.actor != 'dependabot[bot]' && github.actor != 'app/dependabot'
+        uses: jwgmeligmeyling/checkstyle-github-action@50292990e18466f2c5d95d04ff5fab931254fa5f  # v1.2
         with:
           path: '**/target.nosync/checkstyle-result.xml'
 
@@ -84,10 +90,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6
 
       - name: Set up Java
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654  # v5
         with:
           java-version: ${{ vars.JAVA_VERSION }}
           distribution: 'temurin'
@@ -97,13 +103,15 @@ jobs:
           server-password: GITHUB_TOKEN
 
       - name: Run tests and generate coverage
+        if: github.actor != 'dependabot[bot]' && github.actor != 'app/dependabot'
         run: mvn --no-transfer-progress verify --batch-mode
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
 
       - name: Post coverage report
-        uses: madrapps/jacoco-report@v1.7.2
+        if: github.actor != 'dependabot[bot]' && github.actor != 'app/dependabot'
+        uses: madrapps/jacoco-report@50d3aff4548aa991e6753342d9ba291084e63848  # v1.7.2
         with:
           paths: '**/jacoco.xml'
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -133,7 +141,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6
 
       - name: Run Semgrep
         run: |
@@ -146,7 +154,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload SARIF to GitHub Security
-        uses: github/codeql-action/upload-sarif@v4
+        uses: github/codeql-action/upload-sarif@dc73d59c2d7bd4f8194098a91219eeee6d8a1719  # v4
         with:
           sarif_file: semgrep.sarif
         continue-on-error: true  # requires GitHub Advanced Security; skips gracefully if not enabled
