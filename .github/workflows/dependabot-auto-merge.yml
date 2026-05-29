@@ -16,19 +16,23 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request_target' && (github.actor == 'dependabot[bot]' || github.actor == 'app/dependabot')
     steps:
-      - name: Approve PR
-        run: gh pr review --approve "$PR_URL"
+      - name: Rebase if out of date
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
+        run: gh pr update-branch --rebase "$PR_URL" || true
 
-      - name: Enable auto-merge and rebase if out of date
+      - name: Approve PR
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
-        run: |
-          gh pr merge --auto --squash "$PR_URL"
-          gh pr update-branch --rebase "$PR_URL" || true
+        run: gh pr review --approve "$PR_URL"
+
+      - name: Enable auto-merge
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: gh pr merge --auto --squash "$PR_URL"
 
   rebase-on-merge:
     runs-on: ubuntu-latest
