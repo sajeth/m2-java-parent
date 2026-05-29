@@ -36,6 +36,7 @@ jobs:
           server-password: GITHUB_TOKEN
 
       - name: Run SpotBugs
+        if: github.actor != 'dependabot[bot]'
         run: |
           mvn --no-transfer-progress com.github.spotbugs:spotbugs-maven-plugin:spotbugs \
             -DskipTests --batch-mode
@@ -44,11 +45,13 @@ jobs:
           GITHUB_ACTOR: ${{ github.actor }}
 
       - name: Post SpotBugs annotations
+        if: github.actor != 'dependabot[bot]'
         uses: jwgmeligmeyling/spotbugs-github-action@v1.2
         with:
           path: '**/target.nosync/spotbugsXml.xml'
 
       - name: Run PMD
+        if: github.actor != 'dependabot[bot]'
         run: |
           mvn --no-transfer-progress org.apache.maven.plugins:maven-pmd-plugin:pmd \
             -DskipTests --batch-mode
@@ -57,11 +60,13 @@ jobs:
           GITHUB_ACTOR: ${{ github.actor }}
 
       - name: Post PMD annotations
+        if: github.actor != 'dependabot[bot]'
         uses: jwgmeligmeyling/pmd-github-action@v1.2
         with:
           path: '**/target.nosync/pmd.xml'
 
       - name: Run Checkstyle
+        if: github.actor != 'dependabot[bot]'
         run: |
           mvn --no-transfer-progress org.apache.maven.plugins:maven-checkstyle-plugin:checkstyle \
             -DskipTests --batch-mode
@@ -70,6 +75,7 @@ jobs:
           GITHUB_ACTOR: ${{ github.actor }}
 
       - name: Post Checkstyle annotations
+        if: github.actor != 'dependabot[bot]'
         uses: jwgmeligmeyling/checkstyle-github-action@v1.2
         with:
           path: '**/target.nosync/checkstyle-result.xml'
@@ -97,12 +103,14 @@ jobs:
           server-password: GITHUB_TOKEN
 
       - name: Run tests and generate coverage
+        if: github.actor != 'dependabot[bot]'
         run: mvn --no-transfer-progress verify --batch-mode
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
 
       - name: Post coverage report
+        if: github.actor != 'dependabot[bot]'
         uses: madrapps/jacoco-report@v1.7.2
         with:
           paths: '**/jacoco.xml'
