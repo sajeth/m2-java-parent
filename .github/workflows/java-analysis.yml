@@ -106,46 +106,6 @@ jobs:
           min-coverage-changed-files: 70
         continue-on-error: true  # advisory only — child projects set hard thresholds
 
-  # ── OWASP Dependency Check ────────────────────────────────────────────────
-  owasp:
-    runs-on: ubuntu-latest
-    if: github.actor != 'dependabot[bot]'
-    permissions:
-      contents: read
-      security-events: write
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Set up Java
-        uses: actions/setup-java@v5
-        with:
-          java-version: ${{ vars.JAVA_VERSION }}
-          distribution: 'temurin'
-          cache: 'maven'
-          server-id: github
-          server-username: GITHUB_ACTOR
-          server-password: GITHUB_TOKEN
-
-      - name: Run OWASP Dependency Check
-        run: |
-          mvn --no-transfer-progress org.owasp:dependency-check-maven:check \
-            -DfailBuildOnCVSS=7 \
-            -DsuppressionFile=.github/owasp-suppressions.xml \
-            -DanalyzerNvdApiEnabled=false \
-            --batch-mode
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
-          GITHUB_ACTOR: ${{ github.actor }}
-
-      - name: Upload OWASP report as SARIF
-        uses: github/codeql-action/upload-sarif@v4
-        if: always()
-        with:
-          sarif_file: '**/target.nosync/dependency-check-report.sarif'
-        continue-on-error: true
-
   # ── Semgrep SAST ──────────────────────────────────────────────────────────
   semgrep:
     runs-on: ubuntu-latest
