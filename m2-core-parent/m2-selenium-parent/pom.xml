@@ -52,7 +52,7 @@
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
         <slf4j.version>2.0.17</slf4j.version>
         <!-- https://mvnrepository.com/artifact/org.asynchttpclient/async-http-client-netty-utils -->
-        <async.http.client.version>3.0.9</async.http.client.version>
+        <async.http.client.version>3.0.10</async.http.client.version>
         <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
         <guava.version>33.5.0-jre</guava.version>
         <!-- https://mvnrepository.com/artifact/io.netty/netty-transport-classes-epoll -->
