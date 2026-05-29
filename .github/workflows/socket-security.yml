@@ -62,9 +62,9 @@ jobs:
           GH_ISSUE_NUMBER: ${{ github.event.issue.number || 0 }}
         run: |
           PR_NUMBER=0
-          if [ "$GH_EVENT_NAME" == "pull_request" ]; then
+          if [[ "$GH_EVENT_NAME" == "pull_request" ]]; then
             PR_NUMBER=$GH_PR_NUMBER
-          elif [ "$GH_EVENT_NAME" == "issue_comment" ]; then
+          elif [[ "$GH_EVENT_NAME" == "issue_comment" ]]; then
             PR_NUMBER=$GH_ISSUE_NUMBER
           fi
           socketcli \
