@@ -34,7 +34,7 @@ jobs:
             -DallowMajorUpdates=false \
             -DallowMinorUpdates=true \
             -DallowIncrementalUpdates=true \
-            -pl . -pl m2-springboot-parent -pl m2-core-parent
+            -pl .,m2-core-parent,m2-core-parent/m2-commons-parent,m2-core-parent/m2-selenium-parent,m2-springboot-parent,m2-springboot-parent/m2-kafka-parent,m2-springboot-parent/m2-webapp-parent,m2-springboot-parent/m2-webapp-parent/m2-grpc-parent,m2-springboot-parent/m2-webapp-parent/m2-batch-parent,m2-springboot-parent/m2-webapp-parent/m2-quic-parent
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
