@@ -47,7 +47,7 @@ jobs:
           npm i -g @cyclonedx/cdxgen
           cdxgen -t maven -o socket.cdx.json --no-banner
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
 
       - name: Install Socket CLI

@@ -40,7 +40,7 @@ jobs:
           mvn --no-transfer-progress com.github.spotbugs:spotbugs-maven-plugin:spotbugs \
             -DskipTests --batch-mode
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
 
       - name: Post SpotBugs annotations
@@ -53,7 +53,7 @@ jobs:
           mvn --no-transfer-progress org.apache.maven.plugins:maven-pmd-plugin:pmd \
             -DskipTests --batch-mode
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
 
       - name: Post PMD annotations
@@ -66,7 +66,7 @@ jobs:
           mvn --no-transfer-progress org.apache.maven.plugins:maven-checkstyle-plugin:checkstyle \
             -DskipTests --batch-mode
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
 
       - name: Post Checkstyle annotations
@@ -99,7 +99,7 @@ jobs:
       - name: Run tests and generate coverage
         run: mvn --no-transfer-progress verify --batch-mode
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
 
       - name: Post coverage report
