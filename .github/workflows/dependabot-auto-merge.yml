@@ -26,22 +26,11 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
 
-      - name: Wait for checks and merge
+      - name: Enable auto-merge
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
-        run: |
-          # Wait for all checks to finish; ignore exit code — skipped counts as failure to --watch
-          gh pr checks "$PR_URL" --watch --interval 30 || true
-          # Fail only on real failures; skipped/neutral are acceptable
-          fail_count=$(gh pr checks "$PR_URL" --json conclusion \
-            --jq '[.[] | select(.conclusion == "failure" or .conclusion == "cancelled" or .conclusion == "timed_out")] | length')
-          if [ "$fail_count" -eq 0 ]; then
-            gh pr merge --squash "$PR_URL"
-          else
-            echo "::error::$fail_count check(s) failed; not merging"
-            exit 1
-          fi
+        run: gh pr merge --auto --squash "$PR_URL"
 
   rebase-on-merge:
     runs-on: ubuntu-latest
