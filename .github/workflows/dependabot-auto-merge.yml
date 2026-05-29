@@ -16,21 +16,19 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request_target' && (github.actor == 'dependabot[bot]' || github.actor == 'app/dependabot')
     steps:
-      - name: Fetch Dependabot metadata
-        id: metadata
-        uses: dependabot/fetch-metadata@v2
-
       - name: Approve PR
         run: gh pr review --approve "$PR_URL"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
 
-      - name: Enable auto-merge
+      - name: Enable auto-merge and rebase if out of date
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
-        run: gh pr merge --auto --squash "$PR_URL"
+        run: |
+          gh pr merge --auto --squash "$PR_URL"
+          gh pr update-branch --rebase "$PR_URL" || true
 
   rebase-on-merge:
     runs-on: ubuntu-latest
@@ -43,5 +41,5 @@ jobs:
           gh pr list --state open --json number,author \
             --jq '.[] | select(.author.login == "dependabot[bot]" or .author.login == "app/dependabot") | .number' | \
           while read -r pr; do
-            gh pr comment "$pr" --body "@dependabot rebase"
+            gh pr update-branch --rebase "$pr" || true
           done
