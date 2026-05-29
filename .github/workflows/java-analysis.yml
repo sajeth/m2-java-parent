@@ -5,8 +5,14 @@ on:
     types: [opened, synchronize, reopened, ready_for_review]
 
 jobs:
+  gate:
+    uses: ./.github/workflows/dependabot-gate.yml
+    with:
+      pr-number: ${{ github.event.pull_request.number }}
+
   # ── SpotBugs + PMD + Checkstyle ───────────────────────────────────────────
   maven-analysis:
+    needs: gate
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -70,6 +76,7 @@ jobs:
 
   # ── JaCoCo Coverage ───────────────────────────────────────────────────────
   jacoco:
+    needs: gate
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -108,12 +115,14 @@ jobs:
 
   # ── OWASP stub — satisfies branch-protection required check ─────────────
   owasp:
+    needs: gate
     runs-on: ubuntu-latest
     steps:
       - run: echo "OWASP/NVD check disabled — vulnerability scanning provided by Semgrep and CodeQL"
 
   # ── Semgrep SAST ──────────────────────────────────────────────────────────
   semgrep:
+    needs: gate
     runs-on: ubuntu-latest
     permissions:
       contents: read

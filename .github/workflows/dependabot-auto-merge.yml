@@ -14,7 +14,7 @@ permissions:
 jobs:
   auto-merge:
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot[bot]' && github.event_name == 'pull_request_target'
+    if: github.event_name == 'pull_request_target' && (github.actor == 'dependabot[bot]' || github.actor == 'app/dependabot')
     steps:
       - name: Fetch Dependabot metadata
         id: metadata
@@ -52,7 +52,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh pr list --state open --json number,author \
-            --jq '.[] | select(.author.login == "dependabot[bot]") | .number' | \
+            --jq '.[] | select(.author.login == "dependabot[bot]" or .author.login == "app/dependabot") | .number' | \
           while read -r pr; do
             gh pr comment "$pr" --body "@dependabot rebase"
           done

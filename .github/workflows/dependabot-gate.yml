@@ -1,0 +1,33 @@
+name: Dependabot Queue Gate
+
+on:
+  workflow_call:
+    inputs:
+      pr-number:
+        required: true
+        type: number
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    steps:
+      - name: Check queue position
+        env:
+          GH_TOKEN: ${{ github.token }}
+          THIS_PR: ${{ inputs.pr-number }}
+          REPO: ${{ github.repository }}
+        run: |
+          author=$(gh pr view "$THIS_PR" --repo "$REPO" --json author --jq '.author.login')
+          if [[ "$author" != "dependabot[bot]" && "$author" != "app/dependabot" ]]; then
+            exit 0
+          fi
+          oldest=$(gh pr list --repo "$REPO" --state open --json number,author \
+            --jq '[.[] | select(.author.login == "dependabot[bot]" or .author.login == "app/dependabot")] | sort_by(.number) | first | .number')
+          if [ "$oldest" = "$THIS_PR" ]; then
+            echo "PR #$THIS_PR is the oldest open Dependabot PR — running checks."
+          else
+            echo "::error::PR #$THIS_PR is queued behind #$oldest. Checks will run once that PR merges."
+            exit 1
+          fi
