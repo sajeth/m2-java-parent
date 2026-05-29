@@ -4,14 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>m2-core-parent</artifactId>
-        <groupId>com.saji.m2.parent</groupId>
+        <groupId>io.github.sajeth</groupId>
         <version>0.0.1</version>
     </parent>
 
     <artifactId>m2-commons-parent</artifactId>
     <packaging>pom</packaging>
     <name>m2-commons-parent</name>
-    <!--  <url>http://www.example.com</url>-->
 
     <properties>
 

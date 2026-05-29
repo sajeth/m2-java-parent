@@ -1,9 +1,12 @@
-name: Publish
+name: Publish to Maven Central
 
 on:
-  push:
-    branches: [master]
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g. 1.2.3)'
+        required: true
+        type: string
 
 jobs:
   publish:
@@ -11,32 +14,37 @@ jobs:
     permissions:
       contents: write
       packages: write
+      id-token: write
+      attestations: write
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Java 25
+      - name: Set up Java 25 with GPG
         uses: actions/setup-java@v4
         with:
           java-version: '25'
           distribution: 'temurin'
           cache: 'maven'
-          server-id: github
-          server-username: GITHUB_ACTOR
-          server-password: GITHUB_TOKEN
+          server-id: central
+          server-username: CENTRAL_USERNAME
+          server-password: CENTRAL_PASSWORD
+          gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
       - name: Set version
         run: |
           mvn --no-transfer-progress org.codehaus.mojo:versions-maven-plugin:2.17.1:set \
-            -DnewVersion=0.${{ github.run_number }}.${{ github.run_attempt }} \
+            -DnewVersion=${{ inputs.version }} \
             -DgenerateBackupPoms=false
 
-      - name: Deploy to GitHub Packages
-        run: mvn --no-transfer-progress deploy -DskipTests
+      - name: Build and publish to Maven Central
+        run: mvn --no-transfer-progress deploy -Prelease -DskipTests --batch-mode
         env:
-          # GH_PACKAGES_TOKEN needs read:packages + write:packages scope
-          # GITHUB_TOKEN alone cannot read packages from other repos (clean-architecture-common)
+          CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
+          CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
           GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
 
@@ -48,28 +56,30 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
 
-      - name: Publish GitHub Release with SBOM
+      - name: Create GitHub Release with SBOM
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          VERSION="0.${{ github.run_number }}.${{ github.run_attempt }}"
-          gh release create "v${VERSION}" \
-            --title "v${VERSION}" \
-            --notes "Published to GitHub Packages as \`com.saji.m2.parent:*:${VERSION}\`" \
+          gh release create "v${{ inputs.version }}" \
+            --title "v${{ inputs.version }}" \
+            --generate-notes \
             --target "${{ github.sha }}" \
             target.nosync/bom.json \
-            target.nosync/bom.xml \
-          || gh release upload "v${VERSION}" \
-            target.nosync/bom.json \
-            target.nosync/bom.xml \
-            --clobber
+            target.nosync/bom.xml
+
+      - name: Generate SLSA provenance attestation
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: |
+            target.nosync/bom.json
+            target.nosync/bom.xml
 
       - name: Commit version bump
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "ci: bump version to 0.${{ github.run_number }}.${{ github.run_attempt }} [skip ci]"
+          git commit -m "ci: release v${{ inputs.version }} [skip ci]"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
