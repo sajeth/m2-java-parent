@@ -1,4 +1,4 @@
-name: Dependabot Auto-merge
+name: Auto-merge
 
 on:
   pull_request:
@@ -10,11 +10,12 @@ permissions: {}
 jobs:
   auto-merge:
     runs-on: ubuntu-latest
-    if: github.event.action != 'closed' && (github.actor == 'dependabot[bot]' || github.actor == 'app/dependabot')
+    if: github.event.action != 'closed'
     permissions:
       pull-requests: write
     steps:
-      - name: Approve PR
+      - name: Approve PR (Dependabot only)
+        if: github.actor == 'dependabot[bot]' || github.actor == 'app/dependabot'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
