@@ -34,9 +34,11 @@ jobs:
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
       - name: Set version
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
         run: |
           mvn --no-transfer-progress org.codehaus.mojo:versions-maven-plugin:2.17.1:set \
-            -DnewVersion=${{ inputs.version }} \
+            -DnewVersion="$RELEASE_VERSION" \
             -DgenerateBackupPoms=false
 
       - name: Build and publish to Maven Central
@@ -59,11 +61,13 @@ jobs:
       - name: Create GitHub Release with SBOM
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_VERSION: ${{ inputs.version }}
+          RELEASE_SHA: ${{ github.sha }}
         run: |
-          gh release create "v${{ inputs.version }}" \
-            --title "v${{ inputs.version }}" \
+          gh release create "v${RELEASE_VERSION}" \
+            --title "v${RELEASE_VERSION}" \
             --generate-notes \
-            --target "${{ github.sha }}" \
+            --target "${RELEASE_SHA}" \
             target.nosync/bom.json \
             target.nosync/bom.xml
 
@@ -75,11 +79,12 @@ jobs:
             target.nosync/bom.xml
 
       - name: Commit version bump
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_VERSION: ${{ inputs.version }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "ci: release v${{ inputs.version }} [skip ci]"
+          git commit -m "ci: release v${RELEASE_VERSION} [skip ci]"
           git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
