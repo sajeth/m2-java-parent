@@ -34,6 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
     permissions:
+      contents: write
       pull-requests: write
     steps:
       - name: Rebase open Dependabot PRs
@@ -43,5 +44,7 @@ jobs:
           gh pr list --state open --json number,author \
             --jq '.[] | select(.author.login == "dependabot[bot]" or .author.login == "app/dependabot") | .number' | \
           while read -r pr; do
-            gh pr comment "$pr" --body "@dependabot rebase"
+            gh pr update-branch --rebase "$pr" \
+              && echo "Rebased PR #$pr." \
+              || echo "Could not rebase PR #$pr (may already be up to date)."
           done
