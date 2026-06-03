@@ -15,3 +15,7 @@ target.nosync/
 */.bmad-core
 */.claude
 */.bmad-infrastructure-devops
+/m2-springboot-parent/m2-webapp-parent/m2-grpc-parent/pom.xml.versionsBackup
+/m2-springboot-parent/m2-webapp-parent/m2-quic-parent/pom.xml.versionsBackup
+/m2-springboot-parent/m2-webapp-parent/pom.xml.versionsBackup
+/pom.xml.versionsBackup
