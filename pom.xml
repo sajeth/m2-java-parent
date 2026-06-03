@@ -47,7 +47,6 @@
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <junit.version>6.0.3</junit.version>
         <!-- TDD / Mutation Testing -->
-        <evosuite.version>1.0.6</evosuite.version>
         <pitest.version>1.23.1</pitest.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
         <maven.compiler.version>3.15.0</maven.compiler.version>
@@ -75,6 +74,9 @@
         <cyclonedx.plugin.version>2.7.9</cyclonedx.plugin.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
         <maven.source.version>3.3.1</maven.source.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-enforcer-plugin -->
+        <maven.enforcer.version>3.5.0</maven.enforcer.version>
+        <maven.minimum.version>3.9.0</maven.minimum.version>
     </properties>
 
     <distributionManagement>
@@ -108,7 +110,7 @@
         <dependency>
             <groupId>org.apache.maven.surefire</groupId>
             <artifactId>surefire-junit-platform</artifactId>
-            <version>3.5.5</version>
+            <version>3.5.6</version>
         </dependency>
     </dependencies>
     <build>
@@ -175,9 +177,33 @@
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${jacoco.version}</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>${maven.enforcer.version}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-maven-version</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>[${maven.minimum.version},)</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.version}</version>

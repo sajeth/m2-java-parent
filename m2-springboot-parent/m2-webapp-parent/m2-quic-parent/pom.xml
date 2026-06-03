@@ -27,7 +27,7 @@
             <dependency>
                 <groupId>io.netty</groupId>
                 <artifactId>netty-codec-classes-quic</artifactId>
-                <version>4.2.12.Final</version>
+                <version>4.2.15.Final</version>
             </dependency>
             <!-- Override Spring to patch CVE-2026-22735 (spring-web) and CVE-2026-22737 (spring-webflux) -->
             <dependency>
@@ -53,7 +53,7 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-codec-classes-quic</artifactId>
-            <version>4.2.12.Final</version>
+            <version>4.2.15.Final</version>
             <scope>compile</scope>
         </dependency>
         <!-- gRPC Spring Boot Starter (client + server) -->

@@ -40,7 +40,7 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
-                <version>2.21.2</version>
+                <version>2.21.4</version>
             </dependency>
             <!-- Explicit override: spring-grpc BOM may pull tools.jackson.core:3.1.0, overriding parent's 3.1.2 -->
             <dependency>
