@@ -22,7 +22,7 @@
         <!-- https://mvnrepository.com/artifact/io.opentelemetry.semconv/opentelemetry-semconv -->
         <opentelemetry.extension.version>1.39.0</opentelemetry.extension.version>
         <!-- https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-sdk-common -->
-        <opentelemetry.sdk.version>1.62.0</opentelemetry.sdk.version>
+        <opentelemetry.sdk.version>1.63.0</opentelemetry.sdk.version>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-api -->
         <selenium.api.version>4.43.0</selenium.api.version>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-json -->
@@ -56,7 +56,7 @@
         <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
         <guava.version>33.5.0-jre</guava.version>
         <!-- https://mvnrepository.com/artifact/io.netty/netty-transport-classes-epoll -->
-        <netty.codec.version>4.2.13.Final</netty.codec.version>
+        <netty.codec.version>4.2.15.Final</netty.codec.version>
         <!-- https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-context -->
         <opentelemetry.context.version>1.62.0</opentelemetry.context.version>
 
