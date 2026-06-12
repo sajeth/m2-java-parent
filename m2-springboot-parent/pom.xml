@@ -175,5 +175,9 @@
         <module>m2-kafka-parent</module>
         <module>m2-webapp-parent</module>
         <module>m2-ai-parent</module>
+        <module>m2-reactive-data-parent</module>
+        <module>m2-cloud-native-parent</module>
+        <module>m2-native-parent</module>
+        <module>m2-testcontainers-parent</module>
     </modules>
 </project>

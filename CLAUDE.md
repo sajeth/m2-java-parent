@@ -38,19 +38,28 @@ Build artifacts go to `target.nosync/` (not `target/`) across all modules. This 
 ## POM Hierarchy
 
 ```
-m2-java-parent                    (root — Java 25, Lombok, JaCoCo, Surefire, static-analysis plugins)
-├── m2-core-parent                (Spring Framework 7.x, Jakarta Persistence, Spring Data)
-│   ├── m2-commons-parent         (spring-web, jackson-databind 3.x)
-│   └── m2-selenium-parent        (Selenium 4.43, OpenTelemetry SDK 1.62, Netty, async-http-client)
-└── m2-springboot-parent          (Spring Boot 4.0.6, Spring Cloud 2025.1.1, Spring Security 7.x)
-    ├── m2-kafka-parent            (spring-kafka, Resilience4j)
-    └── m2-webapp-parent           (SpringDoc 3, MapStruct 1.6, Cucumber 7, Serenity, Gatling 3.15)
-        ├── m2-grpc-parent         (spring-grpc 1.0.3, grpc-services, WebFlux)
-        ├── m2-batch-parent        (Spring Batch, Quartz)
-        └── m2-quic-parent         (HTTP/3 via Netty QUIC 0.0.75, gRPC, WebFlux, BoringSSL)
+m2-java-parent                        (root — Java 25, Lombok, JaCoCo, Surefire, static-analysis plugins,
+│                                       reproducible-build, license-report pluginManagement)
+├── m2-core-parent                    (Spring Framework 7.x, Jakarta Persistence, Spring Data)
+│   ├── m2-commons-parent             (spring-web, jackson-databind 3.x)
+│   └── m2-selenium-parent            (Selenium 4.43, OpenTelemetry SDK 1.63, Netty, async-http-client)
+└── m2-springboot-parent              (Spring Boot 4.0.6, Spring Cloud 2025.1.1, Spring Security 7.x)
+    ├── m2-kafka-parent               (spring-kafka, Resilience4j)
+    ├── m2-ai-parent                  (Spring AI 2.0.0-RC2: spring-ai-model, ChatClient autoconfigure)
+    ├── m2-reactive-data-parent       (R2DBC, reactive Redis, reactive MongoDB, WebFlux)
+    ├── m2-cloud-native-parent        (Spring Cloud Gateway, Config, Eureka, LoadBalancer, Circuit Breaker)
+    ├── m2-native-parent              (GraalVM native-maven-plugin 0.10.6, AOT processing)
+    ├── m2-testcontainers-parent      (Testcontainers BOM 1.21.1, @ServiceConnection, common containers)
+    └── m2-webapp-parent              (SpringDoc 3, MapStruct 1.6, Cucumber 7, Serenity, Gatling 3.15)
+        ├── m2-grpc-parent            (spring-grpc 1.0.3, grpc-services, WebFlux)
+        ├── m2-batch-parent           (Spring Batch, Quartz)
+        ├── m2-quic-parent            (HTTP/3 via Netty QUIC 0.0.75, gRPC, WebFlux, BoringSSL)
+        ├── m2-soap-parent            (Spring WS, JAXB 4, WSS4J, Apache Santuario)
+        ├── m2-websocket-parent       (spring-boot-starter-websocket, spring-security-messaging)
+        └── m2-graphql-parent         (spring-boot-starter-graphql, graphql-java-extended-scalars)
 ```
 
-Each level inherits and extends the one above it. Downstream projects pick the most specific parent that matches their tech stack (e.g. a Kafka consumer inherits `m2-kafka-parent`; a REST API inherits `m2-webapp-parent`).
+Each level inherits and extends the one above it. Downstream projects pick the most specific parent that matches their tech stack (e.g. a Kafka consumer inherits `m2-kafka-parent`; a REST API inherits `m2-webapp-parent`; a cloud-native gateway inherits `m2-cloud-native-parent`).
 
 ## Versioning
 
@@ -74,7 +83,7 @@ This is a security-sensitive repository because every CVE fixed or introduced he
       <version>7.0.7</version>
   </dependency>
   ```
-- If a CVE cannot be fixed (e.g. a shaded internal copy), add a suppression entry in `.github/owasp-suppressions.xml` with a full explanation of why the risk is accepted and when to revisit.
+- If a CVE cannot be fixed (e.g. a shaded internal copy), add a suppression entry in `.github/owasp-suppressions.xml` with a full explanation of why the risk is accepted and when to revisit. **Every suppression MUST include `until: YYYY-MM-DD` in the `<notes>` element** — the `stale-suppression-audit.yml` workflow opens a GitHub issue when a date is reached.
 - The OWASP Dependency Check is configured to fail the build on CVSS ≥ 7.
 
 **Two Jackson families are in use:**
@@ -87,8 +96,10 @@ Both need to be patched independently when a Jackson CVE lands.
 | Workflow | Trigger | Purpose |
 |---|---|---|
 | `publish.yml` | Schedule (1st/15th) or manual | CalVer release to Maven Central + SBOM + SLSA |
-| `java-analysis.yml` | PRs | SpotBugs, PMD, Checkstyle, JaCoCo, Semgrep SAST |
+| `release-on-merge.yml` | PR with `release` label merged to master | Triggers `publish.yml` for ad-hoc releases |
+| `java-analysis.yml` | PRs | SpotBugs, PMD, Checkstyle, JaCoCo, OWASP, Semgrep SAST |
 | `dependency-upgrade.yml` | Weekly Monday | Minor/patch bumps → PR with OWASP pre-check |
+| `stale-suppression-audit.yml` | Weekly Monday | Checks `.github/owasp-suppressions.xml` for expired `until:` dates |
 | `auto-merge.yml` | All PRs opened/updated | Auto-approve (Dependabot only) + enable squash auto-merge for all PRs |
 | `dependabot-gate.yml` | Called by other workflows | Serializes Dependabot PRs — only the oldest open one runs checks |
 | `pr-discussion.yml` | PR opened against master | Creates a GitHub Discussion linked to the PR |
@@ -135,6 +146,29 @@ git push origin master
 ```
 
 Wiki pages use GitHub-Flavored Markdown. The home page is `Home.md`; each top-level topic is a separate `*.md` file (e.g. `POM-Hierarchy.md`, `Versioning.md`, `Workflows.md`, `Security.md`, `Static-Analysis.md`).
+
+## Maven Wrapper
+
+Use `./mvnw` (Unix) or `mvnw.cmd` (Windows) instead of a system Maven to ensure consistent Maven version (3.9.9). The wrapper auto-downloads Maven on first use to `~/.m2/wrapper/dists/`.
+
+```bash
+./mvnw install          # same as: mvn install
+./mvnw verify           # same as: mvn verify
+```
+
+## Dev Container
+
+`.devcontainer/devcontainer.json` provides a pre-configured environment with Java 25 (Temurin), Maven 3.9.9, GitHub CLI, and actionlint. Open in VS Code with the Dev Containers extension or on GitHub Codespaces.
+
+## Reproducible Builds
+
+`project.build.outputTimestamp` is set in the root POM so that Maven produces byte-identical JARs and POMs from the same source tree. The `maven-artifact-plugin:buildinfo` goal records build metadata to `target.nosync/*.buildinfo` on every `verify` run.
+
+The `license-maven-plugin` (configured in root `pluginManagement`) can generate a `THIRD-PARTY.txt` listing transitive dependency licenses:
+
+```bash
+mvn org.codehaus.mojo:license-maven-plugin:aggregate-add-third-party -DskipTests
+```
 
 ## Static Analysis Configuration
 

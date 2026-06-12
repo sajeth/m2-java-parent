@@ -1,0 +1,33 @@
+{
+    "name": "m2-java-parent",
+    "image": "mcr.microsoft.com/devcontainers/java:25-jdk-noble",
+    "features": {
+        "ghcr.io/devcontainers/features/java:1": {
+            "version": "25",
+            "jdkDistro": "tem",
+            "installMaven": "true",
+            "mavenVersion": "3.9.9"
+        },
+        "ghcr.io/devcontainers/features/github-cli:1": {}
+    },
+    "postCreateCommand": "bash -c 'curl -sSfL https://github.com/rhysd/actionlint/releases/latest/download/actionlint_linux_amd64.tar.gz | tar xz -C /usr/local/bin actionlint && chmod +x /usr/local/bin/actionlint'",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "vscjava.vscode-java-pack",
+                "vscjava.vscode-maven",
+                "redhat.vscode-xml"
+            ],
+            "settings": {
+                "java.configuration.runtimes": [
+                    {
+                        "name": "JavaSE-25",
+                        "default": true
+                    }
+                ],
+                "maven.executable.path": "/usr/local/sdkman/candidates/maven/current/bin/mvn"
+            }
+        }
+    },
+    "remoteUser": "vscode"
+}
