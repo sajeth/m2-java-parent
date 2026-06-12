@@ -13,10 +13,10 @@
     <name>m2-cloud-native-parent</name>
 
     <dependencies>
-        <!-- Spring Cloud Gateway — reactive API gateway (replaces Zuul) -->
+        <!-- Spring Cloud Gateway (WebFlux/reactive) — split from spring-cloud-starter-gateway in Gateway 5.x -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
+            <artifactId>spring-cloud-starter-gateway-server-webflux</artifactId>
         </dependency>
 
         <!-- Spring Cloud Config Client — externalised configuration from Config Server -->
