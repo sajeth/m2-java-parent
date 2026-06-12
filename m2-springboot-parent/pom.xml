@@ -69,6 +69,11 @@
                 <artifactId>jackson-core</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
+            <dependency>
+                <groupId>tools.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
             <!-- Override spring-web/webflux: CVE-2026-22735 (spring-web) and CVE-2026-22737 (spring-webflux), fixed in 7.0.7 -->
             <dependency>
                 <groupId>org.springframework</groupId>
