@@ -208,6 +208,9 @@
         <module>m2-grpc-parent</module>
         <module>m2-batch-parent</module>
         <module>m2-quic-parent</module>
+        <module>m2-soap-parent</module>
+        <module>m2-websocket-parent</module>
+        <module>m2-graphql-parent</module>
     </modules>
     <build>
         <plugins>
