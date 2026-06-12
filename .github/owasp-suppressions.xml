@@ -4,16 +4,22 @@
     <!--
         Add false-positive suppressions here.
 
+        Convention: every suppression MUST include an "until: YYYY-MM-DD" marker inside
+        <notes> so the stale-suppression-audit.yml workflow can detect expired entries.
+        Set the date to 6-12 months out, or to the expected fix release date.
+
         Example — suppress a specific CVE for one artifact:
         <suppress>
-            <notes>False positive: CVE affects the C library, not the Java binding</notes>
+            <notes>False positive: CVE affects the C library, not the Java binding.
+                   until: 2026-12-31</notes>
             <packageUrl regex="true">^pkg:maven/com\.example/artifact@.*$</packageUrl>
             <cve>CVE-2024-12345</cve>
         </suppress>
 
         Example — suppress by file name pattern:
         <suppress>
-            <notes>Test-scope only, not in production classpath</notes>
+            <notes>Test-scope only, not in production classpath.
+                   until: 2026-12-31</notes>
             <filePath regex="true">.*test.*\.jar</filePath>
             <cvssBelow>8</cvssBelow>
         </suppress>
@@ -23,9 +29,11 @@
          Gatling 3.15.0 ships this as `gatling-recorder-bc-shaded` (a relocated internal artifact).
          It cannot be overridden via Maven dependencyManagement.
          Risk accepted: only exploitable if the Gatling Recorder is used with GOST-encrypted TLS traffic.
-         Revisit when Gatling releases a version that bumps to BC 1.84+. -->
+         Revisit when Gatling releases a version that bumps to BC 1.84+.
+         until: 2026-12-31 -->
     <suppress>
-        <notes>Gatling-shaded internal BC copy; not overridable via Maven. Low exposure — GOST cipher only used by Gatling Recorder.</notes>
+        <notes>Gatling-shaded internal BC copy; not overridable via Maven. Low exposure — GOST cipher only used by Gatling Recorder.
+               until: 2026-12-31</notes>
         <filePath regex="true">.*gatling-recorder-bc-shaded.*\.jar</filePath>
         <cve>CVE-2025-14813</cve>
     </suppress>

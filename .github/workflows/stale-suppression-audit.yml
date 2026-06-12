@@ -1,0 +1,81 @@
+name: Stale Suppression Audit
+
+on:
+  schedule:
+    - cron: '0 8 * * 1'  # Every Monday at 08:00 UTC
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6
+
+      - name: Check for expired suppressions
+        id: check
+        run: |
+          TODAY=$(date +'%Y-%m-%d')
+          EXPIRED_COUNT=0
+          REPORT=""
+
+          while IFS= read -r line; do
+            # Match lines like: until: YYYY-MM-DD
+            if echo "$line" | grep -qE 'until:[[:space:]]*[0-9]{4}-[0-9]{2}-[0-9]{2}'; then
+              UNTIL=$(echo "$line" | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}')
+              if [ "$UNTIL" \< "$TODAY" ] || [ "$UNTIL" = "$TODAY" ]; then
+                EXPIRED_COUNT=$((EXPIRED_COUNT + 1))
+                REPORT="$REPORT\n- Suppression with until: $UNTIL (expired on $TODAY)"
+              fi
+            fi
+          done < .github/owasp-suppressions.xml
+
+          if [ "$EXPIRED_COUNT" -gt 0 ]; then
+            printf "::error::Found %d expired OWASP suppression(s):%b\n" "$EXPIRED_COUNT" "$REPORT"
+            {
+              echo "expired_count=$EXPIRED_COUNT"
+              echo "report<<EOF"
+              printf "%b\n" "$REPORT"
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+
+          echo "All OWASP suppressions are current (checked $TODAY)."
+          echo "expired_count=0" >> "$GITHUB_OUTPUT"
+
+      - name: Open issue for expired suppressions
+        if: failure() && steps.check.outputs.expired_count != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          EXISTING=$(gh issue list \
+            --label "security" \
+            --state open \
+            --search "Expired OWASP suppressions" \
+            --json number \
+            --jq '.[0].number')
+
+          if [ -z "$EXISTING" ]; then
+            gh issue create \
+              --title "Expired OWASP suppressions in owasp-suppressions.xml" \
+              --label "security" \
+              --body "$(cat <<'BODY'
+          ## Expired OWASP Suppressions
+
+          The weekly suppression audit found suppressions whose `until:` date has passed.
+
+          **Action required:** Review `.github/owasp-suppressions.xml`, verify whether each
+          suppressed CVE is still a false positive or accepted risk, then either extend
+          the `until:` date or remove the suppression entry.
+
+          See the [workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for details.
+          BODY
+          )"
+          fi

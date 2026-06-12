@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>m2-webapp-parent</artifactId>
+        <groupId>io.github.sajeth</groupId>
+        <version>0.0.1</version>
+    </parent>
+
+    <artifactId>m2-soap-parent</artifactId>
+    <packaging>pom</packaging>
+    <name>m2-soap-parent</name>
+
+    <properties>
+        <!-- https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime -->
+        <jaxb-runtime.version>4.0.5</jaxb-runtime.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.wss4j/wss4j-ws-security-dom -->
+        <wss4j.version>3.0.4</wss4j.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.santuario/xmlsec -->
+        <xmlsec.version>3.0.4</xmlsec.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Pin WSS4J: arbitrary code execution via crafted SOAP messages; always use latest 3.x -->
+            <dependency>
+                <groupId>org.apache.wss4j</groupId>
+                <artifactId>wss4j-ws-security-dom</artifactId>
+                <version>${wss4j.version}</version>
+            </dependency>
+            <!-- Pin Apache Santuario (XML digital signature/encryption) to latest secure version -->
+            <dependency>
+                <groupId>org.apache.santuario</groupId>
+                <artifactId>xmlsec</artifactId>
+                <version>${xmlsec.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- Spring WS SOAP starter (spring-ws-core + Tomcat endpoint support; Boot-managed) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web-services</artifactId>
+        </dependency>
+
+        <!-- WS-Security: message-level signing and encryption via WSS4J -->
+        <!-- OpenSAML excluded — not on Maven Central; add build.shibboleth.net repo if SAML tokens needed -->
+        <dependency>
+            <groupId>org.springframework.ws</groupId>
+            <artifactId>spring-ws-security</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.opensaml</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- JAXB runtime for Jakarta EE 11 XML marshalling (Boot BOM may not include the RI) -->
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>${jaxb-runtime.version}</version>
+        </dependency>
+
+        <!-- Spring WS MockWebServiceServer for unit-testing SOAP endpoints -->
+        <dependency>
+            <groupId>org.springframework.ws</groupId>
+            <artifactId>spring-ws-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>
