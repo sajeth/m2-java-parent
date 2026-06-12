@@ -19,40 +19,8 @@
 
     <build>
         <plugins>
-            <!-- GraalVM Native Image compilation plugin -->
-            <plugin>
-                <groupId>org.graalvm.buildtools</groupId>
-                <artifactId>native-maven-plugin</artifactId>
-                <version>${native-maven-plugin.version}</version>
-                <extensions>true</extensions>
-                <executions>
-                    <execution>
-                        <id>build-native</id>
-                        <goals>
-                            <goal>compile-no-fork</goal>
-                        </goals>
-                        <phase>package</phase>
-                    </execution>
-                    <execution>
-                        <id>test-native</id>
-                        <goals>
-                            <goal>test</goal>
-                        </goals>
-                        <phase>test</phase>
-                    </execution>
-                </executions>
-                <configuration>
-                    <imageName>${project.artifactId}</imageName>
-                    <buildArgs>
-                        <!-- Fail hard if reflection metadata is missing: no JVM fallback -->
-                        <arg>--no-fallback</arg>
-                        <!-- Initialise all classes at build time by default -->
-                        <arg>--initialize-at-build-time</arg>
-                    </buildArgs>
-                </configuration>
-            </plugin>
-
-            <!-- Spring Boot Maven plugin — process-aot generates native hints at build time -->
+            <!-- Spring Boot AOT processing — runs on every build to generate reflection hints,
+                 proxy configs, and resource metadata needed at runtime (JVM or native). -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -67,5 +35,47 @@
             </plugin>
         </plugins>
     </build>
+
+    <!-- Native image compilation only runs with -Pnative; requires GraalVM JDK as JAVA_HOME. -->
+    <profiles>
+        <profile>
+            <id>native</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.graalvm.buildtools</groupId>
+                        <artifactId>native-maven-plugin</artifactId>
+                        <version>${native-maven-plugin.version}</version>
+                        <extensions>true</extensions>
+                        <executions>
+                            <execution>
+                                <id>build-native</id>
+                                <goals>
+                                    <goal>compile-no-fork</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                            <execution>
+                                <id>test-native</id>
+                                <goals>
+                                    <goal>test</goal>
+                                </goals>
+                                <phase>test</phase>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <imageName>${project.artifactId}</imageName>
+                            <buildArgs>
+                                <!-- Fail hard if reflection metadata is missing: no JVM fallback -->
+                                <arg>--no-fallback</arg>
+                                <!-- Initialise all classes at build time by default -->
+                                <arg>--initialize-at-build-time</arg>
+                            </buildArgs>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
