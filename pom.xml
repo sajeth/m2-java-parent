@@ -59,8 +59,8 @@
         <maven.surfire.plugin>3.5.5</maven.surfire.plugin>
         <!--        <base.commons.version>[1.0.0,)</base.commons.version>-->
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-        <!-- https://github.com/FasterXML/jackson-core/security/advisories/GHSA-72hv-8253-57qq -->
-        <jackson.version>3.1.3</jackson.version>
+        <!-- GHSA-72hv-8253-57qq (DoS, CVSS 7.5, fixed 3.1.3); GHSA-j3rv-43j4-c7qm + GHSA-rmj7-2vxq-3g9f (RCE via PolymorphicTypeValidator, fixed 3.1.4) -->
+        <jackson.version>3.1.4</jackson.version>
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <lombok.version>1.18.46</lombok.version>
         <jacoco.version>0.8.14</jacoco.version>

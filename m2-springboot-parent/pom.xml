@@ -67,7 +67,7 @@
                 <artifactId>bcprov-jdk18on</artifactId>
                 <version>1.84</version>
             </dependency>
-                <!-- Override Spring Boot BOM's tools.jackson.core:3.1.0: GHSA-2m67-wjpj-xhg9 (DoS, CVSS 7.5) -->
+                <!-- Override tools.jackson.core: GHSA-2m67-wjpj-xhg9 (DoS, fixed 3.1.1); GHSA-j3rv-43j4-c7qm + GHSA-rmj7-2vxq-3g9f (PolymorphicTypeValidator RCE, fixed 3.1.4) -->
             <dependency>
                 <groupId>tools.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
