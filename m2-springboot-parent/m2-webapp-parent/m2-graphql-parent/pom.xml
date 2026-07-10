@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>m2-webapp-parent</artifactId>
+        <groupId>io.github.sajeth</groupId>
+        <version>0.0.1</version>
+    </parent>
+
+    <artifactId>m2-graphql-parent</artifactId>
+    <packaging>pom</packaging>
+    <name>m2-graphql-parent</name>
+
+    <properties>
+        <!-- https://mvnrepository.com/artifact/com.graphql-java/graphql-java-extended-scalars -->
+        <!-- Tracks graphql-java minor version; align with Boot BOM's graphql-java version -->
+        <graphql.extended-scalars.version>22.0</graphql.extended-scalars.version>
+    </properties>
+
+    <dependencies>
+        <!-- Spring for GraphQL: @QueryMapping, @MutationMapping, @SchemaMapping over HTTP + WebSocket -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-graphql</artifactId>
+        </dependency>
+
+        <!-- Extended scalar types: Date, DateTime, UUID, BigDecimal, Locale, Url, etc. -->
+        <dependency>
+            <groupId>com.graphql-java</groupId>
+            <artifactId>graphql-java-extended-scalars</artifactId>
+            <version>${graphql.extended-scalars.version}</version>
+        </dependency>
+
+        <!-- WebFlux transport for GraphQL subscriptions (SSE + WebSocket reactive streams) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
+        <!-- GraphQL test client: HttpGraphQlTester / WebSocketGraphQlTester for slice tests -->
+        <dependency>
+            <groupId>org.springframework.graphql</groupId>
+            <artifactId>spring-graphql-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>
