@@ -1,0 +1,28 @@
+name: Release on Merge
+
+# Triggers publish.yml when a PR labelled 'release' is merged into master.
+# This allows ad-hoc releases outside the scheduled CalVer cadence.
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - master
+
+permissions: {}
+
+jobs:
+  trigger-release:
+    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'release')
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+
+    steps:
+      - name: Trigger publish workflow
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run publish.yml \
+            --repo "${{ github.repository }}" \
+            --ref master

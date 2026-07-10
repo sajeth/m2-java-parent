@@ -24,21 +24,16 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>io.netty</groupId>
-                <artifactId>netty-codec-classes-quic</artifactId>
-                <version>4.2.15.Final</version>
-            </dependency>
-            <!-- Override Spring to patch CVE-2026-22735 (spring-web) and CVE-2026-22737 (spring-webflux) -->
+            <!-- CVE-2026-22735/22737 override re-asserted after spring-grpc-dependencies import (version defined in m2-springboot-parent) -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-web</artifactId>
-                <version>7.0.7</version>
+                <version>${spring-web.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-webflux</artifactId>
-                <version>7.0.7</version>
+                <version>${spring-web.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springdoc</groupId>
@@ -53,7 +48,6 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-codec-classes-quic</artifactId>
-            <version>4.2.15.Final</version>
             <scope>compile</scope>
         </dependency>
         <!-- gRPC Spring Boot Starter (client + server) -->

@@ -25,24 +25,24 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- Override Spring to patch CVE-2026-22735 (spring-web) and CVE-2026-22737 (spring-webflux) -->
+            <!-- CVE-2026-22735/22737 override re-asserted after spring-grpc-dependencies import (version defined in m2-springboot-parent) -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-web</artifactId>
-                <version>7.0.7</version>
+                <version>${spring-web.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-webflux</artifactId>
-                <version>7.0.7</version>
+                <version>${spring-web.version}</version>
             </dependency>
-            <!-- Override transitive jackson-core from spring-grpc BOM: GHSA-72hv-8253-57qq (DoS, CVSS 7.5) -->
+            <!-- GHSA-72hv-8253-57qq override re-asserted after spring-grpc-dependencies import (version defined in m2-springboot-parent) -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
-                <version>2.21.4</version>
+                <version>${fasterxml.jackson.version}</version>
             </dependency>
-            <!-- Explicit override: spring-grpc BOM may pull tools.jackson.core:3.1.0, overriding parent's 3.1.2 -->
+            <!-- spring-grpc BOM may pull tools.jackson.core:3.1.0, overriding parent's patched version -->
             <dependency>
                 <groupId>tools.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>

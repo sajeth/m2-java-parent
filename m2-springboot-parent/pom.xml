@@ -35,6 +35,13 @@
         <spring-security.version>7.0.4</spring-security.version>
         <spring-web.version>7.0.7</spring-web.version>
         <kafka.version>4.2.0</kafka.version>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+        <!-- Override: GHSA-72hv-8253-57qq (DoS, CVSS 7.5) — pulled transitively by springdoc/serenity/grpc BOMs -->
+        <fasterxml.jackson.version>2.21.4</fasterxml.jackson.version>
+        <!-- Override Netty to patch CVE-2026-47691 (GHSA-5pvg-856g-cp85, CVSS 7.5), CVE-2026-45674 (GHSA-676x-f7gg-47vc, CVSS 7.5),
+             CVE-2026-44892 (GHSA-c2rx-5r8w-8xr2, CVSS 7.5), CVE-2026-45416 (GHSA-x4gw-5cx5-pgmh, CVSS 7.5);
+             all affect io.netty 4.2.0–4.2.14.Final, fixed in 4.2.15.Final -->
+        <netty.version>4.2.15.Final</netty.version>
     </properties>
     <dependencyManagement>
 
@@ -60,17 +67,163 @@
                 <artifactId>bcprov-jdk18on</artifactId>
                 <version>1.84</version>
             </dependency>
-            <!-- Override Spring Boot BOM's tools.jackson.core:3.1.0: GHSA-2m67-wjpj-xhg9 (DoS, CVSS 7.5) -->
+                <!-- Override tools.jackson.core: GHSA-2m67-wjpj-xhg9 (DoS, fixed 3.1.1); GHSA-j3rv-43j4-c7qm + GHSA-rmj7-2vxq-3g9f (PolymorphicTypeValidator RCE, fixed 3.1.4) -->
             <dependency>
                 <groupId>tools.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
                 <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>tools.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <!-- Override spring-web/webflux: CVE-2026-22735 (spring-web) and CVE-2026-22737 (spring-webflux), fixed in 7.0.7 -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webflux</artifactId>
+                <version>${spring-web.version}</version>
+            </dependency>
+            <!-- Override com.fasterxml.jackson.core 2.x (pulled transitively by springdoc, serenity, grpc BOMs): GHSA-72hv-8253-57qq (DoS, CVSS 7.5) -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${fasterxml.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${fasterxml.jackson.version}</version>
             </dependency>
             <!-- Override spring-boot-autoconfigure — patched in 4.0.6 (CVE-2026-40970/71/74/75/76/77, CVE-2026-40972/73) -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-autoconfigure</artifactId>
                 <version>${spring.boot.version}</version>
+            </dependency>
+            <!-- Override io.netty 4.2.x pulled transitively via reactor-netty-http:
+                 CVE-2026-47691 (GHSA-5pvg-856g-cp85, CVSS 7.5), CVE-2026-45674 (GHSA-676x-f7gg-47vc, CVSS 7.5),
+                 CVE-2026-44892 (GHSA-c2rx-5r8w-8xr2, CVSS 7.5), CVE-2026-45416 (GHSA-x4gw-5cx5-pgmh, CVSS 7.5);
+                 all affect 4.2.0–4.2.14.Final, fixed in 4.2.15.Final -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-buffer</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-codec-base</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-codec-classes-quic</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-codec-compression</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-codec-dns</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-codec-http</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-codec-http2</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-codec-http3</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-codec-native-quic</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-codec-socks</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-common</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-handler</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-handler-proxy</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-resolver</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-resolver-dns</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-resolver-dns-classes-macos</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-resolver-dns-native-macos</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-transport</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-transport-classes-epoll</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-transport-classes-io_uring</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-transport-native-epoll</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-transport-native-io_uring</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-transport-native-unix-common</artifactId>
+                <version>${netty.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -154,5 +307,10 @@
     <modules>
         <module>m2-kafka-parent</module>
         <module>m2-webapp-parent</module>
+        <module>m2-ai-parent</module>
+        <module>m2-reactive-data-parent</module>
+        <module>m2-cloud-native-parent</module>
+        <module>m2-native-parent</module>
+        <module>m2-testcontainers-parent</module>
     </modules>
 </project>

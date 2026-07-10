@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>m2-springboot-parent</artifactId>
+        <groupId>io.github.sajeth</groupId>
+        <version>0.0.1</version>
+    </parent>
+
+    <artifactId>m2-ai-parent</artifactId>
+    <packaging>pom</packaging>
+    <name>m2-ai-parent</name>
+
+    <properties>
+        <!-- https://mvnrepository.com/artifact/org.springframework.ai/spring-ai-bom -->
+        <!-- 2.0.0-RC2 targets Spring Boot 4.x / Spring Framework 7.x; update to GA when released -->
+        <spring-ai.version>2.0.0-RC2</spring-ai.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring AI BOM — manages all spring-ai-* artifact versions -->
+            <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-bom</artifactId>
+                <version>${spring-ai.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Re-assert Spring CVE overrides after AI BOM import to prevent downgrade -->
+            <!-- Override spring-web: CVE-2026-22735 (spring-web) and CVE-2026-22737 (spring-webflux) -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webflux</artifactId>
+                <version>${spring-web.version}</version>
+            </dependency>
+            <!-- Re-assert Jackson 2.x override: GHSA-72hv-8253-57qq (DoS, CVSS 7.5) -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${fasterxml.jackson.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- Spring AI model abstractions: ChatModel, EmbeddingModel, VectorStore, Tool (renamed from spring-ai-core in 2.x) -->
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-model</artifactId>
+        </dependency>
+
+        <!-- ChatClient auto-configuration — wires ChatClient bean from any registered ChatModel -->
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-autoconfigure-model-chat-client</artifactId>
+        </dependency>
+
+        <!-- Spring AI test utilities: MockChatModel, AssertJ matchers, ChatClientTest support -->
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>
