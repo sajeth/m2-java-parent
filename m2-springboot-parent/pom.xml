@@ -37,11 +37,11 @@
         <kafka.version>4.2.0</kafka.version>
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
         <!-- Override: GHSA-72hv-8253-57qq (DoS, CVSS 7.5) — pulled transitively by springdoc/serenity/grpc BOMs -->
-        <fasterxml.jackson.version>2.21.4</fasterxml.jackson.version>
+        <fasterxml.jackson.version>2.21.5</fasterxml.jackson.version>
         <!-- Override Netty to patch CVE-2026-47691 (GHSA-5pvg-856g-cp85, CVSS 7.5), CVE-2026-45674 (GHSA-676x-f7gg-47vc, CVSS 7.5),
              CVE-2026-44892 (GHSA-c2rx-5r8w-8xr2, CVSS 7.5), CVE-2026-45416 (GHSA-x4gw-5cx5-pgmh, CVSS 7.5);
              all affect io.netty 4.2.0–4.2.14.Final, fixed in 4.2.15.Final -->
-        <netty.version>4.2.15.Final</netty.version>
+        <netty.version>4.2.16.Final</netty.version>
     </properties>
     <dependencyManagement>
 
