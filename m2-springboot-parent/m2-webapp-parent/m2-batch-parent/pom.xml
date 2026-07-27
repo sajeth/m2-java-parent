@@ -16,18 +16,15 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Override tools.jackson.core: GHSA-j3rv-43j4-c7qm + GHSA-rmj7-2vxq-3g9f (PolymorphicTypeValidator RCE, fixed 3.1.4).
-                 Version hardcoded (not ${jackson.version}) because the submit job resolves this POM against the published
-                 parent artifact which carries the old jackson.version value. -->
             <dependency>
                 <groupId>tools.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
-                <version>3.1.4</version>
+                <version>${jackson.version}</version>
             </dependency>
             <dependency>
                 <groupId>tools.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>3.1.4</version>
+                <version>${jackson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -49,9 +49,10 @@
                 <version>${jackson.version}</version>
             </dependency>
             <!-- Override io.netty transitively pulled by grpc/reactor-netty/spring-webflux:
-                 CVE-2026-47691 (GHSA-5pvg-856g-cp85, CVSS 7.5), CVE-2026-45674 (GHSA-676x-f7gg-47vc, CVSS 7.5),
-                 CVE-2026-44892 (GHSA-c2rx-5r8w-8xr2, CVSS 7.5), CVE-2026-45416 (GHSA-x4gw-5cx5-pgmh, CVSS 7.5);
-                 all fixed in 4.2.15.Final; version controlled via ${netty.version} defined in root POM. -->
+                 CVE-2026-47691 (CVSS 7.5), CVE-2026-45674 (CVSS 7.5), CVE-2026-44892 (CVSS 7.5), CVE-2026-45416 (CVSS 7.5),
+                 all fixed in 4.2.15.Final; CVE-2026-55831/55833 (CVSS 7.5), CVE-2026-59901/56745 (high),
+                 CVE-2026-59921 (CVSS 5.7), CVE-2026-56746 (CVSS 6.5), CVE-2026-59900/59899/59898, netty-codec-dns leak,
+                 all fixed in 4.2.16.Final; version controlled via ${netty.version} defined in root POM. -->
             <dependency>
                 <groupId>io.netty</groupId>
                 <artifactId>netty-buffer</artifactId>

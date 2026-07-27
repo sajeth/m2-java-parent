@@ -25,6 +25,36 @@
         </suppress>
     -->
 
+    <!-- CVE-2025-48924 — Apache Commons Lang (2.x groupId commons-lang:commons-lang) uncontrolled recursion on long inputs.
+         No fix available as of 2026-07-27; the modern replacement is org.apache.commons:commons-lang3 which is not affected.
+         This artifact enters via Spring Cloud 2025.1.1 transitive chain (Netflix Eureka / Ribbon internals).
+         Risk accepted: exploitable only with untrusted very-long string inputs; Spring Cloud internals do not pass attacker-controlled strings to this API.
+         Revisit 2027-01-01 or when a patched commons-lang 2.x release is published.
+         until: 2027-01-01 -->
+    <suppress>
+        <notes>No fix available for commons-lang 2.x; transitively pulled by Spring Cloud internals only, not exposed to
+            user input.
+            until: 2027-01-01
+        </notes>
+        <packageUrl regex="true">^pkg:maven/commons-lang/commons-lang@.*$</packageUrl>
+        <cve>CVE-2025-48924</cve>
+    </suppress>
+
+    <!-- CVE-2025-46392 — Apache Commons Configuration (1.x groupId commons-configuration:commons-configuration) uncontrolled resource consumption.
+         No fix available as of 2026-07-27; the modern replacement is org.apache.commons:commons-configuration2 which is not affected.
+         This artifact enters via Spring Cloud 2025.1.1 transitive chain.
+         Risk accepted: not reachable from external input in this configuration; only read from internal config files.
+         Revisit 2027-01-01 or when a patched commons-configuration 1.x release is published.
+         until: 2027-01-01 -->
+    <suppress>
+        <notes>No fix available for commons-configuration 1.x; transitively pulled by Spring Cloud internals only, not
+            exposed to external input.
+            until: 2027-01-01
+        </notes>
+        <packageUrl regex="true">^pkg:maven/commons-configuration/commons-configuration@.*$</packageUrl>
+        <cve>CVE-2025-46392</cve>
+    </suppress>
+
     <!-- CVE-2025-14813 (CVSS 9.3) — Bouncy Castle 1.83 GOST CTR cipher overflow.
          Gatling 3.15.0 ships this as `gatling-recorder-bc-shaded` (a relocated internal artifact).
          It cannot be overridden via Maven dependencyManagement.

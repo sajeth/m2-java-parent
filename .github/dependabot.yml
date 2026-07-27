@@ -1,7 +1,6 @@
 version: 2
 updates:
-  f  # Keep GitHub Actions versions current (supply chain safety).
-  # SHA pinning is intentional — tags are mutable; SHAs are not.
+  # Keep GitHub Actions versions current (supply chain safety).
   # All action updates are grouped into one PR per week to reduce noise.
   - package-ecosystem: github-actions
     directory: /
@@ -14,10 +13,10 @@ updates:
       prefix: "ci"
     labels:
       - "ci"
-groups:
-  github-actions:
-    patterns:
-      - "*"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
 
   # Maven security updates only — version bumps are handled by dependency-upgrade.yml.
   # open-pull-requests-limit: 0 disables scheduled version PRs; security update PRs
