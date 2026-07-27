@@ -28,13 +28,13 @@ jobs:
       checks: write
 
     steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6
+      - uses: actions/checkout@v6
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
 
       - name: Qodana Scan
-        uses: JetBrains/qodana-action@4861e015da555e86a72b862892aba6c2b93e6891  # v2026.1
+        uses: JetBrains/qodana-action@v2026.1
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
