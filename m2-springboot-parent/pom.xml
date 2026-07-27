@@ -266,7 +266,13 @@
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
-                <version>4.5.14</version>
+                <version>${httpclient.version}</version>
+            </dependency>
+            <!-- Override commons-compress: CVE-2024-26308 (CVSS 5.5, DoS via 7z) and CVE-2024-25710 (CVSS 8.1, Bzip2 loop); both fixed in 1.26.0 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-compress</artifactId>
+                <version>${commons.compress.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
