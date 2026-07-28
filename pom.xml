@@ -129,7 +129,11 @@
         </dependency>
     </dependencies>
     <build>
+        <!-- Keep build output out of iCloud/Dropbox sync: inherit target.nosync for all children.
+             Explicit class dirs help IDEs that don't always derive them from <directory>. -->
         <directory>${buildDirectory}</directory>
+        <outputDirectory>${buildDirectory}/classes</outputDirectory>
+        <testOutputDirectory>${buildDirectory}/test-classes</testOutputDirectory>
         <pluginManagement>
             <plugins>
                 <plugin>
