@@ -14,7 +14,7 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: actions/stale@v10
+      - uses: actions/stale@v11
         with:
           # PRs only — don't touch issues
           days-before-issue-stale: -1
