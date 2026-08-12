@@ -87,7 +87,7 @@ jobs:
             target.nosync/bom.xml
 
       - name: Generate SLSA provenance attestation
-        uses: actions/attest-build-provenance@v4.1.1
+        uses: actions/attest-build-provenance@v4.2.2
         with:
           subject-path: |
             target.nosync/bom.json
