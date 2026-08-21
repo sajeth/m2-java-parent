@@ -19,7 +19,7 @@
         <junit-platform.version>6.0.2</junit-platform.version>
         <clean.commons.version>0.0.1</clean.commons.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
-        <spring.boot.version>4.0.6</spring.boot.version>
+        <spring.boot.version>4.0.7</spring.boot.version>
         <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
         <swagger.version>3.0.3</swagger.version>
         <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
@@ -33,7 +33,7 @@
         <!-- Override Spring Framework to patch CVE-2026-22735 (spring-web) and CVE-2026-22737 (spring-webflux) -->
         <spring-framework.version>7.0.7</spring-framework.version>
         <spring-security.version>7.0.4</spring-security.version>
-        <spring-web.version>7.0.8</spring-web.version>
+        <spring-web.version>7.0.9</spring-web.version>
         <kafka.version>4.2.0</kafka.version>
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
         <!-- Override: GHSA-72hv-8253-57qq (DoS, CVSS 7.5) — pulled transitively by springdoc/serenity/grpc BOMs -->
