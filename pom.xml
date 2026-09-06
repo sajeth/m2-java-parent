@@ -46,6 +46,7 @@
         <java.version>25</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
         <aspectj.version>1.9.25.1</aspectj.version>
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <junit.version>6.0.3</junit.version>
@@ -63,7 +64,9 @@
         <jackson.version>3.1.5</jackson.version>
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <lombok.version>1.18.46</lombok.version>
+        <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
         <jacoco.version>0.8.14</jacoco.version>
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
         <junit.jupiter.version>5.10.2</junit.jupiter.version>
         <!-- https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs-maven-plugin -->
         <spotbugs.plugin.version>4.9.3.0</spotbugs.plugin.version>
