@@ -180,10 +180,11 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- Spring gRPC Server Starter (version managed by spring-grpc-dependencies BOM) -->
+        <!-- Spring Boot 4.1+ first-party gRPC server starter (replaces org.springframework.grpc:spring-grpc-spring-boot-starter).
+             Programming model (@GrpcService, etc.) still comes from spring-grpc-core via the Boot BOM. -->
         <dependency>
-            <groupId>org.springframework.grpc</groupId>
-            <artifactId>spring-grpc-spring-boot-starter</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-grpc-server</artifactId>
             <scope>compile</scope>
         </dependency>
         <!-- gRPC services (reflection + health check support) -->
