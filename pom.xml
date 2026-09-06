@@ -69,7 +69,8 @@
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
         <junit.jupiter.version>5.10.2</junit.jupiter.version>
         <!-- https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs-maven-plugin -->
-        <spotbugs.plugin.version>4.9.3.0</spotbugs.plugin.version>
+        <!-- 4.10.x embeds SpotBugs >= 4.9.7 (Java 25 / class file major version 69) -->
+        <spotbugs.plugin.version>4.10.4.1</spotbugs.plugin.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-pmd-plugin -->
         <pmd.plugin.version>3.26.0</pmd.plugin.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-checkstyle-plugin -->
