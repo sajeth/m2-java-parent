@@ -14,6 +14,7 @@
 
     <properties>
         <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-bom -->
+        <!-- Testcontainers 2.x renamed modules (e.g. postgresql → testcontainers-postgresql). -->
         <testcontainers.version>2.0.5</testcontainers.version>
     </properties>
 
@@ -48,24 +49,24 @@
         <!-- JUnit 5 Testcontainers extension (@Testcontainers, @Container) -->
         <dependency>
             <groupId>org.testcontainers</groupId>
-            <artifactId>junit-jupiter</artifactId>
+            <artifactId>testcontainers-junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
 
         <!-- Common container modules — add only those your project uses -->
         <dependency>
             <groupId>org.testcontainers</groupId>
-            <artifactId>postgresql</artifactId>
+            <artifactId>testcontainers-postgresql</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.testcontainers</groupId>
-            <artifactId>mongodb</artifactId>
+            <artifactId>testcontainers-mongodb</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.testcontainers</groupId>
-            <artifactId>kafka</artifactId>
+            <artifactId>testcontainers-kafka</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
