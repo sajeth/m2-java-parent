@@ -148,6 +148,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-graphql</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Extended scalar types: Date, DateTime, UUID, BigDecimal, Locale, Url, etc. -->
@@ -155,12 +156,14 @@
             <groupId>com.graphql-java</groupId>
             <artifactId>graphql-java-extended-scalars</artifactId>
             <version>${graphql.extended-scalars.version}</version>
+            <scope>compile</scope>
         </dependency>
 
         <!-- WebFlux transport for GraphQL subscriptions (SSE + WebSocket reactive streams) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <!-- GraphQL test client: HttpGraphQlTester / WebSocketGraphQlTester for slice tests -->

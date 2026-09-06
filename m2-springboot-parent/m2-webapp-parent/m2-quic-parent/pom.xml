@@ -12,8 +12,14 @@
     <packaging>pom</packaging>
     <name>m2-quic-parent</name>
     <properties>
+        <!-- https://mvnrepository.com/artifact/io.netty.incubator/netty-incubator-codec-native-quic -->
         <quic.version>0.0.75.Final</quic.version>
+        <!-- https://mvnrepository.com/artifact/org.springframework.grpc/spring-grpc-dependencies -->
         <spring-grpc.version>1.0.3</spring-grpc.version>
+        <!-- https://mvnrepository.com/artifact/net.devh/grpc-spring-boot-starter -->
+        <grpc.spring.boot.starter.version>3.1.0.RELEASE</grpc.spring.boot.starter.version>
+        <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/build-helper-maven-plugin -->
+        <build.helper.maven.plugin>3.4.0</build.helper.maven.plugin>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -38,7 +44,7 @@
             <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
-                <version>3.0.3</version>
+                <version>${springdoc.version}</version>
             </dependency>
             <!-- Override io.netty (direct dep + reactor-netty/grpc transitive):
                  CVE-2026-47691 (CVSS 7.5), CVE-2026-45674 (CVSS 7.5), CVE-2026-44892 (CVSS 7.5), CVE-2026-45416 (CVSS 7.5),
@@ -174,35 +180,41 @@
         <dependency>
             <groupId>net.devh</groupId>
             <artifactId>grpc-spring-boot-starter</artifactId>
-            <version>3.1.0.RELEASE</version>
+            <version>${grpc.spring.boot.starter.version}</version>
+            <scope>compile</scope>
         </dependency>
         <!-- Spring WebFlux — provides HttpHandler bean, reactive web stack -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
+            <scope>compile</scope>
         </dependency>
         <!-- Reactor Netty HTTP — required for HttpServer, Http3SslContextSpec, DisposableServer -->
         <dependency>
             <groupId>io.projectreactor.netty</groupId>
             <artifactId>reactor-netty-http</artifactId>
+            <scope>compile</scope>
         </dependency>
         <!-- Netty QUIC codec for HTTP/3 support -->
         <dependency>
             <groupId>io.netty.incubator</groupId>
             <artifactId>netty-incubator-codec-native-quic</artifactId>
-            <version>0.0.75.Final</version>
+            <version>${quic.version}</version>
             <classifier>osx-aarch_64</classifier>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>io.netty.incubator</groupId>
             <artifactId>netty-incubator-codec-native-quic</artifactId>
-            <version>0.0.75.Final</version>
+            <version>${quic.version}</version>
             <classifier>linux-aarch_64</classifier>
+            <scope>compile</scope>
         </dependency>
         <!-- BoringSSL native TLS — required by Netty QUIC/HTTP3 -->
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-tcnative-boringssl-static</artifactId>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
     <build>
@@ -211,7 +223,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.4.0</version>
+                <version>${build.helper.maven.plugin}</version>
                 <executions>
                     <execution>
                         <id>add-generated-sources</id>

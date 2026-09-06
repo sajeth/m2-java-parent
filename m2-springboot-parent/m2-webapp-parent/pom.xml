@@ -56,11 +56,13 @@
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-tracing-bridge-brave</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>${springdoc.version}</version>
+            <scope>compile</scope>
             <exclusions>
                 <exclusion>
                     <groupId>*</groupId>
@@ -72,6 +74,7 @@
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
             <version>${springdoc.version}</version>
+            <scope>compile</scope>
             <exclusions>
                 <exclusion>
                     <groupId>*</groupId>
@@ -89,11 +92,13 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>${org.mapstruct.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>tools.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
             <version>${jackson.version}</version>
+            <scope>compile</scope>
             <exclusions>
                 <exclusion>
                     <groupId>org.yaml</groupId>
@@ -104,6 +109,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <scope>compile</scope>
             <exclusions>
                 <exclusion>
                     <groupId>*</groupId>
@@ -148,11 +154,13 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>
+            <scope>compile</scope>
         </dependency>
         <!-- Resilience4j Reactor (for reactive retry) -->
         <dependency>
             <groupId>io.github.resilience4j</groupId>
             <artifactId>resilience4j-reactor</artifactId>
+            <scope>compile</scope>
         </dependency>
         <!-- Spring AOP for logging aspects -->
 
@@ -161,6 +169,7 @@
         <dependency>
             <groupId>org.springframework.retry</groupId>
             <artifactId>spring-retry</artifactId>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
