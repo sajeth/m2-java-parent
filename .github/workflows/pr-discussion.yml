@@ -2,10 +2,10 @@ name: Create Discussion on PR
 
 on:
   pull_request:
-    types: [opened]
-    branches: [master]
+    types: [ opened ]
+    branches: [ master ]
 
-permissions: {}
+permissions: { }
 
 jobs:
   create-discussion:

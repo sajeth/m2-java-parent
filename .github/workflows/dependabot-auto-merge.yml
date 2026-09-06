@@ -5,10 +5,10 @@ name: Auto-merge
 
 on:
   pull_request:
-    types: [opened, reopened, synchronize, closed]
-    branches: [master]
+    types: [ opened, reopened, synchronize, closed ]
+    branches: [ master ]
 
-permissions: {}
+permissions: { }
 
 jobs:
   auto-merge:

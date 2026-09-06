@@ -2,9 +2,9 @@ name: Release Drafter
 
 on:
   push:
-    branches: [master]
+    branches: [ master ]
 
-permissions: {}
+permissions: { }
 
 jobs:
   draft:

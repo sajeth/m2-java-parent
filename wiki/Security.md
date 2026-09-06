@@ -13,8 +13,8 @@ Full policy: [SECURITY.md](https://github.com/sajeth/m2-java-parent/blob/master/
 
 ## Automation
 
-| Tool | Role |
-|------|------|
-| Dependabot | Actions + security update PRs; can open tracking issues |
-| OWASP Dependency-Check | Fails on CVSS ≥ 7 |
-| CycloneDX | SBOM on each release |
+| Tool                   | Role                                                    |
+|------------------------|---------------------------------------------------------|
+| Dependabot             | Actions + security update PRs; can open tracking issues |
+| OWASP Dependency-Check | Fails on CVSS ≥ 7                                       |
+| CycloneDX              | SBOM on each release                                    |

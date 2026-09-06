@@ -10,13 +10,14 @@ Add a GitHub Packages repository that can read `m2-java-parent`, then inherit th
 </parent>
 ```
 
-| Parent | Use when |
-|--------|----------|
-| `m2-commons-parent` | Shared libraries (no Spring Boot) |
-| `m2-springboot-parent` | Spring Boot apps |
-| `m2-webapp-parent` | HTTP / OpenAPI / resilience web apps |
-| `m2-kafka-parent` | Kafka producers/consumers |
-| `m2-grpc-parent` | gRPC services |
-| `m2-quic-parent` | HTTP/3 / QUIC |
+| Parent                 | Use when                             |
+|------------------------|--------------------------------------|
+| `m2-commons-parent`    | Shared libraries (no Spring Boot)    |
+| `m2-springboot-parent` | Spring Boot apps                     |
+| `m2-webapp-parent`     | HTTP / OpenAPI / resilience web apps |
+| `m2-kafka-parent`      | Kafka producers/consumers            |
+| `m2-grpc-parent`       | gRPC services                        |
+| `m2-quic-parent`       | HTTP/3 / QUIC                        |
 
-Pin to a published CalVer version from [Releases](https://github.com/sajeth/m2-java-parent/releases). Prefer the latest supported release for security fixes.
+Pin to a published CalVer version from [Releases](https://github.com/sajeth/m2-java-parent/releases). Prefer the latest
+supported release for security fixes.

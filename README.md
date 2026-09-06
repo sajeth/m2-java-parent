@@ -2,17 +2,18 @@
 
 Maven **parent POM** hierarchy for **Java 25** projects — Spring Boot, Spring Cloud, gRPC, Kafka, and related stacks.
 
-There is no application source in this repository. Artifacts are published as `io.github.sajeth:*` parent POMs to [GitHub Packages](https://github.com/sajeth/m2-java-parent/packages).
+There is no application source in this repository. Artifacts are published as `io.github.sajeth:*` parent POMs
+to [GitHub Packages](https://github.com/sajeth/m2-java-parent/packages).
 
 ## About
 
-| | |
-|---|---|
-| **License** | [Apache-2.0](LICENSE) |
+|                     |                                                                                                                |
+|---------------------|----------------------------------------------------------------------------------------------------------------|
+| **License**         | [Apache-2.0](LICENSE)                                                                                          |
 | **Security policy** | [SECURITY.md](SECURITY.md) · [Advisory form](https://github.com/sajeth/m2-java-parent/security/advisories/new) |
-| **Activity** | [Recent activity](https://github.com/sajeth/m2-java-parent/activity) |
-| **Wiki** | [Documentation wiki](https://github.com/sajeth/m2-java-parent/wiki) |
-| **Releases** | [CalVer releases](https://github.com/sajeth/m2-java-parent/releases) (1st & 15th) |
+| **Activity**        | [Recent activity](https://github.com/sajeth/m2-java-parent/activity)                                           |
+| **Wiki**            | [Documentation wiki](https://github.com/sajeth/m2-java-parent/wiki)                                            |
+| **Releases**        | [CalVer releases](https://github.com/sajeth/m2-java-parent/releases) (1st & 15th)                              |
 
 ## Hierarchy (summary)
 
@@ -41,4 +42,6 @@ See [Wiki · Consuming Parents](https://github.com/sajeth/m2-java-parent/wiki/Co
 
 ## Security
 
-Only the latest published version of each parent is supported. Report vulnerabilities privately via [GitHub Security Advisories](https://github.com/sajeth/m2-java-parent/security/advisories/new) — do not open a public issue for security bugs. Details: [SECURITY.md](SECURITY.md).
+Only the latest published version of each parent is supported. Report vulnerabilities privately
+via [GitHub Security Advisories](https://github.com/sajeth/m2-java-parent/security/advisories/new) — do not open a
+public issue for security bugs. Details: [SECURITY.md](SECURITY.md).

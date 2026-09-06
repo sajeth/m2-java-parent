@@ -3,26 +3,26 @@ tag-template: 'v$RESOLVED_VERSION'
 
 categories:
   - title: 'Features'
-    labels: ['feature', 'enhancement']
+    labels: [ 'feature', 'enhancement' ]
   - title: 'Bug Fixes'
-    labels: ['bug', 'fix']
+    labels: [ 'bug', 'fix' ]
   - title: 'Security'
-    labels: ['security']
+    labels: [ 'security' ]
   - title: 'Dependency Updates'
-    labels: ['chore', 'dependency']
+    labels: [ 'chore', 'dependency' ]
   - title: 'CI / CD'
-    labels: ['ci']
+    labels: [ 'ci' ]
 
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 change-title-escapes: '\<*_&'
 
 version-resolver:
   major:
-    labels: ['major']
+    labels: [ 'major' ]
   minor:
-    labels: ['feature', 'enhancement']
+    labels: [ 'feature', 'enhancement' ]
   patch:
-    labels: ['bug', 'fix', 'security', 'chore', 'dependency', 'ci']
+    labels: [ 'bug', 'fix', 'security', 'chore', 'dependency', 'ci' ]
   default: patch
 
 template: |

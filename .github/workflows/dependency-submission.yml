@@ -2,9 +2,9 @@ name: Dependency Submission
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [ opened, synchronize, reopened ]
 
-permissions: {}
+permissions: { }
 
 jobs:
   gate:

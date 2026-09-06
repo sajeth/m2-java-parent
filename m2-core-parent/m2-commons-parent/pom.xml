@@ -12,7 +12,16 @@
     <packaging>pom</packaging>
     <name>m2-commons-parent</name>
 
-    <properties/>
+    <properties>
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-relational -->
+        <spring.data.relational>4.0.6</spring.data.relational>
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+        <spring.data.jpa>4.0.6</spring.data.jpa>
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons -->
+        <spring.data.commons>4.0.6</spring.data.commons>
+        <!-- https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs-maven-plugin -->
+        <spotbugs.plugin.version>4.10.4.1</spotbugs.plugin.version>
+    </properties>
 
     <dependencyManagement>
         <dependencies>

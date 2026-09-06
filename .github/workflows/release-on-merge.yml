@@ -5,11 +5,11 @@ name: Release on Merge
 
 on:
   pull_request:
-    types: [closed]
+    types: [ closed ]
     branches:
       - master
 
-permissions: {}
+permissions: { }
 
 jobs:
   trigger-release:

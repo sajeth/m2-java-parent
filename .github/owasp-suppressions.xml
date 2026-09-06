@@ -62,8 +62,10 @@
          Revisit when Gatling releases a version that bumps to BC 1.84+.
          until: 2026-12-31 -->
     <suppress>
-        <notes>Gatling-shaded internal BC copy; not overridable via Maven. Low exposure — GOST cipher only used by Gatling Recorder.
-               until: 2026-12-31</notes>
+        <notes>Gatling-shaded internal BC copy; not overridable via Maven. Low exposure — GOST cipher only used by
+            Gatling Recorder.
+            until: 2026-12-31
+        </notes>
         <filePath regex="true">.*gatling-recorder-bc-shaded.*\.jar</filePath>
         <cve>CVE-2025-14813</cve>
     </suppress>

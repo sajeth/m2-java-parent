@@ -2,17 +2,17 @@ name: Socket Security
 
 on:
   push:
-    branches: [master]
+    branches: [ master ]
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [ opened, synchronize, reopened ]
   issue_comment:
-    types: [created]
+    types: [ created ]
 
 concurrency:
   group: socket-scan-${{ github.ref }}-${{ github.sha }}
   cancel-in-progress: true
 
-permissions: {}
+permissions: { }
 
 jobs:
   gate:

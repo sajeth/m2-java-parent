@@ -9,12 +9,12 @@ on:
     - cron: '0 7 * * 1-5'  # weekdays 07:00 UTC
   workflow_dispatch:
   push:
-    branches: [master]
+    branches: [ master ]
     paths:
       - '**/pom.xml'
       - '.github/dependabot.yml'
 
-permissions: {}
+permissions: { }
 
 jobs:
   sync:

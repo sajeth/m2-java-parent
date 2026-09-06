@@ -6,13 +6,13 @@ name: Sync Wiki
 
 on:
   push:
-    branches: [master]
+    branches: [ master ]
     paths:
       - 'wiki/**'
       - '.github/workflows/wiki.yml'
   workflow_dispatch:
 
-permissions: {}
+permissions: { }
 
 jobs:
   sync:
