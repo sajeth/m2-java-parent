@@ -1,29 +1,62 @@
 name: Auto-merge
 
+# Enables squash auto-merge when checks pass, and deletes the head branch after merge.
+
 on:
   pull_request:
-    types: [ opened, reopened, synchronize ]
+    types: [opened, reopened, synchronize, closed]
     branches: [master]
 
 permissions: {}
 
 jobs:
   auto-merge:
+    if: github.event.action != 'closed'
     runs-on: ubuntu-latest
     permissions:
+      contents: write
       pull-requests: write
     steps:
       - name: Approve PR
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
-        run: gh pr review --approve "$PR_URL"
+        run: |
+          gh pr review --approve "$PR_URL" \
+            || echo "Approve skipped (e.g. own PR or already approved)."
 
-      - name: Enable auto-merge
+      - name: Enable auto-merge (squash, delete branch)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
         run: |
-          gh pr merge --auto --squash "$PR_URL" \
-            && echo "Auto-merge enabled." \
+          gh pr merge --auto --squash --delete-branch "$PR_URL" \
+            && echo "Auto-merge enabled; branch will be deleted after merge." \
             || echo "Auto-merge not available (repo setting disabled or already set); merge manually when checks pass."
+
+  delete-branch:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Delete head branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: ${{ github.event.pull_request.head.ref }}
+          REPO: ${{ github.repository }}
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+        run: |
+          if [ "$HEAD_REPO" != "$REPO" ]; then
+            echo "Head branch is from a fork ($HEAD_REPO) — skipping delete."
+            exit 0
+          fi
+          if [ "$BRANCH" = "master" ] || [ "$BRANCH" = "main" ]; then
+            echo "Refusing to delete protected branch '$BRANCH'."
+            exit 0
+          fi
+          if gh api -X DELETE "repos/${REPO}/git/refs/heads/${BRANCH}"; then
+            echo "Deleted branch '$BRANCH'."
+          else
+            echo "Branch '$BRANCH' already deleted or not found."
+          fi
