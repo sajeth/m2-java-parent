@@ -142,30 +142,35 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway-server-webflux</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Spring Cloud Config Client — externalised configuration from Config Server -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Eureka service-discovery client — register/discover services via Eureka Server -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Spring Cloud LoadBalancer — client-side load balancing (replaces Ribbon) -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Spring Cloud Circuit Breaker (Resilience4j) — fault tolerance for gateway routes -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

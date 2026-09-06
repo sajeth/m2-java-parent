@@ -142,29 +142,34 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <!-- R2DBC: reactive relational database connectivity -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-r2dbc</artifactId>
+            <scope>compile</scope>
         </dependency>
         <!-- R2DBC connection pool (non-blocking, managed by Boot BOM) -->
         <dependency>
             <groupId>io.r2dbc</groupId>
             <artifactId>r2dbc-pool</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Reactive Redis -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Reactive MongoDB -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Testcontainers for reactive data integration tests (auto-detected drivers) -->

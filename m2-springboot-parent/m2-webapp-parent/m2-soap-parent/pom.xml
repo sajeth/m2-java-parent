@@ -163,6 +163,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web-services</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <!-- WS-Security: message-level signing and encryption via WSS4J -->
@@ -176,6 +177,7 @@
                     <artifactId>*</artifactId>
                 </exclusion>
             </exclusions>
+            <scope>compile</scope>
         </dependency>
 
         <!-- JAXB runtime for Jakarta EE 11 XML marshalling (Boot BOM may not include the RI) -->
@@ -183,6 +185,7 @@
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
             <version>${jaxb-runtime.version}</version>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Spring WS MockWebServiceServer for unit-testing SOAP endpoints -->

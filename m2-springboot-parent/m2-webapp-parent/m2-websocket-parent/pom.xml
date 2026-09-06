@@ -144,18 +144,21 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Spring Security WebSocket: per-message STOMP authentication + CSRF for WebSocket -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-messaging</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Reactive STOMP client support (for reactive WebSocket client scenarios) -->
         <dependency>
             <groupId>io.projectreactor.netty</groupId>
             <artifactId>reactor-netty-http</artifactId>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

@@ -174,17 +174,20 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Spring gRPC Server Starter (version managed by spring-grpc-dependencies BOM) -->
         <dependency>
             <groupId>org.springframework.grpc</groupId>
             <artifactId>spring-grpc-spring-boot-starter</artifactId>
+            <scope>compile</scope>
         </dependency>
         <!-- gRPC services (reflection + health check support) -->
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-services</artifactId>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
     <build>

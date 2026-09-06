@@ -174,12 +174,14 @@
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-model</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <!-- ChatClient auto-configuration — wires ChatClient bean from any registered ChatModel -->
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-autoconfigure-model-chat-client</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Spring AI test utilities: MockChatModel, AssertJ matchers, ChatClientTest support -->
