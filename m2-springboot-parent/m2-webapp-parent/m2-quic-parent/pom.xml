@@ -15,11 +15,11 @@
         <!-- https://mvnrepository.com/artifact/io.netty.incubator/netty-incubator-codec-native-quic -->
         <quic.version>0.0.75.Final</quic.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.grpc/spring-grpc-dependencies -->
-        <spring-grpc.version>1.0.3</spring-grpc.version>
+        <spring-grpc.version>1.1.1</spring-grpc.version>
         <!-- https://mvnrepository.com/artifact/net.devh/grpc-spring-boot-starter -->
         <grpc.spring.boot.starter.version>3.1.0.RELEASE</grpc.spring.boot.starter.version>
         <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/build-helper-maven-plugin -->
-        <build.helper.maven.plugin>3.4.0</build.helper.maven.plugin>
+        <build.helper.maven.plugin>3.6.1</build.helper.maven.plugin>
     </properties>
     <dependencyManagement>
         <dependencies>

@@ -21,9 +21,9 @@
         <commons.lang3.version>3.20.0</commons.lang3.version>
         <!-- BDD -->
         <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
-        <cucumber.version>7.34.3</cucumber.version>
+        <cucumber.version>7.34.7</cucumber.version>
         <!-- https://mvnrepository.com/artifact/net.serenity-bdd/serenity-core -->
-        <serenity.version>5.3.10</serenity.version>
+        <serenity.version>5.3.11</serenity.version>
         <!-- Performance -->
         <!-- https://mvnrepository.com/artifact/io.gatling.highcharts/gatling-charts-highcharts -->
         <gatling.version>3.15.1</gatling.version>

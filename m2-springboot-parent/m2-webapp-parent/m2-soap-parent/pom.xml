@@ -14,7 +14,7 @@
 
     <properties>
         <!-- https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime -->
-        <jaxb-runtime.version>4.0.5</jaxb-runtime.version>
+        <jaxb-runtime.version>4.0.9</jaxb-runtime.version>
         <!-- https://mvnrepository.com/artifact/org.apache.wss4j/wss4j-ws-security-dom -->
         <wss4j.version>4.0.1</wss4j.version>
         <!-- https://mvnrepository.com/artifact/org.apache.santuario/xmlsec -->

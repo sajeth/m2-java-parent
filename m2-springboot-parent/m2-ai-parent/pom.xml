@@ -15,7 +15,7 @@
     <properties>
         <!-- https://mvnrepository.com/artifact/org.springframework.ai/spring-ai-bom -->
         <!-- 2.0.0-RC2 targets Spring Boot 4.x / Spring Framework 7.x; update to GA when released -->
-        <spring-ai.version>2.0.0-RC2</spring-ai.version>
+        <spring-ai.version>2.0.1</spring-ai.version>
     </properties>
 
     <dependencyManagement>
