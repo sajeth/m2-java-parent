@@ -103,3 +103,15 @@ jobs:
           git add -A
           git commit -m "ci: release v${RELEASE_VERSION} [skip ci]"
           git push
+
+      - name: Notify consumers to sync parent
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
+          RELEASE_VERSION: ${{ steps.version.outputs.value }}
+        run: |
+          # Triggers sajeth/clean-architecture-common sync-parent.yml
+          gh api repos/sajeth/clean-architecture-common/dispatches \
+            -f event_type='m2-commons-parent-published' \
+            -f "client_payload[version]=${RELEASE_VERSION}"
+          echo "Dispatched m2-commons-parent-published (${RELEASE_VERSION}) to clean-architecture-common"
