@@ -17,7 +17,7 @@
         <!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
         <protobuf.version>4.33.4</protobuf.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.grpc/spring-grpc-dependencies -->
-        <spring-grpc.version>1.0.3</spring-grpc.version>
+        <spring-grpc.version>1.1.1</spring-grpc.version>
     </properties>
     <dependencyManagement>
         <dependencies>

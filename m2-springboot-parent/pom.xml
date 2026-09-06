@@ -16,21 +16,21 @@
         <!--		https://mvnrepository.com/artifact/io.cucumber/cucumber-spring-->
         <cucumber.version>7.34.3</cucumber.version>
         <!--		https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite-->
-        <junit-platform.version>6.0.2</junit-platform.version>
+        <junit-platform.version>6.1.3</junit-platform.version>
         <clean.commons.version>0.0.1</clean.commons.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
-        <spring.boot.version>4.0.7</spring.boot.version>
+        <spring.boot.version>4.1.1</spring.boot.version>
         <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
         <swagger.version>3.1.0</swagger.version>
         <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
-        <snakeyaml.version>2.6</snakeyaml.version>
+        <snakeyaml.version>2.7</snakeyaml.version>
 
         <!-- https://mvnrepository.com/artifact/org.openapitools/openapi-generator-maven-plugin -->
         <openapi-generator.version>7.21.0</openapi-generator.version>
         <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
-        <spring-cloud.version>2025.1.1</spring-cloud.version>
+        <spring-cloud.version>2025.1.3</spring-cloud.version>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-framework-bom -->
         <!-- Override Spring Framework to patch CVE-2026-22735 (spring-web) and CVE-2026-22737 (spring-webflux) -->
         <spring-framework.version>7.0.7</spring-framework.version>
@@ -42,7 +42,7 @@
         <kafka.version>4.2.0</kafka.version>
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
         <!-- Override: GHSA-72hv-8253-57qq (DoS, CVSS 7.5) — pulled transitively by springdoc/serenity/grpc BOMs -->
-        <fasterxml.jackson.version>2.21.5</fasterxml.jackson.version>
+        <fasterxml.jackson.version>2.22.2</fasterxml.jackson.version>
         <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on -->
         <bouncycastle.version>1.85.2</bouncycastle.version>
         <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
