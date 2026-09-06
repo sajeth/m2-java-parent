@@ -1,0 +1,31 @@
+name: Sync Wiki
+
+# Mirrors the wiki/ directory to the GitHub Wiki after the wiki backend exists.
+# One-time bootstrap: open https://github.com/sajeth/m2-java-parent/wiki/_new
+# and save an empty Home page (creates the .wiki.git repo), then re-run this workflow.
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'wiki/**'
+      - '.github/workflows/wiki.yml'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Publish wiki/
+        uses: Andrew-Chen-Wang/github-wiki-action@v1
+        with:
+          path: wiki
+          strategy: init
+        continue-on-error: true

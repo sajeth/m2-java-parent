@@ -9,18 +9,18 @@ updates:
       day: monday
       time: "06:00"
     rebase-strategy: auto
+    open-pull-requests-limit: 10
     commit-message:
       prefix: "ci"
     labels:
       - "ci"
+      - "dependencies"
     groups:
       github-actions:
         patterns:
           - "*"
 
-  # Maven security updates only — version bumps are handled by dependency-upgrade.yml.
-  # open-pull-requests-limit: 0 disables scheduled version PRs; security update PRs
-  # are exempt from this limit and will still be raised automatically.
+  # Maven: security updates always; version PRs limited (weekly upgrades also via dependency-upgrade.yml).
   - package-ecosystem: maven
     directory: /
     schedule:
@@ -28,8 +28,9 @@ updates:
       day: monday
       time: "06:00"
     rebase-strategy: auto
-    open-pull-requests-limit: 0
+    open-pull-requests-limit: 5
     commit-message:
       prefix: "fix"
     labels:
       - "security"
+      - "dependencies"

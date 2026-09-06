@@ -1,0 +1,113 @@
+name: Dependabot Alert Issues
+
+# Opens GitHub issues for open HIGH/CRITICAL Dependabot alerts so findings
+# are tracked in Issues (Actions token has issues: write).
+
+on:
+  schedule:
+    - cron: '0 7 * * 1'  # Monday 07:00 UTC
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  open-issues:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      security-events: read
+      contents: read
+    steps:
+      - name: Create issues for high/critical Dependabot alerts
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          ALERTS=$(gh api graphql -f query='
+            query($owner:String!, $name:String!) {
+              repository(owner:$owner, name:$name) {
+                vulnerabilityAlerts(first: 50, states: [OPEN]) {
+                  nodes {
+                    number
+                    securityVulnerability {
+                      severity
+                      package { name ecosystem }
+                      advisory { ghsaId summary permalink }
+                      firstPatchedVersion { identifier }
+                    }
+                    dependabotUpdate {
+                      pullRequest { number url }
+                    }
+                  }
+                }
+              }
+            }' -f owner="${REPO%/*}" -f name="${REPO#*/}")
+
+          export ALERTS
+          python3 <<'PY'
+          import json, os, subprocess
+
+          data = json.loads(os.environ["ALERTS"])
+          nodes = (
+              data.get("data", {})
+              .get("repository", {})
+              .get("vulnerabilityAlerts", {})
+              .get("nodes")
+              or []
+          )
+
+          repo = os.environ["REPO"]
+          created = 0
+          for node in nodes:
+              vuln = node.get("securityVulnerability") or {}
+              sev = (vuln.get("severity") or "").upper()
+              if sev not in {"CRITICAL", "HIGH"}:
+                  continue
+              pkg = (vuln.get("package") or {}).get("name", "unknown")
+              advisory = vuln.get("advisory") or {}
+              ghsa = advisory.get("ghsaId") or f"alert-{node.get('number')}"
+              permalink = advisory.get("permalink") or ""
+              patched = (vuln.get("firstPatchedVersion") or {}).get("identifier") or "n/a"
+              pr = ((node.get("dependabotUpdate") or {}).get("pullRequest") or {})
+              pr_line = f"- Open PR: {pr.get('url')}" if pr.get("url") else "- No Dependabot PR yet"
+
+              title = f"[Dependabot][{sev}] {pkg} — {ghsa}"
+              existing = subprocess.check_output(
+                  [
+                      "gh", "issue", "list", "--repo", repo, "--state", "open",
+                      "--search", f"in:title {ghsa}", "--json", "number",
+                  ],
+                  text=True,
+              )
+              if json.loads(existing):
+                  print(f"skip existing issue for {ghsa}")
+                  continue
+
+              body = "\n".join([
+                  "## Dependabot alert",
+                  "",
+                  f"**Severity:** {sev}",
+                  f"**Package:** `{pkg}`",
+                  f"**Advisory:** [{ghsa}]({permalink})",
+                  f"**First patched version:** `{patched}`",
+                  pr_line,
+                  "",
+                  "---",
+                  "Opened automatically so Dependabot findings are tracked as issues.",
+                  "Policy: see [SECURITY.md](../blob/master/SECURITY.md).",
+              ])
+
+              subprocess.check_call([
+                  "gh", "issue", "create",
+                  "--repo", repo,
+                  "--title", title,
+                  "--label", "security",
+                  "--body", body,
+              ])
+              created += 1
+              print(f"created issue for {ghsa}")
+
+          print(f"done; created={created}")
+          PY
