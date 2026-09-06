@@ -40,8 +40,11 @@
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
         <maven.javadoc.plugin>3.12.0</maven.javadoc.plugin>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
-        <!-- Patched CVE-2026-22735 / CVE-2026-22737, fixed in 7.0.7 -->
         <spring.version>7.0.7</spring.version>
+        <!-- Source: https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-pmd-plugin -->
+        <maven.pmd.plugin>3.28.0</maven.pmd.plugin>
+        <!-- Source: https://mvnrepository.com/artifact/org.pitest/pitest-maven -->
+        <pitest.maven>1.30.0</pitest.maven>
     </properties>
 
     <dependencies/>
@@ -89,17 +92,17 @@
                         </execution>
                     </executions>
                 </plugin>
-                <!-- maven-pmd-plugin: pinned to 3.28.0 — first release with Java 25 targetJdk support -->
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-pmd-plugin</artifactId>
-                    <version>3.28.0</version>
+                    <version>${maven.pmd.plugin}</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.pitest</groupId>
                     <artifactId>pitest-maven</artifactId>
-                    <version>1.17.3</version>
+                    <version>${pitest.maven}</version>
                     <configuration>
                         <outputFormats>
                             <outputFormat>XML</outputFormat>

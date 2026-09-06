@@ -92,6 +92,12 @@
         <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
         <!-- CVE-2020-13956 (CVSS 5.3, path traversal in URIUtils); fixed in 4.5.13 -->
         <httpclient.version>4.5.14</httpclient.version>
+        <!-- Source: https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-artifact-plugin -->
+        <maven.artifact.plugin>3.5.2</maven.artifact.plugin>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.surefire/surefire-junit-platform -->
+        <surfire.junit.platform>3.5.6</surfire.junit.platform>
+        <!-- Source: https://mvnrepository.com/artifact/org.codehaus.mojo/license-maven-plugin -->
+        <license.maven.plugin>2.7.1</license.maven.plugin>
     </properties>
 
     <distributionManagement>
@@ -121,11 +127,11 @@
             <version>${lombok.version}</version>
             <scope>compile</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.maven.surefire/surefire-junit-platform -->
+
         <dependency>
             <groupId>org.apache.maven.surefire</groupId>
             <artifactId>surefire-junit-platform</artifactId>
-            <version>3.5.6</version>
+            <version>${surfire.junit.platform}</version>
         </dependency>
     </dependencies>
     <build>
@@ -205,13 +211,13 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-artifact-plugin</artifactId>
-                    <version>3.5.2</version>
+                    <version>${maven.artifact.plugin}</version>
                 </plugin>
                 <!-- Dependency license report: generates THIRD-PARTY.txt listing transitive dep licenses -->
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>license-maven-plugin</artifactId>
-                    <version>2.5.0</version>
+                    <version>${license.maven.plugin}</version>
                     <configuration>
                         <outputDirectory>${project.build.directory}</outputDirectory>
                         <thirdPartyFilename>THIRD-PARTY.txt</thirdPartyFilename>

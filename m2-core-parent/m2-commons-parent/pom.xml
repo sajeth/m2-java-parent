@@ -12,9 +12,7 @@
     <packaging>pom</packaging>
     <name>m2-commons-parent</name>
 
-    <properties>
-
-    </properties>
+    <properties/>
 
     <dependencies>
         <dependency>
