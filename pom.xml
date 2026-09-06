@@ -75,7 +75,7 @@
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-checkstyle-plugin -->
         <checkstyle.plugin.version>3.6.0</checkstyle.plugin.version>
         <!-- https://mvnrepository.com/artifact/org.owasp/dependency-check-maven -->
-        <owasp.dependency.check.version>9.2.0</owasp.dependency.check.version>
+        <owasp.dependency.check.version>13.0.0</owasp.dependency.check.version>
         <!-- https://mvnrepository.com/artifact/org.cyclonedx/cyclonedx-maven-plugin -->
         <cyclonedx.plugin.version>2.7.9</cyclonedx.plugin.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
