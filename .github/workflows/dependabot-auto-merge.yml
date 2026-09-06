@@ -1,6 +1,7 @@
 name: Auto-merge
 
-# Enables squash auto-merge when checks pass, and deletes the head branch after merge.
+# Dependabot autonomy: squash-merge when checks pass and delete the head branch.
+# Human PRs are left for manual merge.
 
 on:
   pull_request:
@@ -18,22 +19,19 @@ jobs:
       pull-requests: write
       issues: write
     steps:
-      - name: Approve PR
+      - name: Enable auto-merge (Dependabot only)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
+          ACTOR: ${{ github.actor }}
         run: |
-          gh pr review --approve "$PR_URL" \
-            || echo "Approve skipped (e.g. own PR or already approved)."
-
-      - name: Enable auto-merge (squash, delete branch)
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_URL: ${{ github.event.pull_request.html_url }}
-        run: |
+          if [ "$ACTOR" != 'dependabot[bot]' ] && [ "$ACTOR" != 'app/dependabot' ]; then
+            echo "Skipping auto-merge for actor=$ACTOR (Dependabot only)."
+            exit 0
+          fi
           gh pr merge --auto --squash --delete-branch "$PR_URL" \
             && echo "Auto-merge enabled; branch will be deleted after merge." \
-            || echo "Auto-merge not available (repo setting disabled or already set); merge manually when checks pass."
+            || echo "Auto-merge not available (repo setting disabled or already set)."
 
   delete-branch:
     if: github.event.pull_request.merged == true
@@ -61,3 +59,19 @@ jobs:
           else
             echo "Branch '$BRANCH' already deleted or not found."
           fi
+
+  rebase-on-merge:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Rebase open Dependabot PRs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr list --state open --json number,author \
+            --jq '.[] | select(.author.login == "dependabot[bot]" or .author.login == "app/dependabot") | .number' | \
+          while read -r pr; do
+            gh pr comment "$pr" --body "@dependabot rebase" || true
+          done

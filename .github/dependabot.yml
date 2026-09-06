@@ -1,7 +1,8 @@
 version: 2
+# Autonomous Dependabot maintenance for m2-java-parent.
+# Security updates always raise PRs; version updates are grouped weekly.
+# Auto-merge + branch delete is handled by .github/workflows/dependabot-auto-merge.yml.
 updates:
-  # Keep GitHub Actions versions current (supply chain safety).
-  # All action updates are grouped into one PR per week to reduce noise.
   - package-ecosystem: github-actions
     directory: /
     schedule:
@@ -9,7 +10,7 @@ updates:
       day: monday
       time: "06:00"
     rebase-strategy: auto
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 20
     commit-message:
       prefix: "ci"
     labels:
@@ -20,7 +21,6 @@ updates:
         patterns:
           - "*"
 
-  # Maven: security updates always; version PRs limited (weekly upgrades also via dependency-upgrade.yml).
   - package-ecosystem: maven
     directory: /
     schedule:
@@ -28,9 +28,20 @@ updates:
       day: monday
       time: "06:00"
     rebase-strategy: auto
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 20
     commit-message:
       prefix: "fix"
     labels:
-      - "security"
       - "dependencies"
+    groups:
+      maven-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+      maven-patch-minor:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
+        patterns:
+          - "*"

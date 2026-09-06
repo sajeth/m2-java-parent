@@ -1,113 +1,137 @@
-name: Dependabot Alert Issues
+name: Dependabot Alert Sync
 
-# Opens GitHub issues for open HIGH/CRITICAL Dependabot alerts so findings
-# are tracked in Issues (Actions token has issues: write).
+# Open Issues for HIGH/CRITICAL Dependabot alerts and close them as completed
+# when the matching alert is fixed/dismissed. Merging Dependabot security PRs
+# marks alerts fixed in GitHub Security automatically.
 
 on:
   schedule:
-    - cron: '0 7 * * 1'  # Monday 07:00 UTC
+    - cron: '0 7 * * 1-5'  # weekdays 07:00 UTC
   workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - '**/pom.xml'
+      - '.github/dependabot.yml'
 
 permissions: {}
 
 jobs:
-  open-issues:
+  sync:
     runs-on: ubuntu-latest
     permissions:
       issues: write
       security-events: read
       contents: read
+      pull-requests: read
     steps:
-      - name: Create issues for high/critical Dependabot alerts
+      - name: Open issues for open HIGH/CRITICAL alerts
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
-
-          ALERTS=$(gh api graphql -f query='
-            query($owner:String!, $name:String!) {
-              repository(owner:$owner, name:$name) {
-                vulnerabilityAlerts(first: 50, states: [OPEN]) {
-                  nodes {
-                    number
-                    securityVulnerability {
-                      severity
-                      package { name ecosystem }
-                      advisory { ghsaId summary permalink }
-                      firstPatchedVersion { identifier }
-                    }
-                    dependabotUpdate {
-                      pullRequest { number url }
-                    }
-                  }
-                }
-              }
-            }' -f owner="${REPO%/*}" -f name="${REPO#*/}")
-
-          export ALERTS
+          HIGH=$(gh api --paginate "repos/${REPO}/dependabot/alerts?state=open&severity=high&per_page=100" || echo '[]')
+          CRIT=$(gh api --paginate "repos/${REPO}/dependabot/alerts?state=open&severity=critical&per_page=100" || echo '[]')
+          export HIGH CRIT REPO
           python3 <<'PY'
           import json, os, subprocess
 
-          data = json.loads(os.environ["ALERTS"])
-          nodes = (
-              data.get("data", {})
-              .get("repository", {})
-              .get("vulnerabilityAlerts", {})
-              .get("nodes")
-              or []
-          )
+          def load(s):
+              try:
+                  d = json.loads(s)
+                  return d if isinstance(d, list) else []
+              except Exception:
+                  return []
 
+          alerts = load(os.environ.get("HIGH", "[]")) + load(os.environ.get("CRIT", "[]"))
           repo = os.environ["REPO"]
+          seen = set()
           created = 0
-          for node in nodes:
-              vuln = node.get("securityVulnerability") or {}
-              sev = (vuln.get("severity") or "").upper()
-              if sev not in {"CRITICAL", "HIGH"}:
+          for a in alerts:
+              ghsa = (a.get("security_advisory") or {}).get("ghsa_id") or f"alert-{a.get('number')}"
+              if ghsa in seen:
                   continue
-              pkg = (vuln.get("package") or {}).get("name", "unknown")
-              advisory = vuln.get("advisory") or {}
-              ghsa = advisory.get("ghsaId") or f"alert-{node.get('number')}"
-              permalink = advisory.get("permalink") or ""
-              patched = (vuln.get("firstPatchedVersion") or {}).get("identifier") or "n/a"
-              pr = ((node.get("dependabotUpdate") or {}).get("pullRequest") or {})
-              pr_line = f"- Open PR: {pr.get('url')}" if pr.get("url") else "- No Dependabot PR yet"
+              seen.add(ghsa)
+              sev = ((a.get("security_advisory") or {}).get("severity") or "").upper()
+              pkg = ((a.get("dependency") or {}).get("package") or {}).get("name", "unknown")
+              html = a.get("html_url") or ""
+              patched = ((a.get("security_vulnerability") or {}).get("first_patched_version") or {}).get("identifier") or "n/a"
 
               title = f"[Dependabot][{sev}] {pkg} — {ghsa}"
               existing = subprocess.check_output(
-                  [
-                      "gh", "issue", "list", "--repo", repo, "--state", "open",
-                      "--search", f"in:title {ghsa}", "--json", "number",
-                  ],
+                  ["gh", "issue", "list", "--repo", repo, "--state", "open",
+                   "--search", f"in:title {ghsa}", "--json", "number"],
                   text=True,
               )
               if json.loads(existing):
-                  print(f"skip existing issue for {ghsa}")
+                  print(f"skip open issue for {ghsa}")
                   continue
 
               body = "\n".join([
-                  "## Dependabot alert",
+                  "## Dependabot security alert",
                   "",
                   f"**Severity:** {sev}",
                   f"**Package:** `{pkg}`",
-                  f"**Advisory:** [{ghsa}]({permalink})",
+                  f"**Advisory:** {ghsa}",
+                  f"**Alert:** {html}",
                   f"**First patched version:** `{patched}`",
-                  pr_line,
                   "",
-                  "---",
-                  "Opened automatically so Dependabot findings are tracked as issues.",
-                  "Policy: see [SECURITY.md](../blob/master/SECURITY.md).",
+                  "Dependabot opens a security-update PR when a patch is available.",
+                  "This issue closes automatically when the alert is marked **fixed** in GitHub.",
               ])
-
               subprocess.check_call([
-                  "gh", "issue", "create",
-                  "--repo", repo,
-                  "--title", title,
-                  "--label", "security",
-                  "--body", body,
+                  "gh", "issue", "create", "--repo", repo,
+                  "--title", title, "--label", "security", "--body", body,
               ])
               created += 1
               print(f"created issue for {ghsa}")
+          print(f"open-pass created={created}")
+          PY
 
-          print(f"done; created={created}")
+      - name: Close issues when alerts are fixed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          ISSUES=$(gh issue list --repo "$REPO" --state open --label security --json number,title \
+            --jq '[.[] | select(.title | startswith("[Dependabot]"))]')
+          FIXED=$(gh api --paginate "repos/${REPO}/dependabot/alerts?state=fixed&per_page=100" || echo '[]')
+          DISMISSED=$(gh api --paginate "repos/${REPO}/dependabot/alerts?state=dismissed&per_page=100" || echo '[]')
+          export ISSUES FIXED DISMISSED REPO
+          python3 <<'PY'
+          import json, os, re, subprocess
+
+          def load(s):
+              try:
+                  d = json.loads(s)
+                  return d if isinstance(d, list) else []
+              except Exception:
+                  return []
+
+          closed_ghsas = set()
+          for a in load(os.environ.get("FIXED", "[]")) + load(os.environ.get("DISMISSED", "[]")):
+              ghsa = (a.get("security_advisory") or {}).get("ghsa_id")
+              if ghsa:
+                  closed_ghsas.add(ghsa)
+
+          repo = os.environ["REPO"]
+          closed = 0
+          for issue in load(os.environ.get("ISSUES", "[]")):
+              m = re.search(r"(GHSA-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4})", issue.get("title", ""))
+              if not m:
+                  continue
+              ghsa = m.group(1)
+              if ghsa not in closed_ghsas:
+                  continue
+              num = issue["number"]
+              subprocess.check_call([
+                  "gh", "issue", "close", str(num), "--repo", repo,
+                  "--reason", "completed",
+                  "--comment", f"Alert `{ghsa}` is fixed/dismissed in GitHub Security — closing as completed.",
+              ])
+              closed += 1
+              print(f"closed issue #{num} for {ghsa}")
+          print(f"close-pass closed={closed}")
           PY
