@@ -18,7 +18,7 @@
         <!-- https://mvnrepository.com/artifact/org.apache.wss4j/wss4j-ws-security-dom -->
         <wss4j.version>4.0.1</wss4j.version>
         <!-- https://mvnrepository.com/artifact/org.apache.santuario/xmlsec -->
-        <xmlsec.version>3.0.4</xmlsec.version>
+        <xmlsec.version>4.0.4</xmlsec.version>
     </properties>
 
     <dependencyManagement>
