@@ -32,7 +32,7 @@ jobs:
           server-username: GITHUB_ACTOR
           server-password: GITHUB_TOKEN
 
-      - uses: advanced-security/maven-dependency-submission-action@v5.0.0
+      - uses: advanced-security/maven-dependency-submission-action@v6.0.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           # Use setup-java's Maven; mvnw downloads Maven on every run which is slower and unnecessary in CI
