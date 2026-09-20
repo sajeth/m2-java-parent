@@ -188,17 +188,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- CVE-2026-22735/22737 override re-asserted after netty-bom import (version defined in m2-springboot-parent) -->
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-web</artifactId>
-                <version>${spring-web.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-webflux</artifactId>
-                <version>${spring-web.version}</version>
-            </dependency>
+
             <!-- GHSA-72hv-8253-57qq override re-asserted after netty-bom import (version defined in m2-springboot-parent) -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
