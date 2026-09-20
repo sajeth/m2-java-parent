@@ -40,7 +40,7 @@ projectJDK: "25" #(Applied in CI/CD pipeline)
   #  severityThresholds:
   #    any: 15
   #    critical: 5
-  #  testCoverageThresholds:
+#  testCoverageThresholds:
 #    fresh: 70
 #    total: 50
 
