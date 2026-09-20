@@ -216,6 +216,13 @@
             <artifactId>netty-tcnative-boringssl-static</artifactId>
             <scope>compile</scope>
         </dependency>
+        <!-- Classpath scanner for reflective JUnit coverage over all main classes -->
+        <dependency>
+            <groupId>io.github.classgraph</groupId>
+            <artifactId>classgraph</artifactId>
+            <version>${classgraph.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
