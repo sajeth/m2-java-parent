@@ -18,6 +18,8 @@
         <protobuf.version>4.33.4</protobuf.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.grpc/spring-grpc-dependencies -->
         <spring-grpc.version>1.1.1</spring-grpc.version>
+        <!-- Source: https://mvnrepository.com/artifact/net.serenity-bdd/serenity-junit5 -->
+        <serenity.version>4.1.17</serenity.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -204,13 +206,6 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <!-- Classpath scanner for reflective JUnit coverage over all main classes -->
-        <dependency>
-            <groupId>io.github.classgraph</groupId>
-            <artifactId>classgraph</artifactId>
-            <version>${classgraph.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
