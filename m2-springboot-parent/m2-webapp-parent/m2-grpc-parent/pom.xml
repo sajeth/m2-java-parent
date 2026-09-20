@@ -20,6 +20,8 @@
         <spring-grpc.version>1.1.1</spring-grpc.version>
         <!-- Source: https://mvnrepository.com/artifact/net.serenity-bdd/serenity-junit5 -->
         <serenity.version>4.1.17</serenity.version>
+        <!-- Source: https://mvnrepository.com/artifact/org.xolstice.maven.plugins/protobuf-maven-plugin -->
+        <protobuf.version>0.6.1</protobuf.version>
     </properties>
     <dependencyManagement>
         <dependencies>
