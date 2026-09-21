@@ -98,7 +98,7 @@
         <!-- CVE-2020-13956 (CVSS 5.3, path traversal in URIUtils); fixed in 4.5.13 -->
         <httpclient.version>4.5.14</httpclient.version>
         <!-- Source: https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-artifact-plugin -->
-        <maven.artifact.plugin>3.6.1</maven.artifact.plugin>
+        <maven.artifact.plugin>3.7.0</maven.artifact.plugin>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.surefire/surefire-junit-platform -->
         <surfire.junit.platform>3.6.0</surfire.junit.platform>
         <!-- Source: https://mvnrepository.com/artifact/org.codehaus.mojo/license-maven-plugin -->
