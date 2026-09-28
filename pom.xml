@@ -63,7 +63,7 @@
         <!--        <base.commons.version>[1.0.0,)</base.commons.version>-->
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
         <!-- GHSA-72hv-8253-57qq (DoS, CVSS 7.5, fixed 3.1.3); GHSA-j3rv-43j4-c7qm + GHSA-rmj7-2vxq-3g9f (RCE via PolymorphicTypeValidator, fixed 3.1.4); CVE-2026-59889 (@JsonView bypass CVSS 6.5, fixed 3.1.5) -->
-        <jackson.version>3.2.2</jackson.version>
+        <jackson.version>3.2.3</jackson.version>
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <lombok.version>1.18.48</lombok.version>
         <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->

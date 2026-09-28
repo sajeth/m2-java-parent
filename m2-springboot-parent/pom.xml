@@ -44,11 +44,11 @@
         <kafka.version>4.2.0</kafka.version>
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
         <!-- Override: GHSA-72hv-8253-57qq (DoS, CVSS 7.5) — pulled transitively by springdoc/serenity/grpc BOMs -->
-        <fasterxml.jackson.version>2.22.2</fasterxml.jackson.version>
+        <fasterxml.jackson.version>2.22.3</fasterxml.jackson.version>
         <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on -->
         <bouncycastle.version>1.86</bouncycastle.version>
         <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
-        <logback.version>1.6.3</logback.version>
+        <logback.version>1.6.4</logback.version>
         <!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-el -->
         <tomcat.embed.version>11.0.26</tomcat.embed.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka -->
