@@ -307,7 +307,7 @@
                         <id>buildinfo</id>
                         <phase>verify</phase>
                         <goals>
-                            <goal>buildinfo</goal>
+                            <goal>describe-build-output</goal>
                         </goals>
                     </execution>
                 </executions>
