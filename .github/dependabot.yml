@@ -1,7 +1,7 @@
 version: 2
-# Autonomous Dependabot maintenance for m2-java-parent.
-# Security updates always raise PRs; version updates are grouped weekly.
-# Auto-merge + branch delete is handled by .github/workflows/dependabot-auto-merge.yml.
+# Fully autonomous Dependabot maintenance for m2-java-parent.
+# No reviewers/assignees — CODEOWNERS is empty so PRs are not blocked on humans.
+# Auto-approve + auto-merge is handled by .github/workflows/dependabot-auto-merge.yml.
 updates:
   - package-ecosystem: github-actions
     directory: /

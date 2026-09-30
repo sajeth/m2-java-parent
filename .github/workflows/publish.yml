@@ -2,11 +2,11 @@ name: Publish to GitHub Packages
 
 on:
   schedule:
-    - cron: '0 6 1,15 * *'  # 1st and 15th of every month at 06:00 UTC
+    - cron: '0 12 * * 1'  # every Monday 12:00 UTC (after Dependabot / property upgrades)
   workflow_dispatch:
     inputs:
       version:
-        description: 'Override version (e.g. 2026.5.1) — leave blank to auto-generate'
+        description: 'Override version (e.g. 2026.9.2) — leave blank to auto-generate'
         required: false
         type: string
 
@@ -33,12 +33,12 @@ jobs:
           if [ -n "$VERSION_OVERRIDE" ]; then
             echo "value=$VERSION_OVERRIDE" >> "$GITHUB_OUTPUT"
           else
-            # CalVer: YYYY.M.1 on the 1st, YYYY.M.2 on the 15th
+            # CalVer: YYYY.M.W — W = week-of-month (1–5) for weekly Monday publishes
             YEAR=$(date +'%Y')
             MONTH=$(date +'%-m')
             DAY=$(date +'%-d')
-            RELEASE=$([[ "$DAY" -lt 15 ]] && echo 1 || echo 2)
-            echo "value=${YEAR}.${MONTH}.${RELEASE}" >> "$GITHUB_OUTPUT"
+            WEEK=$(( (10#$DAY - 1) / 7 + 1 ))
+            echo "value=${YEAR}.${MONTH}.${WEEK}" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Set up Java

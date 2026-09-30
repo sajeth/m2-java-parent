@@ -1,14 +1,19 @@
 # Versioning
 
-Releases use **CalVer**: `YYYY.M.R`
+Releases use **CalVer**: `YYYY.M.W`
 
-| Day of month | Release number         |
-|--------------|------------------------|
-| 1st          | `.1` (e.g. `2026.9.1`) |
-| 15th         | `.2` (e.g. `2026.9.2`) |
+| Field | Meaning                                      |
+|-------|----------------------------------------------|
+| YYYY  | Calendar year                                |
+| M     | Month (no zero-pad)                          |
+| W     | Week of month (1–5), from the Monday publish |
 
-- Scheduled by `.github/workflows/publish.yml`
+Examples: `2026.9.1`, `2026.9.2`, `2026.9.5`
+
+- Scheduled **every Monday** by `.github/workflows/publish.yml` (12:00 UTC)
 - Ad-hoc: merge a PR labelled `release` (`release-on-merge.yml`)
 - Manual: **Actions → Publish to GitHub Packages → Run workflow**
 
-Tags are `vYYYY.M.R` and include a CycloneDX SBOM.
+Tags are `vYYYY.M.W` and include a CycloneDX SBOM.
+
+Dependency updates are fully autonomous via Dependabot (no human review required).

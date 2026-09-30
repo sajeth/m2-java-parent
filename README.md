@@ -13,7 +13,7 @@ to [GitHub Packages](https://github.com/sajeth/m2-java-parent/packages).
 | **Security policy** | [SECURITY.md](SECURITY.md) · [Advisory form](https://github.com/sajeth/m2-java-parent/security/advisories/new) |
 | **Activity**        | [Recent activity](https://github.com/sajeth/m2-java-parent/activity)                                           |
 | **Wiki**            | [Documentation wiki](https://github.com/sajeth/m2-java-parent/wiki)                                            |
-| **Releases**        | [CalVer releases](https://github.com/sajeth/m2-java-parent/releases) (1st & 15th)                              |
+| **Releases**        | [CalVer releases](https://github.com/sajeth/m2-java-parent/releases) (weekly, Mondays)                         |
 
 ## Hierarchy (summary)
 

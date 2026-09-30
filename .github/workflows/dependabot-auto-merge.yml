@@ -1,7 +1,7 @@
 name: Auto-merge
 
-# Dependabot autonomy: squash-merge when checks pass and delete the head branch.
-# Human PRs are left for manual merge.
+# Fully autonomous Dependabot: drop review requests, approve, enable auto-merge,
+# squash-merge when checks pass, and delete the head branch.
 
 on:
   pull_request:
@@ -19,16 +19,38 @@ jobs:
       pull-requests: write
       issues: write
     steps:
-      - name: Enable auto-merge (Dependabot only)
+      - name: Approve and enable auto-merge (Dependabot only)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
           ACTOR: ${{ github.actor }}
         run: |
+          set -euo pipefail
           if [ "$ACTOR" != 'dependabot[bot]' ] && [ "$ACTOR" != 'app/dependabot' ]; then
             echo "Skipping auto-merge for actor=$ACTOR (Dependabot only)."
             exit 0
           fi
+
+          # Clear any human review requests (stale CODEOWNERS / manual requests).
+          USERS="$(gh api "repos/${REPO}/pulls/${PR_NUMBER}/requested_reviewers" --jq '[.users[].login]')"
+          if [ "$USERS" != "[]" ]; then
+            echo "Removing review requests: $USERS"
+            jq -n --argjson reviewers "$USERS" '{reviewers:$reviewers, team_reviewers:[]}' \
+              | gh api --method DELETE "repos/${REPO}/pulls/${PR_NUMBER}/requested_reviewers" --input - \
+              || echo "Could not clear review requests (continuing)."
+          fi
+
+          APPROVED="$(gh pr view "$PR_NUMBER" --json reviews \
+            --jq '[.reviews[] | select(.author.login=="github-actions[bot]" and .state=="APPROVED")] | length')"
+          if [ "$APPROVED" = "0" ]; then
+            gh pr review "$PR_NUMBER" --approve --body "Autonomous Dependabot maintenance — auto-approved." \
+              || echo "Approve skipped (token may lack permission or already approved)."
+          else
+            echo "Already approved by github-actions[bot]."
+          fi
+
           gh pr merge --auto --squash --delete-branch "$PR_URL" \
             && echo "Auto-merge enabled; branch will be deleted after merge." \
             || echo "Auto-merge not available (repo setting disabled or already set)."

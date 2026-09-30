@@ -61,7 +61,7 @@ This repository uses automated tooling on every pull request and release:
 | **OWASP Dependency Check**                | Scans all declared and transitive dependencies against the NVD (fails on CVSS ≥ 7) |
 | **Semgrep** (`p/java`, `p/owasp-top-ten`) | SAST scan of POM and CI configuration                                              |
 | **SpotBugs / PMD / Checkstyle**           | Static analysis for inherited Java code quality rules                              |
-| **Dependabot**                            | Keeps GitHub Actions + Maven dependency versions current                           |
+| **Dependabot**                            | Fully autonomous: opens, auto-approves, and auto-merges Actions + Maven update PRs (no human review) |
 | **Weekly dependency upgrade**             | Reads `mvnrepository.com` links above `<properties>` entries, bumps minor/patch on Maven Central, opens a PR with OWASP pre-check |
 | **Weekly latest releases**                | Same property-link scan as above, but allows major bumps                           |
 | **CycloneDX SBOM**                        | Software Bill of Materials attached to every release                               |

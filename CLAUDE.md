@@ -69,7 +69,7 @@ gateway inherits `m2-cloud-native-parent`).
 ## Versioning
 
 - **Development version in source:** `0.0.1`
-- **Released versions:** CalVer `YYYY.M.R` — `R=1` on the 1st of the month, `R=2` on the 15th
+- **Released versions:** CalVer `YYYY.M.W` — weekly Monday publish; `W` = week-of-month (1–5)
 - The `publish.yml` workflow bumps the version with the Versions Maven Plugin, commits, deploys, creates a GitHub
   Release with the SBOM attached, then generates a SLSA provenance attestation
 
@@ -108,7 +108,7 @@ consumers.
 
 | Workflow                      | Trigger                                  | Purpose                                                               |
 |-------------------------------|------------------------------------------|-----------------------------------------------------------------------|
-| `publish.yml`                 | Schedule (1st/15th) or manual            | CalVer release to Maven Central + SBOM + SLSA                         |
+| `publish.yml`                 | Schedule (weekly Monday) or manual       | CalVer release to GitHub Packages + SBOM + SLSA                       |
 | `release-on-merge.yml`        | PR with `release` label merged to master | Triggers `publish.yml` for ad-hoc releases                            |
 | `java-analysis.yml`           | PRs                                      | SpotBugs, PMD, Checkstyle, JaCoCo, OWASP, Semgrep SAST                |
 | `dependency-upgrade.yml`      | Weekly Monday                            | Minor/patch bumps → PR with OWASP pre-check                           |
