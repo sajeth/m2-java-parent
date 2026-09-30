@@ -39,8 +39,11 @@
         <spring-web.version>7.0.9</spring-web.version>
         <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
         <kafka.version>4.3.1</kafka.version>
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+        <!-- https://mvnrepository.com/artifact/com/fasterxml/jackson/jackson-bom — Jackson 2.x for transitive deps -->
         <fasterxml.jackson.version>2.22.3</fasterxml.jackson.version>
+        <!-- Shared annotations artifact used by Jackson 3; 2.22+ required for JsonApplyView (Boot jackson-2-bom may lag) -->
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+        <fasterxml.jackson.annotations.version>2.22</fasterxml.jackson.annotations.version>
         <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on -->
         <bouncycastle.version>1.86</bouncycastle.version>
         <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
@@ -113,14 +116,10 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- Override transitive bcprov-jdk18on 1.81 (CVE-2025-55242 / GHSA, CVSS high), fixed in 1.82 -->
-            <dependency>
-                <groupId>org.bouncycastle</groupId>
-                <artifactId>bcprov-jdk18on</artifactId>
-                <version>${bouncycastle.version}</version>
-                <scope>compile</scope>
-            </dependency>
-            <!-- Override tools.jackson.core: GHSA-2m67-wjpj-xhg9 (DoS, fixed 3.1.1); GHSA-j3rv-43j4-c7qm + GHSA-rmj7-2vxq-3g9f (PolymorphicTypeValidator RCE, fixed 3.1.4); CVE-2026-59889 (@JsonView bypass CVSS 6.5, fixed 3.1.5) -->
+            <!-- Direct DM pins (not BOM imports): Maven keeps the first imported BOM's managed versions,
+                 so importing tools.jackson/jackson-bom after spring-boot-dependencies does not override
+                 Boot's jackson-bom 3.1.x / jackson-2-bom 2.21.x. Explicit GA pins win. -->
+            <!-- tools.jackson 3.x: GHSA-2m67-wjpj-xhg9; GHSA-j3rv-43j4-c7qm; GHSA-rmj7-2vxq-3g9f; CVE-2026-59889 -->
             <dependency>
                 <groupId>tools.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
@@ -130,6 +129,30 @@
                 <groupId>tools.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
                 <version>${jackson.version}</version>
+            </dependency>
+            <!-- Shared annotations for Jackson 3 — 2.22+ required for JsonApplyView (Boot jackson-2-bom may lag at 2.21) -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${fasterxml.jackson.annotations.version}</version>
+            </dependency>
+            <!-- Jackson 2.x leftovers (springdoc, Serenity, jjwt): align core/databind; fat jar excludes them -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${fasterxml.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${fasterxml.jackson.version}</version>
+            </dependency>
+            <!-- Override transitive bcprov-jdk18on 1.81 (CVE-2025-55242 / GHSA, CVSS high), fixed in 1.82 -->
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk18on</artifactId>
+                <version>${bouncycastle.version}</version>
+                <scope>compile</scope>
             </dependency>
             <!-- Override spring-web/webflux: CVE-2026-22735 (spring-web) and CVE-2026-22737 (spring-webflux), fixed in 7.0.7 -->
             <dependency>
@@ -141,17 +164,6 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-webflux</artifactId>
                 <version>${spring-web.version}</version>
-            </dependency>
-            <!-- Override com.fasterxml.jackson.core 2.x (pulled transitively by springdoc, serenity, grpc BOMs): GHSA-72hv-8253-57qq (DoS, CVSS 7.5) -->
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
-                <version>${fasterxml.jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>${fasterxml.jackson.version}</version>
             </dependency>
             <!-- Override spring-boot-autoconfigure — patched in 4.0.6 (CVE-2026-40970/71/74/75/76/77, CVE-2026-40972/73) -->
             <dependency>
@@ -421,6 +433,33 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Boot 4 apps use tools.jackson (3.x). Exclude Jackson 2 databind/core from the
+                     executable jar so transitive jackson2 artifacts (springdoc, Serenity, jjwt, …)
+                     do not dual-ship beside tools.jackson and break JsonApplyView / annotation APIs.
+                     Children may append further excludes (e.g. lombok); do not re-declare these. -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring.boot.version}</version>
+                    <configuration>
+                        <excludes combine.children="append">
+                            <exclude>
+                                <groupId>com.fasterxml.jackson.core</groupId>
+                                <artifactId>jackson-databind</artifactId>
+                            </exclude>
+                            <exclude>
+                                <groupId>com.fasterxml.jackson.core</groupId>
+                                <artifactId>jackson-core</artifactId>
+                            </exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
     <modules>
         <module>m2-kafka-parent</module>

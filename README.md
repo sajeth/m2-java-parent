@@ -40,6 +40,22 @@ Full module map: [Wiki · POM Hierarchy](https://github.com/sajeth/m2-java-paren
 
 See [Wiki · Consuming Parents](https://github.com/sajeth/m2-java-parent/wiki/Consuming-Parents).
 
+## Jackson (Boot 4 / tools.jackson)
+
+`m2-springboot-parent` owns Jackson versions for all Boot apps via **direct**
+`dependencyManagement` pins (BOM imports after `spring-boot-dependencies` do not
+override Boot’s jackson BOMs):
+
+| Family | Pin | Notes |
+|--------|-----|--------|
+| Jackson 3 | `tools.jackson.core:jackson-{core,databind}` (`jackson.version`) | Boot 4 runtime JSON stack |
+| Annotations | `com.fasterxml.jackson.core:jackson-annotations` **2.22+** | Shared with Jackson 3; required for `JsonApplyView` |
+| Jackson 2 leftovers | `com.fasterxml.jackson.core:jackson-{core,databind}` (`fasterxml.jackson.version`) | Transitive springdoc/Serenity/jjwt only |
+
+Fat jars exclude `com.fasterxml.jackson.core:jackson-databind` / `jackson-core` via
+`spring-boot-maven-plugin` so apps do not dual-ship Jackson 2+3. **Do not** re-pin
+`jackson-annotations` or re-add those fat-jar excludes in application POMs.
+
 ## Security
 
 Only the latest published version of each parent is supported. Report vulnerabilities privately
