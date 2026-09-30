@@ -84,6 +84,8 @@ jobs:
       - name: Run OWASP check on updated dependencies
         if: steps.diff.outputs.changed == 'true'
         id: owasp
+        continue-on-error: true
+        timeout-minutes: 25
         run: |
           mvn --no-transfer-progress org.owasp:dependency-check-maven:check \
             -DfailBuildOnCVSS=7 \
@@ -91,7 +93,7 @@ jobs:
             -DnvdApiKey=${{ secrets.NVD_API_KEY }} \
             --batch-mode \
             && echo "status=✅ No HIGH+ CVEs in updated dependencies" >> "$GITHUB_OUTPUT" \
-            || echo "status=⚠️ HIGH+ CVEs detected — review before merging" >> "$GITHUB_OUTPUT"
+            || echo "status=⚠️ HIGH+ CVEs detected or scan incomplete — review before merging" >> "$GITHUB_OUTPUT"
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
@@ -99,7 +101,7 @@ jobs:
       - name: Create PR
         if: steps.diff.outputs.changed == 'true'
         env:
-          OWASP_STATUS: ${{ steps.owasp.outputs.status }}
+          OWASP_STATUS: ${{ steps.owasp.outputs.status || '⚠️ OWASP scan skipped/timed out — review before merging' }}
         run: |
           set -euo pipefail
           BRANCH="chore/latest-releases-$(date +%Y-%m-%d)"
