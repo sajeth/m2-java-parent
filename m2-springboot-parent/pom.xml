@@ -14,7 +14,7 @@
 
     <properties>
         <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-spring-->
-        <cucumber.version>7.34.8</cucumber.version>
+        <cucumber.version>8.0.2</cucumber.version>
         <!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite-->
         <junit-platform.version>6.1.3</junit-platform.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
