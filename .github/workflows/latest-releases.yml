@@ -24,9 +24,10 @@ jobs:
       - name: Configure push credentials
         env:
           PUSH_TOKEN: ${{ secrets.GH_PUSH_TOKEN }}
+          DEFAULT_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          token="${GITHUB_TOKEN}"
+          token="${DEFAULT_TOKEN}"
           source="GITHUB_TOKEN"
           if [ -n "${PUSH_TOKEN:-}" ]; then
             if curl -fsS \
@@ -42,7 +43,11 @@ jobs:
             echo "::warning::GH_PUSH_TOKEN is not set; using GITHUB_TOKEN. PRs opened with GITHUB_TOKEN do not trigger other workflows."
           fi
           echo "PUSH_AUTH_SOURCE=${source}" >> "$GITHUB_ENV"
-          echo "GH_TOKEN=${token}" >> "$GITHUB_ENV"
+          {
+            echo "GH_TOKEN<<EOF"
+            echo "${token}"
+            echo "EOF"
+          } >> "$GITHUB_ENV"
           echo "Using credentials from ${source}"
 
       - name: Set up Java
