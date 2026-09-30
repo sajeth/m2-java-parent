@@ -105,7 +105,7 @@ These principles apply to all contributors and are enforced (where automatable) 
 | Override transitive dependencies that carry CVEs                      | `<dependencyManagement>` override + inline comment with CVE ID, CVSS score, and fix version    |
 | Never introduce a CVSS ≥ 7 dependency without an accepted suppression | OWASP Dependency Check fails the build at that threshold                                       |
 | Document every CVE suppression                                        | `.github/owasp-suppressions.xml` — each entry must explain risk acceptance and a revisit date  |
-| Both Jackson families need independent patching                       | `tools.jackson.core` (3.x) and `com.fasterxml.jackson.core` (2.x) coexist; track CVEs for both |
+| Both Jackson families need independent patching                       | `tools.jackson` BOM (3.x) + `com.fasterxml.jackson` BOM (2.x) + annotations 2.22+; fat jar drops jackson2 core/databind |
 
 **Comment pattern for every dependency change:**
 
