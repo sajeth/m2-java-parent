@@ -16,7 +16,7 @@
         <!-- https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-spring-boot2 -->
         <resilience4j.spring-boot2.version>2.3.0</resilience4j.spring-boot2.version>
         <!-- Source: https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-spring-boot3 -->
-        <resilience4j.spring-boot3.version>2.3.0</resilience4j.spring-boot3.version>
+        <resilience4j.spring-boot3.version>2.4.0</resilience4j.spring-boot3.version>
     </properties>
     <dependencies>
         <dependency>

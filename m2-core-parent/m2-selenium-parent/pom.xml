@@ -16,7 +16,7 @@
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-http -->
         <selenium.http.version>4.49.0</selenium.http.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-failsafe-plugin -->
-        <maven.failsafe.version>3.5.4</maven.failsafe.version>
+        <maven.failsafe.version>3.6.0</maven.failsafe.version>
         <!-- https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-extension-incubator -->
         <opentelemetry.extension.incubator.version>1.36.0-alpha</opentelemetry.extension.incubator.version>
         <!-- https://mvnrepository.com/artifact/io.opentelemetry.semconv/opentelemetry-semconv -->
@@ -56,7 +56,7 @@
         <!-- Source: https://mvnrepository.com/artifact/io.netty/netty-transport-native-unix-common -->
         <netty.version>4.2.18.Final</netty.version>
         <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
-        <guava.version>33.7.1-jre</guava.version>
+        <guava.version>33.7.2-jre</guava.version>
         <!-- https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-context -->
         <opentelemetry.context.version>1.66.0</opentelemetry.context.version>
         <!-- https://mvnrepository.com/artifact/dev.failsafe/failsafe -->
