@@ -18,7 +18,7 @@
         <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
         <springdoc.version>3.1.1</springdoc.version>
         <!-- Source: https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
-        <commons.lang3.version>3.20.0</commons.lang3.version>
+        <commons.lang3.version>3.21.0</commons.lang3.version>
 
         <!-- https://mvnrepository.com/artifact/net.serenity-bdd/serenity-core -->
         <serenity.version>5.3.11</serenity.version>
