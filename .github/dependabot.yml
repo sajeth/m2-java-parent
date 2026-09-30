@@ -21,6 +21,7 @@ updates:
         patterns:
           - "*"
 
+  # Root multi-module reactor (follows <modules> from pom.xml).
   - package-ecosystem: maven
     directory: /
     schedule:
@@ -39,6 +40,28 @@ updates:
         patterns:
           - "*"
       maven-patch-minor:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
+        patterns:
+          - "*"
+
+  # Not listed under m2-core-parent <modules>, so Dependabot won't see it via /.
+  - package-ecosystem: maven
+    directory: /m2-core-parent/m2-selenium-parent
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+    rebase-strategy: auto
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "fix"
+    labels:
+      - "dependencies"
+    groups:
+      selenium-patch-minor:
         applies-to: version-updates
         update-types:
           - "minor"

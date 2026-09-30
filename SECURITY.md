@@ -61,9 +61,37 @@ This repository uses automated tooling on every pull request and release:
 | **OWASP Dependency Check**                | Scans all declared and transitive dependencies against the NVD (fails on CVSS ≥ 7) |
 | **Semgrep** (`p/java`, `p/owasp-top-ten`) | SAST scan of POM and CI configuration                                              |
 | **SpotBugs / PMD / Checkstyle**           | Static analysis for inherited Java code quality rules                              |
-| **Dependabot**                            | Keeps GitHub Actions versions current                                              |
-| **Weekly dependency upgrade**             | Proposes minor/patch bumps via automated PRs with OWASP pre-check                  |
+| **Dependabot**                            | Keeps GitHub Actions + Maven dependency versions current                           |
+| **Weekly dependency upgrade**             | Reads `mvnrepository.com` links above `<properties>` entries, bumps minor/patch on Maven Central, opens a PR with OWASP pre-check |
+| **Weekly latest releases**                | Same property-link scan as above, but allows major bumps                           |
 | **CycloneDX SBOM**                        | Software Bill of Materials attached to every release                               |
+
+### Automated `<properties>` version updates
+
+Every version property that should be kept current **must** be declared with an
+`mvnrepository.com` comment link immediately above it (extra CVE notes may sit
+between the link and the property):
+
+```xml
+<properties>
+    <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+    <aspectj.version>1.9.25.1</aspectj.version>
+</properties>
+```
+
+Scheduled workflows (`.github/workflows/dependency-upgrade.yml` and
+`latest-releases.yml`) run `.github/scripts/update-property-versions.py`, which:
+
+1. Scans all `pom.xml` files for `<properties>` entries with those links
+2. Resolves `groupId` / `artifactId` from the URL
+3. Queries **Maven Central** for the newest stable release
+4. Rewrites the property when a newer version matches the workflow’s bump policy
+5. Opens a GitHub PR (and enables auto-merge when the repo allows it)
+
+`GH_PUSH_TOKEN` should be a fine-grained or classic PAT with `contents:write` and
+`pull-requests:write` so the opened PR can trigger CI. If the secret is missing or
+expired, the workflow falls back to `GITHUB_TOKEN` (PR is still created, but other
+workflows will not run on that PR).
 
 ## Secure Coding Principles
 
@@ -73,7 +101,7 @@ These principles apply to all contributors and are enforced (where automatable) 
 
 | Principle                                                             | How it is enforced                                                                             |
 |-----------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| Pin every direct dependency to a specific version                     | `dependencyManagement` in each POM; Dependabot opens upgrade PRs                               |
+| Pin every direct dependency to a specific version                     | `dependencyManagement` + `<properties>` with mvnrepository links; Dependabot + weekly property-upgrade PRs |
 | Override transitive dependencies that carry CVEs                      | `<dependencyManagement>` override + inline comment with CVE ID, CVSS score, and fix version    |
 | Never introduce a CVSS ≥ 7 dependency without an accepted suppression | OWASP Dependency Check fails the build at that threshold                                       |
 | Document every CVE suppression                                        | `.github/owasp-suppressions.xml` — each entry must explain risk acceptance and a revisit date  |

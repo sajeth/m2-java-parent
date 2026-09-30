@@ -13,8 +13,13 @@ Full policy: [SECURITY.md](https://github.com/sajeth/m2-java-parent/blob/master/
 
 ## Automation
 
-| Tool                   | Role                                                    |
-|------------------------|---------------------------------------------------------|
-| Dependabot             | Actions + security update PRs; can open tracking issues |
-| OWASP Dependency-Check | Fails on CVSS ≥ 7                                       |
-| CycloneDX              | SBOM on each release                                    |
+| Tool                   | Role                                                                 |
+|------------------------|----------------------------------------------------------------------|
+| Dependabot             | Actions + Maven update PRs                                           |
+| Dependency Upgrade     | Minor/patch bumps for `<properties>` via mvnrepository links → PR    |
+| Latest Releases        | Same as above, including major bumps → PR                            |
+| OWASP Dependency-Check | Fails on CVSS ≥ 7                                                    |
+| CycloneDX              | SBOM on each release                                                 |
+
+Property entries must include a `https://mvnrepository.com/artifact/...` comment
+link (see root [SECURITY.md](../SECURITY.md)).
