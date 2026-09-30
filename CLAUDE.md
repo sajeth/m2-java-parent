@@ -98,15 +98,16 @@ consumers.
   a date is reached.
 - The OWASP Dependency Check is configured to fail the build on CVSS ≥ 7.
 
-**Two Jackson families are in use (managed only in `m2-springboot-parent`):**
+**Two Jackson families are in use (managed only in `m2-springboot-parent` via direct DM pins):**
 
-- `tools.jackson.*` (3.x) — via `tools.jackson:jackson-bom` (`jackson.version`); used by Spring Boot 4.x
-- `com.fasterxml.jackson.core:jackson-annotations` **2.22+** — shared annotation jar (`JsonApplyView`); pinned explicitly
-- `com.fasterxml.jackson.*` (2.x core/databind) — via `com.fasterxml.jackson:jackson-bom` for transitive leftovers
+- `tools.jackson.core` (3.x) — `jackson.version`; used by Spring Boot 4.x
+- `com.fasterxml.jackson.core:jackson-annotations` **2.22+** — shared annotation jar (`JsonApplyView`)
+- `com.fasterxml.jackson.core` (2.x core/databind) — `fasterxml.jackson.version` for transitive leftovers
   (springdoc, Serenity, jjwt). Fat jars exclude jackson2 core/databind so they are not dual-shipped.
 
 Do **not** add per-app `jackson-annotations` pins or spring-boot jackson2 fat-jar excludes — fix the parent instead.
-Both Jackson BOMs need independent bumps when a CVE lands.
+Do **not** rely on importing `jackson-bom` after `spring-boot-dependencies` (first imported BOM wins).
+Both Jackson families need independent bumps when a CVE lands.
 
 ## GitHub Workflows
 

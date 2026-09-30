@@ -42,13 +42,15 @@ See [Wiki · Consuming Parents](https://github.com/sajeth/m2-java-parent/wiki/Co
 
 ## Jackson (Boot 4 / tools.jackson)
 
-`m2-springboot-parent` owns Jackson versions for all Boot apps:
+`m2-springboot-parent` owns Jackson versions for all Boot apps via **direct**
+`dependencyManagement` pins (BOM imports after `spring-boot-dependencies` do not
+override Boot’s jackson BOMs):
 
-| Family | BOM / pin | Notes |
-|--------|-----------|--------|
-| Jackson 3 | `tools.jackson:jackson-bom` (`jackson.version`) | databind/core/dataformat under `tools.jackson.*` |
+| Family | Pin | Notes |
+|--------|-----|--------|
+| Jackson 3 | `tools.jackson.core:jackson-{core,databind}` (`jackson.version`) | Boot 4 runtime JSON stack |
 | Annotations | `com.fasterxml.jackson.core:jackson-annotations` **2.22+** | Shared with Jackson 3; required for `JsonApplyView` |
-| Jackson 2 leftovers | `com.fasterxml.jackson:jackson-bom` (`fasterxml.jackson.version`) | Versions only for transitive springdoc/Serenity/jjwt |
+| Jackson 2 leftovers | `com.fasterxml.jackson.core:jackson-{core,databind}` (`fasterxml.jackson.version`) | Transitive springdoc/Serenity/jjwt only |
 
 Fat jars exclude `com.fasterxml.jackson.core:jackson-databind` / `jackson-core` via
 `spring-boot-maven-plugin` so apps do not dual-ship Jackson 2+3. **Do not** re-pin

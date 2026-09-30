@@ -116,32 +116,36 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- Jackson 3 BOM (after Boot): align tools.jackson.* past Boot's jackson-bom and pin shared
-                 com.fasterxml.jackson.core:jackson-annotations to 2.22 (JsonApplyView). Consumers must use
-                 tools.jackson for databind/core; do not add per-app jackson-annotations pins. -->
+            <!-- Direct DM pins (not BOM imports): Maven keeps the first imported BOM's managed versions,
+                 so importing tools.jackson/jackson-bom after spring-boot-dependencies does not override
+                 Boot's jackson-bom 3.1.x / jackson-2-bom 2.21.x. Explicit GA pins win. -->
+            <!-- tools.jackson 3.x: GHSA-2m67-wjpj-xhg9; GHSA-j3rv-43j4-c7qm; GHSA-rmj7-2vxq-3g9f; CVE-2026-59889 -->
             <dependency>
-                <groupId>tools.jackson</groupId>
-                <artifactId>jackson-bom</artifactId>
+                <groupId>tools.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
                 <version>${jackson.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
             </dependency>
-            <!-- Jackson 2.x BOM for transitive leftovers (springdoc, Serenity, jjwt-jackson, etc.).
-                 Importing the full 2.22.x BOM keeps annotations/core/databind aligned — avoids Boot's
-                 jackson-2-bom lag (e.g. annotations 2.21 without JsonApplyView while core was forced newer).
-                 Runtime fat jars still drop jackson2 core/databind via spring-boot-maven-plugin excludes below. -->
             <dependency>
-                <groupId>com.fasterxml.jackson</groupId>
-                <artifactId>jackson-bom</artifactId>
-                <version>${fasterxml.jackson.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
+                <groupId>tools.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
             </dependency>
-            <!-- Explicit re-pin: Jackson 3 keeps annotations under com.fasterxml; 2.22+ for JsonApplyView -->
+            <!-- Shared annotations for Jackson 3 — 2.22+ required for JsonApplyView (Boot jackson-2-bom may lag at 2.21) -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
                 <version>${fasterxml.jackson.annotations.version}</version>
+            </dependency>
+            <!-- Jackson 2.x leftovers (springdoc, Serenity, jjwt): align core/databind; fat jar excludes them -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${fasterxml.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${fasterxml.jackson.version}</version>
             </dependency>
             <!-- Override transitive bcprov-jdk18on 1.81 (CVE-2025-55242 / GHSA, CVSS high), fixed in 1.82 -->
             <dependency>
