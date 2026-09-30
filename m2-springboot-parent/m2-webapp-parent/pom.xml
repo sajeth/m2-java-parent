@@ -14,7 +14,7 @@
 
     <properties>
         <!-- https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-core-jakarta -->
-        <swagger.core.jakarta>2.2.42</swagger.core.jakarta>
+        <swagger.core.jakarta>2.2.54</swagger.core.jakarta>
         <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
         <springdoc.version>3.1.1</springdoc.version>
         <!-- Source: https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
@@ -26,13 +26,15 @@
         <!-- https://mvnrepository.com/artifact/io.gatling.highcharts/gatling-charts-highcharts -->
         <gatling.version>3.15.1</gatling.version>
         <!-- https://mvnrepository.com/artifact/io.gatling/gatling-maven-plugin -->
-        <gatling.plugin.version>4.16.3</gatling.plugin.version>
+        <gatling.plugin.version>4.21.12</gatling.plugin.version>
         <!-- https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api -->
         <jakarta.version>3.0.0</jakarta.version>
         <!--https://mvnrepository.com/artifact/io.pebbletemplates/pebble/4.1.2 -->
         <pebble.version>4.1.2</pebble.version>
         <!-- https://mvnrepository.com/artifact/io.github.classgraph/classgraph -->
         <classgraph.version>4.8.196</classgraph.version>
+        <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
+        <org.mapstruct.version>1.6.3</org.mapstruct.version>
     </properties>
 
     <dependencies>

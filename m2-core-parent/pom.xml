@@ -14,16 +14,15 @@
 
     <properties>
         <!-- https://mvnrepository.com/artifact/jakarta.persistence/jakarta.persistence-api -->
-        <jakarta.persistence.version>3.2.0</jakarta.persistence.version>
-        <!-- Source: https://mvnrepository.com/artifact/org.springframework.data/spring-data-relational -->
-        <!-- GHSA-88fw-v6x4-3f58 / CVE-2026-41695: spring-data-commons <= 4.0.5 -->
+        <jakarta.persistence.version>4.0.0-M7</jakarta.persistence.version>
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-relational -->
         <spring.data.relational>4.1.1</spring.data.relational>
-        <!-- Source: https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
         <spring.data.jpa>4.1.1</spring.data.jpa>
-        <!-- Source: https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons -->
         <spring.data.commons>4.1.1</spring.data.commons>
-        <!-- Source: https://mvnrepository.com/artifact/io.projectreactor/reactor-core -->
-        <reactor.core>3.8.4</reactor.core>
+        <!-- https://mvnrepository.com/artifact/io.projectreactor/reactor-core -->
+        <reactor.core>3.8.7</reactor.core>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-install-plugin -->
         <maven.install.plugin>3.2.0</maven.install.plugin>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-deploy-plugin -->
@@ -35,7 +34,7 @@
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-clean-plugin -->
         <maven.clean.version>3.5.0</maven.clean.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
-        <maven.surfire.version>3.5.4</maven.surfire.version>
+        <maven.surfire.version>3.6.0</maven.surfire.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
         <maven.source.version>3.4.0</maven.source.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
@@ -44,9 +43,9 @@
         <maven.javadoc.plugin>3.12.0</maven.javadoc.plugin>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
         <spring.version>7.0.9</spring.version>
-        <!-- Source: https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-pmd-plugin -->
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-pmd-plugin -->
         <maven.pmd.plugin>3.28.0</maven.pmd.plugin>
-        <!-- Source: https://mvnrepository.com/artifact/org.pitest/pitest-maven -->
+        <!-- https://mvnrepository.com/artifact/org.pitest/pitest-maven -->
         <pitest.maven>1.30.0</pitest.maven>
     </properties>
 

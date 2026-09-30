@@ -13,11 +13,10 @@
     <name>m2-springboot-parent</name>
 
     <properties>
-        <!--		https://mvnrepository.com/artifact/io.cucumber/cucumber-spring-->
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-spring-->
         <cucumber.version>7.34.8</cucumber.version>
-        <!--		https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite-->
+        <!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite-->
         <junit-platform.version>6.1.3</junit-platform.version>
-        <clean.commons.version>0.0.1</clean.commons.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
         <spring.boot.version>4.1.1</spring.boot.version>
         <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
@@ -26,43 +25,40 @@
         <snakeyaml.version>2.7</snakeyaml.version>
         <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-bom -->
         <testcontainers.version>2.0.5</testcontainers.version>
-
         <!-- https://mvnrepository.com/artifact/org.openapitools/openapi-generator-maven-plugin -->
-        <openapi-generator.version>7.21.0</openapi-generator.version>
+        <openapi-generator.version>7.25.0</openapi-generator.version>
         <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
         <spring-cloud.version>2025.1.3</spring-cloud.version>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-framework-bom -->
-        <!-- Override Spring Framework to patch CVE-2026-22735 (spring-web) and CVE-2026-22737 (spring-webflux) -->
-        <spring-framework.version>7.0.7</spring-framework.version>
+        <spring-framework.version>7.0.9</spring-framework.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-bom -->
-        <spring-security.version>7.0.4</spring-security.version>
+        <spring-security.version>7.0.9</spring-security.version>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
         <spring-web.version>7.0.9</spring-web.version>
         <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
-        <kafka.version>4.3.0</kafka.version>
+        <kafka.version>4.3.1</kafka.version>
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
-        <!-- Override: GHSA-72hv-8253-57qq (DoS, CVSS 7.5) — pulled transitively by springdoc/serenity/grpc BOMs -->
         <fasterxml.jackson.version>2.22.3</fasterxml.jackson.version>
         <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on -->
         <bouncycastle.version>1.86</bouncycastle.version>
         <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
         <logback.version>1.6.4</logback.version>
-        <!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-el -->
+        <!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core -->
         <tomcat.embed.version>11.0.26</tomcat.embed.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka -->
-        <spring.kafka.version>4.1.1</spring.kafka.version>
+        <spring.kafka.version>4.2.0-M2</spring.kafka.version>
         <!-- https://mvnrepository.com/artifact/at.yawk.lz4/lz4-java -->
-        <lz4.java.version>1.11.2</lz4.java.version>
+        <lz4.java.version>1.12.0</lz4.java.version>
         <!-- https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-api -->
         <opentelemetry.api.version>1.66.0</opentelemetry.api.version>
         <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
         <assertj.version>4.0.0-M1</assertj.version>
         <!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
         <modelmapper.version>3.2.6</modelmapper.version>
-        <!-- Source: https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson -->
-        <io.jsonwebtoken.version>0.12.6</io.jsonwebtoken.version>
+        <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson -->
+        <io.jsonwebtoken.version>0.13.0</io.jsonwebtoken.version>
     </properties>
     <dependencyManagement>
 

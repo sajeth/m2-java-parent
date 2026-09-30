@@ -13,17 +13,17 @@
     <name>m2-grpc-parent</name>
     <properties>
         <!-- https://mvnrepository.com/artifact/io.grpc/grpc-bom -->
-        <grpc.version>1.81.0</grpc.version>
+        <grpc.version>1.84.0</grpc.version>
         <!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
-        <!--        <protobuf.version>4.33.4</protobuf.version>-->
+        <!--        <protobuf.version>4.36.2</protobuf.version>-->
         <!-- https://mvnrepository.com/artifact/org.springframework.grpc/spring-grpc-dependencies -->
         <spring-grpc.version>1.1.1</spring-grpc.version>
-        <!-- Source: https://mvnrepository.com/artifact/net.serenity-bdd/serenity-junit5 -->
-        <serenity.version>4.1.17</serenity.version>
-        <!-- Source: https://mvnrepository.com/artifact/org.xolstice.maven.plugins/protobuf-maven-plugin -->
+        <!-- https://mvnrepository.com/artifact/net.serenity-bdd/serenity-junit5 -->
+        <serenity.version>5.3.11</serenity.version>
+        <!-- https://mvnrepository.com/artifact/org.xolstice.maven.plugins/protobuf-maven-plugin -->
         <protobuf.version>0.6.1</protobuf.version>
-        <!-- Source: https://mvnrepository.com/artifact/com.oracle.oci.sdk/oci-java-sdk-aivision -->
-        <oci.java.sdk.aivision.version>3.96.0</oci.java.sdk.aivision.version>
+        <!-- https://mvnrepository.com/artifact/com.oracle.oci.sdk/oci-java-sdk-aivision -->
+        <oci.java.sdk.aivision.version>3.97.0</oci.java.sdk.aivision.version>
     </properties>
     <dependencyManagement>
         <dependencies>
