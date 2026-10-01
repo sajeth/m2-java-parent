@@ -14,7 +14,7 @@
 
     <properties>
         <!-- https://mvnrepository.com/artifact/com.graphql-java/graphql-java-extended-scalars -->
-        <graphql.extended-scalars.version>24.0</graphql.extended-scalars.version>
+        <graphql.extended-scalars.version>2023-01-24T02-11-56-babda5f</graphql.extended-scalars.version>
     </properties>
 
     <dependencyManagement>
