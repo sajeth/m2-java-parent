@@ -26,7 +26,7 @@
         <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-bom -->
         <testcontainers.version>2.0.5</testcontainers.version>
         <!-- https://mvnrepository.com/artifact/org.openapitools/openapi-generator-maven-plugin -->
-        <openapi-generator.version>7.25.0</openapi-generator.version>
+        <openapi-generator.version>7.26.0</openapi-generator.version>
         <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
@@ -59,7 +59,7 @@
         <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
         <assertj.version>4.0.0-M1</assertj.version>
         <!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
-        <modelmapper.version>3.2.6</modelmapper.version>
+        <modelmapper.version>3.2.7</modelmapper.version>
         <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson -->
         <io.jsonwebtoken.version>0.13.0</io.jsonwebtoken.version>
     </properties>
