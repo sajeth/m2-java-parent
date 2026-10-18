@@ -13,7 +13,7 @@
     <name>m2-grpc-parent</name>
     <properties>
         <!-- https://mvnrepository.com/artifact/io.grpc/grpc-bom -->
-        <grpc.version>1.84.0</grpc.version>
+        <grpc.version>1.84.1</grpc.version>
         <!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
         <!--        <protobuf.version>4.36.2</protobuf.version>-->
         <!-- https://mvnrepository.com/artifact/org.springframework.grpc/spring-grpc-dependencies -->
@@ -23,7 +23,7 @@
         <!-- https://mvnrepository.com/artifact/org.xolstice.maven.plugins/protobuf-maven-plugin -->
         <protobuf.version>0.6.1</protobuf.version>
         <!-- https://mvnrepository.com/artifact/com.oracle.oci.sdk/oci-java-sdk-aivision -->
-        <oci.java.sdk.aivision.version>3.97.1</oci.java.sdk.aivision.version>
+        <oci.java.sdk.aivision.version>3.97.2</oci.java.sdk.aivision.version>
     </properties>
     <dependencyManagement>
         <dependencies>
