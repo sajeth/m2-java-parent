@@ -26,7 +26,7 @@
         <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-bom -->
         <testcontainers.version>2.0.5</testcontainers.version>
         <!-- https://mvnrepository.com/artifact/org.openapitools/openapi-generator-maven-plugin -->
-        <openapi-generator.version>7.25.0</openapi-generator.version>
+        <openapi-generator.version>7.26.0</openapi-generator.version>
         <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
@@ -38,7 +38,7 @@
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
         <spring-web.version>7.0.9</spring-web.version>
         <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
-        <kafka.version>4.3.1</kafka.version>
+        <kafka.version>4.4.0</kafka.version>
         <!-- https://mvnrepository.com/artifact/com/fasterxml/jackson/jackson-bom — Jackson 2.x for transitive deps -->
         <fasterxml.jackson.version>2.22.3</fasterxml.jackson.version>
         <!-- Shared annotations artifact used by Jackson 3; 2.22+ required for JsonApplyView (Boot jackson-2-bom may lag) -->
@@ -47,19 +47,19 @@
         <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on -->
         <bouncycastle.version>1.86</bouncycastle.version>
         <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
-        <logback.version>1.6.4</logback.version>
+        <logback.version>1.6.5</logback.version>
         <!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core -->
-        <tomcat.embed.version>11.0.26</tomcat.embed.version>
+        <tomcat.embed.version>11.0.27</tomcat.embed.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka -->
         <spring.kafka.version>4.2.0-M2</spring.kafka.version>
         <!-- https://mvnrepository.com/artifact/at.yawk.lz4/lz4-java -->
         <lz4.java.version>1.12.0</lz4.java.version>
         <!-- https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-api -->
-        <opentelemetry.api.version>1.66.0</opentelemetry.api.version>
+        <opentelemetry.api.version>1.67.0</opentelemetry.api.version>
         <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
         <assertj.version>4.0.0-M1</assertj.version>
         <!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
-        <modelmapper.version>3.2.6</modelmapper.version>
+        <modelmapper.version>3.2.7</modelmapper.version>
         <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson -->
         <io.jsonwebtoken.version>0.13.0</io.jsonwebtoken.version>
     </properties>
