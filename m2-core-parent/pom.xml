@@ -46,7 +46,7 @@
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-pmd-plugin -->
         <maven.pmd.plugin>3.28.0</maven.pmd.plugin>
         <!-- https://mvnrepository.com/artifact/org.pitest/pitest-maven -->
-        <pitest.maven>1.30.0</pitest.maven>
+        <pitest.maven>1.30.1</pitest.maven>
     </properties>
 
     <dependencies/>
