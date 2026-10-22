@@ -21,7 +21,7 @@
         <commons.lang3.version>3.21.0</commons.lang3.version>
 
         <!-- https://mvnrepository.com/artifact/net.serenity-bdd/serenity-core -->
-        <serenity.version>5.3.11</serenity.version>
+        <serenity.version>5.4.1</serenity.version>
         <!-- Performance -->
         <!-- https://mvnrepository.com/artifact/io.gatling.highcharts/gatling-charts-highcharts -->
         <gatling.version>3.16.0</gatling.version>
@@ -32,7 +32,7 @@
         <!--https://mvnrepository.com/artifact/io.pebbletemplates/pebble/4.1.2 -->
         <pebble.version>4.1.2</pebble.version>
         <!-- https://mvnrepository.com/artifact/io.github.classgraph/classgraph -->
-        <classgraph.version>4.8.196</classgraph.version>
+        <classgraph.version>6.0.0</classgraph.version>
         <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
     </properties>
