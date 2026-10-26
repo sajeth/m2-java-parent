@@ -16,12 +16,12 @@
         <!-- https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-core-jakarta -->
         <swagger.core.jakarta>2.2.54</swagger.core.jakarta>
         <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
-        <springdoc.version>3.1.1</springdoc.version>
+        <springdoc.version>3.2.0</springdoc.version>
         <!-- Source: https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
         <commons.lang3.version>3.21.0</commons.lang3.version>
 
         <!-- https://mvnrepository.com/artifact/net.serenity-bdd/serenity-core -->
-        <serenity.version>5.3.11</serenity.version>
+        <serenity.version>5.4.1</serenity.version>
         <!-- Performance -->
         <!-- https://mvnrepository.com/artifact/io.gatling.highcharts/gatling-charts-highcharts -->
         <gatling.version>3.16.0</gatling.version>
