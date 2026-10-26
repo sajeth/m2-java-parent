@@ -5,7 +5,7 @@
     <parent>
         <artifactId>m2-webapp-parent</artifactId>
         <groupId>io.github.sajeth</groupId>
-        <version>0.0.1</version>
+        <version>2026.10.4</version>
     </parent>
 
     <artifactId>m2-websocket-parent</artifactId>
