@@ -34,7 +34,7 @@
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-clean-plugin -->
         <maven.clean.version>3.5.0</maven.clean.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
-        <maven.surfire.version>3.6.0</maven.surfire.version>
+        <maven.surfire.version>3.6.1</maven.surfire.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
         <maven.source.version>3.4.0</maven.source.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
@@ -42,7 +42,7 @@
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
         <maven.javadoc.plugin>3.12.0</maven.javadoc.plugin>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
-        <spring.version>7.0.9</spring.version>
+        <spring.version>7.0.10</spring.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-pmd-plugin -->
         <maven.pmd.plugin>3.28.0</maven.pmd.plugin>
         <!-- https://mvnrepository.com/artifact/org.pitest/pitest-maven -->
