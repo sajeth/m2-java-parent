@@ -14,7 +14,7 @@
 
     <properties>
         <!-- https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs-maven-plugin -->
-        <spotbugs.plugin.version>4.10.4.1</spotbugs.plugin.version>
+        <spotbugs.plugin.version>4.10.5.0</spotbugs.plugin.version>
     </properties>
 
     <dependencyManagement>
