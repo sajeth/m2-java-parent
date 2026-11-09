@@ -22,7 +22,7 @@
         <!-- https://mvnrepository.com/artifact/io.opentelemetry.semconv/opentelemetry-semconv -->
         <opentelemetry.extension.version>1.44.0</opentelemetry.extension.version>
         <!-- https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-sdk-common -->
-        <opentelemetry.sdk.version>1.66.0</opentelemetry.sdk.version>
+        <opentelemetry.sdk.version>1.67.0</opentelemetry.sdk.version>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-api -->
         <selenium.api.version>4.50.0</selenium.api.version>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-json -->
