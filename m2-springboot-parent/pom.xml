@@ -49,13 +49,13 @@
         <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
         <logback.version>1.6.5</logback.version>
         <!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core -->
-        <tomcat.embed.version>11.0.26</tomcat.embed.version>
+        <tomcat.embed.version>11.0.27</tomcat.embed.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka -->
         <spring.kafka.version>4.2.0-M2</spring.kafka.version>
         <!-- https://mvnrepository.com/artifact/at.yawk.lz4/lz4-java -->
         <lz4.java.version>1.12.0</lz4.java.version>
         <!-- https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-api -->
-        <opentelemetry.api.version>1.66.0</opentelemetry.api.version>
+        <opentelemetry.api.version>1.67.0</opentelemetry.api.version>
         <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
         <assertj.version>4.0.0-M1</assertj.version>
         <!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->

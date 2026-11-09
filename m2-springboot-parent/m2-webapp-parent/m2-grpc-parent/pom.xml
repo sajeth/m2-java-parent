@@ -13,7 +13,7 @@
     <name>m2-grpc-parent</name>
     <properties>
         <!-- https://mvnrepository.com/artifact/io.grpc/grpc-bom -->
-        <grpc.version>1.84.1</grpc.version>
+        <grpc.version>1.84.2</grpc.version>
         <!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
         <!--        <protobuf.version>4.36.2</protobuf.version>-->
         <!-- https://mvnrepository.com/artifact/org.springframework.grpc/spring-grpc-dependencies -->
