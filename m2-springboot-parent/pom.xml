@@ -40,7 +40,7 @@
         <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
         <kafka.version>4.4.0</kafka.version>
         <!-- https://mvnrepository.com/artifact/com/fasterxml/jackson/jackson-bom — Jackson 2.x for transitive deps -->
-        <fasterxml.jackson.version>2.22.3</fasterxml.jackson.version>
+        <fasterxml.jackson.version>2.22.4</fasterxml.jackson.version>
         <!-- Shared annotations artifact used by Jackson 3; 2.22+ required for JsonApplyView (Boot jackson-2-bom may lag) -->
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
         <fasterxml.jackson.annotations.version>2.23</fasterxml.jackson.annotations.version>
