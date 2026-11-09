@@ -325,9 +325,9 @@
                 <artifactId>opentelemetry-api</artifactId>
                 <version>${opentelemetry.api.version}</version>
             </dependency>
-            <!-- Override lz4-java: CVE-2026-59949 (JVM crash on invalid byte array ranges CVSS 6.5); fixed in 1.11.1 -->
+            <!-- Override lz4-java: CVE-2026-59949 (JVM crash on invalid byte array ranges CVSS 6.5), fixed in 1.11.1, and CVE-2026-106451 (native library temp-file replacement CVSS 7.3), fixed in 1.11.4 -->
             <dependency>
-                <groupId>org.lz4</groupId>
+                <groupId>at.yawk.lz4</groupId>
                 <artifactId>lz4-java</artifactId>
                 <version>${lz4.java.version}</version>
             </dependency>
