@@ -20,9 +20,9 @@
         <!-- https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-extension-incubator -->
         <opentelemetry.extension.incubator.version>1.36.0-alpha</opentelemetry.extension.incubator.version>
         <!-- https://mvnrepository.com/artifact/io.opentelemetry.semconv/opentelemetry-semconv -->
-        <opentelemetry.extension.version>1.44.0</opentelemetry.extension.version>
+        <opentelemetry.extension.version>1.45.0</opentelemetry.extension.version>
         <!-- https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-sdk-common -->
-        <opentelemetry.sdk.version>1.67.0</opentelemetry.sdk.version>
+        <opentelemetry.sdk.version>1.68.0</opentelemetry.sdk.version>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-api -->
         <selenium.api.version>4.52.0</selenium.api.version>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-json -->
@@ -54,11 +54,11 @@
         <!-- https://mvnrepository.com/artifact/org.asynchttpclient/async-http-client-netty-utils -->
         <async.http.client.version>3.0.12</async.http.client.version>
         <!-- Source: https://mvnrepository.com/artifact/io.netty/netty-transport-native-unix-common -->
-        <netty.version>4.2.19.Final</netty.version>
+        <netty.version>4.2.20.Final</netty.version>
         <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
-        <guava.version>33.7.2-jre</guava.version>
+        <guava.version>33.8.0-jre</guava.version>
         <!-- https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-context -->
-        <opentelemetry.context.version>1.67.0</opentelemetry.context.version>
+        <opentelemetry.context.version>1.68.0</opentelemetry.context.version>
         <!-- https://mvnrepository.com/artifact/dev.failsafe/failsafe -->
         <failsafe.version>3.3.2</failsafe.version>
     </properties>
