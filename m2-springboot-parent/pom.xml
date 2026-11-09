@@ -38,7 +38,7 @@
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
         <spring-web.version>7.0.9</spring-web.version>
         <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
-        <kafka.version>4.3.1</kafka.version>
+        <kafka.version>4.4.0</kafka.version>
         <!-- https://mvnrepository.com/artifact/com/fasterxml/jackson/jackson-bom — Jackson 2.x for transitive deps -->
         <fasterxml.jackson.version>2.22.3</fasterxml.jackson.version>
         <!-- Shared annotations artifact used by Jackson 3; 2.22+ required for JsonApplyView (Boot jackson-2-bom may lag) -->
