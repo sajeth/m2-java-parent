@@ -43,7 +43,7 @@
         <fasterxml.jackson.version>2.22.3</fasterxml.jackson.version>
         <!-- Shared annotations artifact used by Jackson 3; 2.22+ required for JsonApplyView (Boot jackson-2-bom may lag) -->
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
-        <fasterxml.jackson.annotations.version>2.22</fasterxml.jackson.annotations.version>
+        <fasterxml.jackson.annotations.version>2.23</fasterxml.jackson.annotations.version>
         <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on -->
         <bouncycastle.version>1.86</bouncycastle.version>
         <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
@@ -53,9 +53,9 @@
         <!-- https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka -->
         <spring.kafka.version>4.2.0-M2</spring.kafka.version>
         <!-- https://mvnrepository.com/artifact/at.yawk.lz4/lz4-java -->
-        <lz4.java.version>1.13.0</lz4.java.version>
+        <lz4.java.version>1.14.0</lz4.java.version>
         <!-- https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-api -->
-        <opentelemetry.api.version>1.67.0</opentelemetry.api.version>
+        <opentelemetry.api.version>1.68.0</opentelemetry.api.version>
         <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
         <assertj.version>4.0.0-M1</assertj.version>
         <!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->

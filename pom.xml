@@ -102,7 +102,7 @@
         <!-- https://mvnrepository.com/artifact/org.apache.maven.surefire/surefire-junit-platform -->
         <surfire.junit.platform>3.6.0</surfire.junit.platform>
         <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/license-maven-plugin -->
-        <license.maven.plugin>2.7.1</license.maven.plugin>
+        <license.maven.plugin>2.8.0</license.maven.plugin>
     </properties>
 
     <distributionManagement>
