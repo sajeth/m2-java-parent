@@ -26,7 +26,7 @@
         <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-bom -->
         <testcontainers.version>2.0.5</testcontainers.version>
         <!-- https://mvnrepository.com/artifact/org.openapitools/openapi-generator-maven-plugin -->
-        <openapi-generator.version>7.26.0</openapi-generator.version>
+        <openapi-generator.version>7.27.0</openapi-generator.version>
         <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->

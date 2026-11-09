@@ -83,7 +83,7 @@
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
         <maven.source.version>3.4.0</maven.source.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-enforcer-plugin -->
-        <maven.enforcer.version>3.6.3</maven.enforcer.version>
+        <maven.enforcer.version>3.7.0</maven.enforcer.version>
         <maven.minimum.version>3.9.0</maven.minimum.version>
         <!-- https://mvnrepository.com/artifact/io.netty/netty-bom -->
         <!-- Override io.netty: CVE-2026-47691 (CVSS 7.5), CVE-2026-45674 (CVSS 7.5), CVE-2026-44892 (CVSS 7.5), CVE-2026-45416 (CVSS 7.5),
