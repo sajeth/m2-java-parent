@@ -17,7 +17,7 @@
         <!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
         <!--        <protobuf.version>4.36.2</protobuf.version>-->
         <!-- https://mvnrepository.com/artifact/org.springframework.grpc/spring-grpc-dependencies -->
-        <spring-grpc.version>1.1.1</spring-grpc.version>
+        <spring-grpc.version>1.1.2</spring-grpc.version>
         <!-- https://mvnrepository.com/artifact/net.serenity-bdd/serenity-junit5 -->
         <serenity.version>5.3.11</serenity.version>
         <!-- https://mvnrepository.com/artifact/org.xolstice.maven.plugins/protobuf-maven-plugin -->
