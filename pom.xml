@@ -49,7 +49,7 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
-        <aspectj.version>1.9.25.1</aspectj.version>
+        <aspectj.version>1.9.26</aspectj.version>
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <junit.version>6.1.3</junit.version>
         <!-- TDD / Mutation Testing -->
