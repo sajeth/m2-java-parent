@@ -16,7 +16,7 @@
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-http -->
         <selenium.http.version>4.51.0</selenium.http.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-failsafe-plugin -->
-        <maven.failsafe.version>3.6.0</maven.failsafe.version>
+        <maven.failsafe.version>3.6.1</maven.failsafe.version>
         <!-- https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-extension-incubator -->
         <opentelemetry.extension.incubator.version>1.36.0-alpha</opentelemetry.extension.incubator.version>
         <!-- https://mvnrepository.com/artifact/io.opentelemetry.semconv/opentelemetry-semconv -->

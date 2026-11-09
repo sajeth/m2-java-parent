@@ -18,9 +18,9 @@
         <!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite-->
         <junit-platform.version>6.1.3</junit-platform.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
-        <spring.boot.version>4.1.1</spring.boot.version>
+        <spring.boot.version>4.1.2</spring.boot.version>
         <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
-        <swagger.version>3.1.1</swagger.version>
+        <swagger.version>3.2.0</swagger.version>
         <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
         <snakeyaml.version>2.7</snakeyaml.version>
         <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-bom -->
@@ -30,7 +30,7 @@
         <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
-        <spring-cloud.version>2025.1.3</spring-cloud.version>
+        <spring-cloud.version>2025.1.4</spring-cloud.version>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-framework-bom -->
         <spring-framework.version>7.0.10</spring-framework.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-bom -->
@@ -47,7 +47,7 @@
         <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on -->
         <bouncycastle.version>1.86</bouncycastle.version>
         <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
-        <logback.version>1.6.5</logback.version>
+        <logback.version>1.6.6</logback.version>
         <!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core -->
         <tomcat.embed.version>11.0.27</tomcat.embed.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka -->
@@ -325,9 +325,9 @@
                 <artifactId>opentelemetry-api</artifactId>
                 <version>${opentelemetry.api.version}</version>
             </dependency>
-            <!-- Override lz4-java: CVE-2026-59949 (JVM crash on invalid byte array ranges CVSS 6.5); fixed in 1.11.1 -->
+            <!-- Override lz4-java: CVE-2026-59949 (JVM crash on invalid byte array ranges CVSS 6.5), fixed in 1.11.1, and CVE-2026-106451 (native library temp-file replacement CVSS 7.3), fixed in 1.11.4 -->
             <dependency>
-                <groupId>org.lz4</groupId>
+                <groupId>at.yawk.lz4</groupId>
                 <artifactId>lz4-java</artifactId>
                 <version>${lz4.java.version}</version>
             </dependency>
