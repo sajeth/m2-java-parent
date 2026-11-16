@@ -24,9 +24,9 @@
         <serenity.version>5.4.2</serenity.version>
         <!-- Performance -->
         <!-- https://mvnrepository.com/artifact/io.gatling.highcharts/gatling-charts-highcharts -->
-        <gatling.version>3.16.0</gatling.version>
+        <gatling.version>3.16.1</gatling.version>
         <!-- https://mvnrepository.com/artifact/io.gatling/gatling-maven-plugin -->
-        <gatling.plugin.version>4.21.12</gatling.plugin.version>
+        <gatling.plugin.version>4.22.3</gatling.plugin.version>
         <!-- https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api -->
         <jakarta.version>3.0.0</jakarta.version>
         <!--https://mvnrepository.com/artifact/io.pebbletemplates/pebble/4.1.2 -->
