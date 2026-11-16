@@ -23,7 +23,7 @@
         <!-- https://mvnrepository.com/artifact/org.xolstice.maven.plugins/protobuf-maven-plugin -->
         <protobuf.version>0.6.1</protobuf.version>
         <!-- https://mvnrepository.com/artifact/com.oracle.oci.sdk/oci-java-sdk-aivision -->
-        <oci.java.sdk.aivision.version>3.100.0</oci.java.sdk.aivision.version>
+        <oci.java.sdk.aivision.version>3.101.0</oci.java.sdk.aivision.version>
     </properties>
     <dependencyManagement>
         <dependencies>
