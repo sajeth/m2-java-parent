@@ -30,7 +30,7 @@
         <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
-        <spring-cloud.version>2025.1.4</spring-cloud.version>
+        <spring-cloud.version>2026.0.0</spring-cloud.version>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-framework-bom -->
         <spring-framework.version>7.1.0</spring-framework.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-bom -->
