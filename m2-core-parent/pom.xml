@@ -16,11 +16,11 @@
         <!-- https://mvnrepository.com/artifact/jakarta.persistence/jakarta.persistence-api -->
         <jakarta.persistence.version>4.0.0-M7</jakarta.persistence.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-relational -->
-        <spring.data.relational>4.1.2</spring.data.relational>
+        <spring.data.relational>4.2.0</spring.data.relational>
         <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
-        <spring.data.jpa>4.1.2</spring.data.jpa>
+        <spring.data.jpa>4.2.0</spring.data.jpa>
         <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons -->
-        <spring.data.commons>4.1.2</spring.data.commons>
+        <spring.data.commons>4.2.0</spring.data.commons>
         <!-- https://mvnrepository.com/artifact/io.projectreactor/reactor-core -->
         <reactor.core>3.8.7</reactor.core>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-install-plugin -->
